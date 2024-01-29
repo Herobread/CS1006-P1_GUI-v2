@@ -32,6 +32,9 @@ public class CaveSystem {
 	public List<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
+	public Coordinates[] getConnectionKeySet(){
+		return connections.keySet().toArray(new Coordinates[connections.keySet().size()]);
+	}
 	
 	// create
 	public void createUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
