@@ -33,7 +33,12 @@ public class CaveSystem {
 	public ArrayList<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
-
+	public Coordinates[] getConnectionKeySet(){
+		return connections.keySet().toArray(new Coordinates[connections.keySet().size()]);
+	}
+	
+	// create
+	
 	public ArrayList<Coordinates> getCaveConnections(int x, int y) {
 		return getCaveConnections(new Coordinates(x, y));
 	}
