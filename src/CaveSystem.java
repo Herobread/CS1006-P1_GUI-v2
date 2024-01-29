@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,13 +9,13 @@ public class CaveSystem {
 	private int width;
 	private int height;
 	private Cave[][] caves;
-	private Map<Coordinates, List<Coordinates>> connections;
+	private Map<Coordinates, ArrayList<Coordinates>> connections;
 
 	public CaveSystem(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.caves = new Cave[height][width];
-		this.connections = new HashMap<Coordinates, List<Coordinates>>() {
+		this.connections = new HashMap<Coordinates, ArrayList<Coordinates>>() {
 		};
 	}
 
@@ -29,7 +30,7 @@ public class CaveSystem {
 
 	// connections:
 	// get
-	public List<Coordinates> getCaveConnections(Coordinates coordinates) {
+	public ArrayList<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
 	public Coordinates[] getConnectionKeySet(){
@@ -37,17 +38,28 @@ public class CaveSystem {
 	}
 	
 	// create
-	public void createUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
-		createDirectredConnection(coordinates1, coordinates2);
-		createDirectredConnection(coordinates2, coordinates1);
+	
+	public ArrayList<Coordinates> getCaveConnections(int x, int y) {
+		return getCaveConnections(new Coordinates(x, y));
 	}
 
-	public void createDirectredConnection(Coordinates coordinates1, Coordinates coordinates2) {
+	// add
+	public void addUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
+		addDirectredConnection(coordinates1, coordinates2);
+		addDirectredConnection(coordinates2, coordinates1);
+	}
+
+	public void addDirectredConnection(Coordinates coordinates1, Coordinates coordinates2) {
 		if (coordinates1.equals(coordinates2)) {
 			return;
 		}
 
-		List<Coordinates> cave1Connections = getCaveConnections(coordinates1);
+		ArrayList<Coordinates> cave1Connections = getCaveConnections(coordinates1);
+
+		if (cave1Connections == null) {
+			cave1Connections = new ArrayList<>();
+		}
+
 		cave1Connections.add(coordinates2);
 		connections.put(coordinates1, cave1Connections);
 	}
@@ -91,9 +103,30 @@ public class CaveSystem {
 	}
 
 	// cave generation:
-	// public void generateCaveSystem() {
-	// // use some algorithm
-	// }
+	public void generateCaveSystem() {
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+
+			}
+		}
+	}
+
+	// debug
+	public void printCaves() {
+		System.out.println("Caves:");
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				ArrayList<Coordinates> connections = getCaveConnections(i, j);
+
+				if (connections == null) {
+					// System.out.println("no connections " + i + " " + j);
+					continue;
+				}
+
+				System.out.println("Cave (" + i + ", " + j + ") is connected to " + connections.toString());
+			}
+		}
+	}
 
 	// extra:
 	// public void isTherePath() {
