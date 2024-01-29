@@ -3,6 +3,8 @@ package game;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.HashSet;
 
 import game.utils.Coordinates;
 
@@ -25,13 +27,13 @@ public class CaveSystem {
 	/**
 	 * A map containing the connections between cave coordinates.
 	 */
-	private Map<Coordinates, ArrayList<Coordinates>> connections;
+	private Map<Coordinates, HashSet<Coordinates>> connections;
 
 	public CaveSystem(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.caves = new Cave[height][width];
-		this.connections = new HashMap<Coordinates, ArrayList<Coordinates>>() {
+		this.connections = new HashMap<Coordinates, HashSet<Coordinates>>() {
 		};
 	}
 
@@ -49,7 +51,7 @@ public class CaveSystem {
 	 * @param coordinates The coordinates of the cave.
 	 * @return Connected caves' coordinates, or an empty list if none exist.
 	 */
-	public ArrayList<Coordinates> getCaveConnections(Coordinates coordinates) {
+	public HashSet<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
 
@@ -86,7 +88,7 @@ public class CaveSystem {
 	 */
 	public String getConnectionsString(Coordinates currentCaveCoordinates) {
 		String res = "";
-		ArrayList<Coordinates> connections = getCaveConnections(currentCaveCoordinates);
+		HashSet<Coordinates> connections = getCaveConnections(currentCaveCoordinates);
 
 		boolean isUp = false;
 		boolean isRight = false;
@@ -135,7 +137,7 @@ public class CaveSystem {
 	 * @param y The y-coordinate of the cave.
 	 * @return Connected caves' coordinates, or an empty list if none exist.
 	 */
-	public ArrayList<Coordinates> getCaveConnections(int x, int y) {
+	public HashSet<Coordinates> getCaveConnections(int x, int y) {
 		return getCaveConnections(new Coordinates(x, y));
 	}
 
@@ -165,10 +167,10 @@ public class CaveSystem {
 			return;
 		}
 
-		ArrayList<Coordinates> cave1Connections = getCaveConnections(coordinates1);
+		HashSet<Coordinates> cave1Connections = getCaveConnections(coordinates1);
 
 		if (cave1Connections == null) {
-			cave1Connections = new ArrayList<>();
+			cave1Connections = new HashSet<>();
 		}
 
 		cave1Connections.add(coordinates2);
@@ -264,12 +266,26 @@ public class CaveSystem {
 	public void generateCaveSystem() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				setCave(new Cave(false), new Coordinates(j, i));
+				Cave currentCave = new Cave(false);
+				Coordinates currentCoordinates = new Coordinates(j, i);
 
-				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i - 1, j));
-				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i + 1, j));
-				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j + 1));
-				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j - 1));
+				setCave(currentCave, currentCoordinates);
+
+				if (i > 0) {
+					addUndirectedConnection(currentCoordinates, new Coordinates(j, i - 1));
+				}
+
+				if (i < height - 1) {
+					addUndirectedConnection(currentCoordinates, new Coordinates(j, i + 1));
+				}
+
+				if (j < width - 1) {
+					addUndirectedConnection(currentCoordinates, new Coordinates(j + 1, i));
+				}
+
+				if (j > 0) {
+					addUndirectedConnection(currentCoordinates, new Coordinates(j - 1, i));
+				}
 			}
 		}
 	}
@@ -279,14 +295,15 @@ public class CaveSystem {
 		System.out.println("Caves:");
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				ArrayList<Coordinates> connections = getCaveConnections(j, i);
+				HashSet<Coordinates> connections = getCaveConnections(j, i);
 
 				if (connections == null) {
 					// System.out.println("no connections " + i + " " + j);
 					continue;
 				}
 
-				System.out.println("Cave (" + j + ", " + i + ") is connected to " + connections.toString());
+				System.out.println("Cave (" + j + ", " + i + ") is connected to (" + connections.size() + ") "
+						+ connections.toString());
 
 				ArrayList<Entity> entities = getCaveEntities(i, j);
 

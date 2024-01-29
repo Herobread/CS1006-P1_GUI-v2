@@ -33,11 +33,8 @@ class Main {
 		f.setResizable(false);
 		f.setVisible(true);
 
-		// TODO: use CaveSystem.getConnectionsString() method to get the directions part
-		// of texture files
-
 		for (Coordinates coords : caves.getConnectionKeySet()) {
-			List<Coordinates> connected = caves.getCaveConnections(coords);
+			HashSet<Coordinates> connected = caves.getCaveConnections(coords);
 			Set<Character> directionSet = new HashSet<Character>();
 			String imagePath;
 			String allDirections = "";
