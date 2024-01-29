@@ -10,9 +10,24 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class CaveSystem {
+	/**
+	 * The width of the cave system.
+	 */
 	private int width;
+
+	/**
+	 * The height of the cave system.
+	 */
 	private int height;
+
+	/**
+	 * 2D array representing the caves in the system.
+	 */
 	private Cave[][] caves;
+
+	/**
+	 * A map containing the connections between cave coordinates.
+	 */
 	private Map<Coordinates, ArrayList<Coordinates>> connections;
 
 	public CaveSystem(int width, int height) {
@@ -23,7 +38,6 @@ public class CaveSystem {
 		};
 	}
 
-	// cave system info
 	public int getWidth() {
 		return width;
 	}
@@ -32,8 +46,12 @@ public class CaveSystem {
 		return height;
 	}
 
-	// connections:
-	// get
+	/**
+	 * Retrieves the connections of a cave at the specified coordinates.
+	 *
+	 * @param coordinates The coordinates of the cave.
+	 * @return Connected caves' coordinates, or an empty list if none exist.
+	 */
 	public ArrayList<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
@@ -118,17 +136,38 @@ public class CaveSystem {
 		return res;
 	}
 
-	// create
+	/**
+	 * Retrieves the connections of a cave at the specified coordinates.
+	 *
+	 * @param x The x-coordinate of the cave.
+	 * @param y The y-coordinate of the cave.
+	 * @return Connected caves' coordinates, or an empty list if none exist.
+	 */
 	public ArrayList<Coordinates> getCaveConnections(int x, int y) {
 		return getCaveConnections(new Coordinates(x, y));
 	}
 
-	// add
+	/**
+	 * Adds an undirected connection between two caves.
+	 * 
+	 * One way connection
+	 *
+	 * @param coordinates1 Coordinates of the first cave.
+	 * @param coordinates2 Coordinates of the second cave.
+	 */
 	public void addUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
 		addDirectredConnection(coordinates1, coordinates2);
 		addDirectredConnection(coordinates2, coordinates1);
 	}
 
+	/**
+	 * Adds an directed connection between two caves.
+	 *
+	 * 2-way connection
+	 * 
+	 * @param coordinates1 Coordinates of the first cave.
+	 * @param coordinates2 Coordinates of the second cave.
+	 */
 	public void addDirectredConnection(Coordinates coordinates1, Coordinates coordinates2) {
 		if (coordinates1.equals(coordinates2)) {
 			return;
@@ -144,19 +183,44 @@ public class CaveSystem {
 		connections.put(coordinates1, cave1Connections);
 	}
 
-	// entities:
+	/**
+	 * Retrieves the entities present in the cave at the specified coordinates.
+	 *
+	 * @param coordinates The coordinates of the cave.
+	 * @return ArrayList of entities in the cave.
+	 */
 	public ArrayList<Entity> getCaveEntities(Coordinates coordinates) {
 		return getCaveEntities(coordinates.getX(), coordinates.getY());
 	}
 
+	/**
+	 * Retrieves the entities present in the cave at the specified coordinates.
+	 *
+	 * @param x The x-coordinate of the cave.
+	 * @param y The y-coordinate of the cave.
+	 * @return ArrayList of entities in the cave.
+	 */
 	public ArrayList<Entity> getCaveEntities(int x, int y) {
 		return getCave(x, y).getEntities();
 	}
 
+	/**
+	 * Adds an entity to the cave at the specified coordinates.
+	 *
+	 * @param entity      The entity to be added.
+	 * @param coordinates The coordinates of the cave.
+	 */
 	public void addEntity(Entity entity, Coordinates coordinates) {
 		addEntity(entity, coordinates.getX(), coordinates.getY());
 	}
 
+	/**
+	 * Adds an entity to the cave at the specified coordinates.
+	 *
+	 * @param entity The entity to be added.
+	 * @param x      The x-coordinate of the cave.
+	 * @param y      The y-coordinate of the cave.
+	 */
 	public void addEntity(Entity entity, int x, int y) {
 		Cave cave = getCave(x, y);
 
@@ -167,11 +231,23 @@ public class CaveSystem {
 		cave.addEntity(entity);
 	}
 
-	// cave info:
+	/**
+	 * Sets the properties of a cave at the specified coordinates.
+	 *
+	 * @param cave        The cave to be set.
+	 * @param coordinates The coordinates of the cave.
+	 */
 	public void setCave(Cave cave, Coordinates coordinates) {
 		setCave(cave, coordinates.getX(), coordinates.getY());
 	}
 
+	/**
+	 * Sets the properties of a cave at the specified coordinates.
+	 *
+	 * @param cave The cave to be set.
+	 * @param x    The x-coordinate of the cave.
+	 * @param y    The y-coordinate of the cave.
+	 */
 	public void setCave(Cave cave, int x, int y) {
 		caves[y][x] = cave;
 	}
