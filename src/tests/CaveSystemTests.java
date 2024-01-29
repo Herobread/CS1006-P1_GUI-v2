@@ -2,16 +2,16 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashSet;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import org.junit.*;
 
+import game.Cave;
 import game.CaveSystem;
+import game.Entity;
 import game.utils.Coordinates;
 
 public class CaveSystemTests {
-
 	@Test
 	public void getConnectionsStringUpTest() {
 		CaveSystem caves = new CaveSystem(10, 10);
@@ -68,5 +68,17 @@ public class CaveSystemTests {
 		caves.addUndirectedConnection(new Coordinates(1, 1), new Coordinates(1, 0));
 
 		assertEquals("check connections string", "ru", caves.getConnectionsString(1, 1));
+	}
+
+	@Test
+	public void entityTest() {
+		CaveSystem caves = new CaveSystem(20, 20);
+
+		caves.setCave(new Cave(false), new Coordinates(5, 3));
+		caves.addEntity(new Entity("Wumpus"), new Coordinates(5, 3));
+
+		ArrayList<Entity> entities = caves.getCaveEntities(new Coordinates(5, 3));
+
+		assertEquals(entities.get(0).getName(), "Wumpus");
 	}
 }
