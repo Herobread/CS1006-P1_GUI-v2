@@ -21,10 +21,10 @@ class Main {
 		final int imageSize = 75;
 		CaveSystem caves = new CaveSystem(width, height);
 		Cave cave = new Cave(false);
-
 		caves.setCave(cave, new Coordinates(200, 200));
 		Entity entity = new Entity("Test");
 		cave.addEntity(entity);
+		caves.generateCaveSystem();
 		JFrame f = new JFrame();
 		f.setLayout(null);
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ class Main {
 			for (Character direction : directionList) {
 				allDirections += direction;
 			}
-			imagePath = "../../resources/cave-" + allDirections + ".png";
+			imagePath = "./resources/cave-" + allDirections + ".png";
 			System.out.println(imagePath);
 			try {
 				BufferedImage img = ImageIO.read(new File(imagePath));
@@ -61,8 +61,8 @@ class Main {
 			} catch (IOException e) {
 				System.out.println("Image not found!");
 			}
+			f.repaint();
 		}
-		f.repaint();
 	}
 
 	private static char getDirection(int x1, int y1, int x2, int y2) {

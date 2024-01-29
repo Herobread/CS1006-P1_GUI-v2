@@ -2,6 +2,9 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.*;
 
 import game.CaveSystem;
@@ -12,12 +15,12 @@ public class CaveSystemTests {
 	public void basicCaveSystemTest() {
 		CaveSystem caves = new CaveSystem(20, 20);
 
-		caves.getCave(19, 19);
+		caves.addUndirectedConnection(new Coordinates(1, 1), new Coordinates(2, 1));
+		caves.addUndirectedConnection(new Coordinates(1, 1), new Coordinates(1, 0));
 
-		// cave.addUndirectedConnection(new Coordinates(1, 1), new Coordinates(2, 1));
-		// cave.addUndirectedConnection(new Coordinates(1, 1), new Coordinates(1, 0));
+		ArrayList<Coordinates> connections = caves.getCaveConnections(new Coordinates(1, 1));
 
-		assertEquals("check connections string", "ru", caves.getConnectionsString(1, 1));
+		assertEquals(Arrays.asList(new Coordinates(2, 1), new Coordinates(1, 0)), connections);
 	}
 
 	@Test

@@ -266,7 +266,7 @@ public class CaveSystem {
 			for (int j = 0; j < width; j++) {
 				setCave(new Cave(false), new Coordinates(j, i));
 
-				// addUndirectedConnection(new Coordinates(j, i), new Coordinates(i - 1, j));
+				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i - 1, j));
 				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i + 1, j));
 				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j + 1));
 				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j - 1));
