@@ -38,18 +38,23 @@ public class CaveSystem {
 		return getCaveConnections(new Coordinates(x, y));
 	}
 
-	// create
-	public void createUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
-		createDirectredConnection(coordinates1, coordinates2);
-		createDirectredConnection(coordinates2, coordinates1);
+	// add
+	public void addUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
+		addDirectredConnection(coordinates1, coordinates2);
+		addDirectredConnection(coordinates2, coordinates1);
 	}
 
-	public void createDirectredConnection(Coordinates coordinates1, Coordinates coordinates2) {
+	public void addDirectredConnection(Coordinates coordinates1, Coordinates coordinates2) {
 		if (coordinates1.equals(coordinates2)) {
 			return;
 		}
 
 		ArrayList<Coordinates> cave1Connections = getCaveConnections(coordinates1);
+
+		if (cave1Connections == null) {
+			cave1Connections = new ArrayList<>();
+		}
+
 		cave1Connections.add(coordinates2);
 		connections.put(coordinates1, cave1Connections);
 	}
@@ -103,10 +108,17 @@ public class CaveSystem {
 
 	// debug
 	public void printCaves() {
+		System.out.println("Caves:");
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				ArrayList<Coordinates> connections = getCaveConnections(i, j);
-				System.out.println("Cave " + i + " " + j + "is connected to " + connections.toString());
+
+				if (connections == null) {
+					// System.out.println("no connections " + i + " " + j);
+					continue;
+				}
+
+				System.out.println("Cave (" + i + ", " + j + ") is connected to " + connections.toString());
 			}
 		}
 	}

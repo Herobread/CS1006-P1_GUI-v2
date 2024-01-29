@@ -26,6 +26,14 @@ public class Coordinates {
 	}
 
 	@Override
+	public int hashCode() {
+		int result = 17;
+		result = 31 * result + x;
+		result = 31 * result + y;
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
