@@ -27,10 +27,15 @@ class Main {
 		cave.addEntity(entity);
 		JFrame f = new JFrame();
 		f.setLayout(null);
+		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setTitle("Hunt The Wumpus");
 		f.setSize(width, height);
 		f.setResizable(false);
 		f.setVisible(true);
+
+		// TODO: use CaveSystem.getConnectionsString() method to get the directions part
+		// of texture files
+
 		for (Coordinates coords : caves.getConnectionKeySet()) {
 			List<Coordinates> connected = caves.getCaveConnections(coords);
 			Set<Character> directionSet = new HashSet<Character>();
@@ -45,7 +50,7 @@ class Main {
 			for (Character direction : directionList) {
 				allDirections += direction;
 			}
-			imagePath = "../resources/cave-" + allDirections + ".png";
+			imagePath = "../../resources/cave-" + allDirections + ".png";
 			System.out.println(imagePath);
 			try {
 				BufferedImage img = ImageIO.read(new File(imagePath));

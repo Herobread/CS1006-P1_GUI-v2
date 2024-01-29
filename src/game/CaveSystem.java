@@ -96,9 +96,6 @@ public class CaveSystem {
 		boolean isDown = false;
 		boolean isLeft = false;
 
-		// sort by x y, so that order
-		Collections.sort(connections, Comparator.comparing(Coordinates::getX).thenComparing(Coordinates::getY));
-
 		for (Coordinates connectedCaveCoordinates : connections) {
 			int x1 = connectedCaveCoordinates.getX();
 			int y1 = connectedCaveCoordinates.getY();
@@ -117,9 +114,7 @@ public class CaveSystem {
 			}
 		}
 
-		// dlru
-
-		// order result
+		// order result in shape: dlru
 		if (isDown) {
 			res += "d";
 		}
