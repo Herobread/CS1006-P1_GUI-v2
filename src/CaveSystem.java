@@ -33,7 +33,7 @@ public class CaveSystem {
 	public List<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
-
+	
 	// create
 	public void createUndirectedConnection(Coordinates coordinates1, Coordinates coordinates2) {
 		createDirectredConnection(coordinates1, coordinates2);
