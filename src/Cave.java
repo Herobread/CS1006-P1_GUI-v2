@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Cave {
 	private boolean isTunnel;
-	private List<Entity> entities;
+	private ArrayList<Entity> entities;
 	// is left
 	// right
 
@@ -16,7 +15,7 @@ public class Cave {
 		entities.add(entity);
 	}
 
-	public List<Entity> getEntities() {
+	public ArrayList<Entity> getEntities() {
 		return entities;
 	}
 

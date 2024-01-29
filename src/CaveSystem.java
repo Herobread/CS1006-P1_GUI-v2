@@ -60,11 +60,11 @@ public class CaveSystem {
 	}
 
 	// entities:
-	public List<Entity> getCaveEntities(Coordinates coordinates) {
+	public ArrayList<Entity> getCaveEntities(Coordinates coordinates) {
 		return getCaveEntities(coordinates.getX(), coordinates.getY());
 	}
 
-	public List<Entity> getCaveEntities(int x, int y) {
+	public ArrayList<Entity> getCaveEntities(int x, int y) {
 		return getCave(x, y).getEntities();
 	}
 
@@ -73,7 +73,13 @@ public class CaveSystem {
 	}
 
 	public void addEntity(Entity entity, int x, int y) {
-		getCave(x, y).addEntity(entity);
+		Cave cave = getCave(x, y);
+
+		if (cave == null) {
+			throw new Error("Cave " + x + ", " + y + " is not defined,");
+		}
+
+		cave.addEntity(entity);
 	}
 
 	// cave info:
@@ -83,6 +89,10 @@ public class CaveSystem {
 
 	public void setCave(Cave cave, int x, int y) {
 		caves[y][x] = cave;
+	}
+
+	public Cave getCave(Coordinates coordinates) {
+		return getCave(coordinates.getX(), coordinates.getY());
 	}
 
 	public Cave getCave(int x, int y) {
@@ -101,7 +111,12 @@ public class CaveSystem {
 	public void generateCaveSystem() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
+				setCave(new Cave(false), new Coordinates(j, i));
 
+				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i - 1, j));
+				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i + 1, j));
+				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j + 1));
+				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j - 1));
 			}
 		}
 	}
@@ -111,14 +126,18 @@ public class CaveSystem {
 		System.out.println("Caves:");
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				ArrayList<Coordinates> connections = getCaveConnections(i, j);
+				ArrayList<Coordinates> connections = getCaveConnections(j, i);
 
 				if (connections == null) {
 					// System.out.println("no connections " + i + " " + j);
 					continue;
 				}
 
-				System.out.println("Cave (" + i + ", " + j + ") is connected to " + connections.toString());
+				System.out.println("Cave (" + j + ", " + i + ") is connected to " + connections.toString());
+
+				ArrayList<Entity> entities = getCaveEntities(i, j);
+
+				System.out.println("Cave (" + j + ", " + i + ") entities: " + entities.toString());
 			}
 		}
 	}
