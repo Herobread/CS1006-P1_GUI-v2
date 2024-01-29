@@ -4,6 +4,8 @@ import java.util.List;
 public class Cave {
 	private boolean isTunnel;
 	private List<Entity> entities;
+	// is left
+	// right
 
 	public Cave(boolean isTunnel) {
 		this.entities = new ArrayList<>();

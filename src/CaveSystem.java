@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,13 +58,21 @@ public class CaveSystem {
 		return getCave(x, y).getEntities();
 	}
 
-	public void addCaveEntity(Entity entity, Coordinates coordinates) {
-		addCaveEntity(entity, coordinates.getX(), coordinates.getY());
+	public void addEntity(Entity entity, Coordinates coordinates) {
+		addEntity(entity, coordinates.getX(), coordinates.getY());
+	}
+
+	public void addEntity(Entity entity, int x, int y) {
+		getCave(x, y).addEntity(entity);
 	}
 
 	// cave info:
-	public void addCaveEntity(Entity entity, int x, int y) {
-		getCave(x, y).addEntity(entity);
+	public void setCave(Cave cave, Coordinates coordinates) {
+		setCave(cave, coordinates.getX(), coordinates.getY());
+	}
+
+	public void setCave(Cave cave, int x, int y) {
+		caves[y][x] = cave;
 	}
 
 	public Cave getCave(int x, int y) {
@@ -79,6 +86,11 @@ public class CaveSystem {
 	public void setCaves(Cave[][] caves) {
 		this.caves = caves;
 	}
+
+	// cave generation:
+	// public void generateCaveSystem() {
+	// // use some algorithm
+	// }
 
 	// extra:
 	// public void isTherePath() {
