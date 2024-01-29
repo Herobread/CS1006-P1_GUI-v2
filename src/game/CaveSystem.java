@@ -1,9 +1,13 @@
+package game;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import utils.Coordinates;
+import game.utils.Coordinates;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 public class CaveSystem {
 	private int width;
@@ -33,12 +37,88 @@ public class CaveSystem {
 	public ArrayList<Coordinates> getCaveConnections(Coordinates coordinates) {
 		return connections.get(coordinates);
 	}
-	public Coordinates[] getConnectionKeySet(){
+
+	public Coordinates[] getConnectionKeySet() {
 		return connections.keySet().toArray(new Coordinates[connections.keySet().size()]);
 	}
-	
+
+	/**
+	 * This method returns a string representing the directions of connected caves
+	 * based on the provided coordinates.
+	 * The order of directions in the result string is: down, left, right, up.
+	 * (dlru)
+	 *
+	 * @param x The coordinates of the current cave.
+	 * @param y The coordinates of the current cave.
+	 * @return A string representing the directions of connected caves. For example,
+	 *         the string "dlr" indicates connections in the order of down, left,
+	 *         and right.
+	 */
+	public String getConnectionsString(int x, int y) {
+		return getConnectionsString(new Coordinates(x, y));
+	}
+
+	/**
+	 * This method returns a string representing the directions of connected caves
+	 * based on the provided coordinates.
+	 * The order of directions in the result string is: down, left, right, up.
+	 * (dlru)
+	 *
+	 * @param currentCaveCoordinates The coordinates of the current cave.
+	 * @return A string representing the directions of connected caves. For example,
+	 *         the string "dlr" indicates connections in the order of down, left,
+	 *         and right.
+	 */
+	public String getConnectionsString(Coordinates currentCaveCoordinates) {
+		String res = "";
+		ArrayList<Coordinates> connections = getCaveConnections(currentCaveCoordinates);
+
+		boolean isUp = false;
+		boolean isRight = false;
+		boolean isDown = false;
+		boolean isLeft = false;
+
+		// sort by x y, so that order
+		Collections.sort(connections, Comparator.comparing(Coordinates::getX).thenComparing(Coordinates::getY));
+
+		for (Coordinates connectedCaveCoordinates : connections) {
+			int x1 = connectedCaveCoordinates.getX();
+			int y1 = connectedCaveCoordinates.getY();
+
+			int x2 = currentCaveCoordinates.getX();
+			int y2 = currentCaveCoordinates.getY();
+
+			if (x1 == x2 - 1) {
+				isLeft = true;
+			} else if (x1 == x2 + 1) {
+				isRight = true;
+			} else if (y1 == y2 + 1) {
+				isDown = true;
+			} else if (y1 == y2 - 1) {
+				isUp = true;
+			}
+		}
+
+		// dlru
+
+		// order result
+		if (isDown) {
+			res += "d";
+		}
+		if (isLeft) {
+			res += "l";
+		}
+		if (isRight) {
+			res += "r";
+		}
+		if (isUp) {
+			res += "u";
+		}
+
+		return res;
+	}
+
 	// create
-	
 	public ArrayList<Coordinates> getCaveConnections(int x, int y) {
 		return getCaveConnections(new Coordinates(x, y));
 	}
@@ -118,7 +198,7 @@ public class CaveSystem {
 			for (int j = 0; j < width; j++) {
 				setCave(new Cave(false), new Coordinates(j, i));
 
-				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i - 1, j));
+				// addUndirectedConnection(new Coordinates(j, i), new Coordinates(i - 1, j));
 				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i + 1, j));
 				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j + 1));
 				addUndirectedConnection(new Coordinates(j, i), new Coordinates(i, j - 1));
