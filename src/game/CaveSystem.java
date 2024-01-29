@@ -6,9 +6,6 @@ import java.util.Map;
 
 import game.utils.Coordinates;
 
-import java.util.Collections;
-import java.util.Comparator;
-
 public class CaveSystem {
 	/**
 	 * The width of the cave system.
