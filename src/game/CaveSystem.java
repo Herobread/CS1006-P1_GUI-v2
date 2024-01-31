@@ -263,7 +263,7 @@ public class CaveSystem {
 	public void generateCaveSystem() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
-				Cave currentCave = new Cave(false);
+				Cave currentCave = new Cave();
 				Coordinates currentCoordinates = new Coordinates(j, i);
 
 				setCave(currentCave, currentCoordinates);
