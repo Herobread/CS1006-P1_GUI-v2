@@ -4,10 +4,9 @@ package game;
 
 public class RendererUnstableMain {
 	public static void main(String[] args) {
-		RendererUnstable renderer = new RendererUnstable();
-
-		renderer.drawTexture("cave-dlru", 100, 100);
-
+		Renderer renderer = new Renderer();
+		renderer.drawText("Hello World", 0, 0, 30);
+		renderer.drawTexture("cave-urdl", 0, 0,renderer.getFrameWidth(),renderer.getFrameHeight());	
 		renderer.draw();
 	}
 }
