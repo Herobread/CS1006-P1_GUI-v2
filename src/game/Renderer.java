@@ -20,7 +20,7 @@ public class Renderer {
 
 	private int width = 500;
 	private int height = 500;
-
+	private final String missingTexture = "./resources/missing-texture.png";
 	// initialise jframe in constructor
 	public Renderer() {
 		frame = new JFrame();
@@ -57,7 +57,13 @@ public class Renderer {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
 			drawTexture(textureName, x, y, image.getWidth(), image.getHeight());
 		} catch (IOException e) {
-			System.out.println("There was an error in drawing an image");
+			try{
+				final BufferedImage image = ImageIO.read(new File(missingTexture));
+				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight());
+			}
+			catch(IOException e2){
+				System.out.println("Critical error in drawing texture");
+			}
 		}
 	}
 
@@ -66,17 +72,20 @@ public class Renderer {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
-			// JLabel imageObject = new JLabel(new
-			// ImageIcon(image).getImage().getScaledInstance(width, height,
-			// Image.SCALE_REPLICATE));
 			Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
 			JLabel imageObject = new JLabel(new ImageIcon(scaledImage));
 			imageObject.setBounds(x, y, width, height);
 			frame.add(imageObject);
 		} catch (IOException e) {
+			try{
+				final BufferedImage image = ImageIO.read(new File(missingTexture));
+				drawTexture("missing-texture", x, y, width, height);
+			}
+			catch(IOException e2){
+				System.out.println("Critical error in drawing texture");
+			}
 		}
 	}
-
 	public void drawText(String text, int x, int y, int size) {
 		JLabel label = new JLabel(text);
 		Font font = new Font("DejaVu Sans Mono", Font.PLAIN, size);
