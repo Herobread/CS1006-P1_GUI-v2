@@ -61,14 +61,13 @@ public class CaveSystem {
 	/**
 	 * This method returns a string representing the directions of connected caves
 	 * based on the provided coordinates.
-	 * The order of directions in the result string is: down, left, right, up.
-	 * (dlru)
-	 *
+	 * The order of directions in the result string is: up, right, down, left.
+	 * (urdl)
+	 * 
 	 * @param x The coordinates of the current cave.
 	 * @param y The coordinates of the current cave.
 	 * @return A string representing the directions of connected caves. For example,
-	 *         the string "dlr" indicates connections in the order of down, left,
-	 *         and right.
+	 *         the string "rdl" = right, down and left.
 	 */
 	public String getConnectionsString(int x, int y) {
 		return getConnectionsString(new Coordinates(x, y));
@@ -77,13 +76,12 @@ public class CaveSystem {
 	/**
 	 * This method returns a string representing the directions of connected caves
 	 * based on the provided coordinates.
-	 * The order of directions in the result string is: down, left, right, up.
-	 * (dlru)
+	 * The order of directions in the result string is: up, right, down, left.
+	 * (urdl)
 	 *
 	 * @param currentCaveCoordinates The coordinates of the current cave.
 	 * @return A string representing the directions of connected caves. For example,
-	 *         the string "dlr" indicates connections in the order of down, left,
-	 *         and right.
+	 *         the string "rdl" = right, down and left.
 	 */
 	public String getConnectionsString(Coordinates currentCaveCoordinates) {
 		String res = "";
@@ -112,18 +110,18 @@ public class CaveSystem {
 			}
 		}
 
-		// order result in shape: dlru
+		// order result in shape: urdl
+		if (isUp) {
+			res += "u";
+		}
+		if (isRight) {
+			res += "r";
+		}
 		if (isDown) {
 			res += "d";
 		}
 		if (isLeft) {
 			res += "l";
-		}
-		if (isRight) {
-			res += "r";
-		}
-		if (isUp) {
-			res += "u";
 		}
 
 		return res;
