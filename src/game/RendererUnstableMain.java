@@ -4,22 +4,22 @@ package game;
 
 public class RendererUnstableMain {
 	public static void main(String[] args) {
-		Renderer renderer = new Renderer();		
-		while(true){
+		Renderer renderer = new Renderer();
+		while (true) {
 			renderer.drawText("Hello World", 0, 0, 30);
-			renderer.drawTexture("cave-urdl", 0, 0,renderer.getFrameWidth(),renderer.getFrameHeight());		
+			renderer.drawTexture("cave-urdl", 0, 0, renderer.getFrameWidth(), renderer.getFrameHeight());
 			renderer.draw();
-			try{
-				Thread.sleep(1000);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
 			}
-			catch(InterruptedException e){}
 			renderer.clear();
 			renderer.draw();
-			try{
-				Thread.sleep(1000);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
 			}
-			catch(InterruptedException e){}
 		}
-		
+
 	}
 }
