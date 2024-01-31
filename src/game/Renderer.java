@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.Component;
 
 public class Renderer {
 	// 4. create a method that gets CaveSystem and then based on that info
@@ -70,7 +71,6 @@ public class Renderer {
 			JLabel imageObject = new JLabel(new ImageIcon(scaledImage));
 			imageObject.setBounds(x, y, width, height);
 			frame.add(imageObject);
-			//frame.setComponentZOrder(imageObject, 1);
 		} catch (IOException e) {
 		}
 	}
@@ -81,5 +81,9 @@ public class Renderer {
 		label.setForeground(new Color(255,255,255));
 		label.setBounds(x, y, 300, size);
 		frame.add(label);
+	}
+
+	public void clear(){
+		frame.getContentPane().removeAll();
 	}
 }
