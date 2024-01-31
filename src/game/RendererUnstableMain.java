@@ -10,13 +10,13 @@ public class RendererUnstableMain {
 			renderer.drawTexture("cave-urdl", 0, 0, renderer.getFrameWidth(), renderer.getFrameHeight());
 			renderer.draw();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
 			renderer.clear();
 			renderer.draw();
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 			}
 		}
