@@ -2,7 +2,7 @@ package game;
 
 public class CaveMapMain {
 	public static void main(String[] args) {
-		final int SIZE = 50;
+		final int SIZE = 16;
 		final int TEXTURE_SIZE = 16;
 		CaveSystem caves = new CaveSystem(SIZE, SIZE);
 		Renderer renderer = new Renderer(1024, 900);

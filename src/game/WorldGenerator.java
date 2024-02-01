@@ -10,7 +10,7 @@ public class WorldGenerator {
 	private int width;
 	private int height;
 	private boolean[][] tiles;
-	private int iterations = 2;
+	private int iterations = 10;
 
 	public WorldGenerator(int width, int height) {
 		this.width = width;
