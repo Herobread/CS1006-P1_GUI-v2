@@ -2,6 +2,10 @@ package game;
 
 import java.util.Random;
 
+import game.utils.Coordinates;
+
+import java.util.ArrayList;
+
 public class WorldGenerator {
 	private int width;
 	private int height;
@@ -14,7 +18,7 @@ public class WorldGenerator {
 		this.tiles = new boolean[height][width];
 	}
 
-	public Cave[][] generateCellularAutomataCaves(CaveSystem caves) {
+	public CaveSystem generateCellularAutomataCaves(CaveSystem caves) {
 		Random random = new Random();
 
 		for (int y = 0; y < height; y += 1) {
@@ -25,15 +29,59 @@ public class WorldGenerator {
 			}
 		}
 
-		printTiles();
-
 		for (int i = 0; i < iterations; i++) {
 			iterate();
 		}
 
 		printTiles();
 
-		return caves.getCaves();
+		for (int y = 0; y < height; y += 1) {
+			for (int x = 0; x < width; x += 1) {
+				Coordinates currentCoordinates = new Coordinates(x, y);
+				ArrayList<Coordinates> coordinates = getNeighbouringCoordinates(x, y);
+
+				if (coordinates == null) {
+					continue;
+				}
+
+				for (Coordinates coordinate : coordinates) {
+					caves.addDirectredConnection(currentCoordinates, coordinate);
+				}
+			}
+		}
+
+		return caves;
+	}
+
+	private ArrayList<Coordinates> getNeighbouringCoordinates(int x, int y) {
+		ArrayList<Coordinates> neighbors = new ArrayList<>();
+
+		// Exclude the tile itself if it is solid
+		if (isSolid(x, y)) {
+			return null;
+		}
+
+		// Add up neighbor if not solid
+		if (y > 0 && !isSolid(x, y - 1)) {
+			neighbors.add(new Coordinates(x, y - 1));
+		}
+
+		// Add right neighbor if not solid
+		if (x < width - 1 && !isSolid(x + 1, y)) {
+			neighbors.add(new Coordinates(x + 1, y));
+		}
+
+		// Add down neighbor if not solid
+		if (y < height - 1 && !isSolid(x, y + 1)) {
+			neighbors.add(new Coordinates(x, y + 1));
+		}
+
+		// Add left neighbor if not solid
+		if (x > 0 && !isSolid(x - 1, y)) {
+			neighbors.add(new Coordinates(x - 1, y));
+		}
+
+		return neighbors;
 	}
 
 	private void printTiles() {
@@ -80,7 +128,7 @@ public class WorldGenerator {
 	}
 
 	private boolean isSolid(int x, int y) {
-		if (x < 1 || x >= width - 1 || y < 1 || y >= height - 1) {
+		if (x < 0 || x >= width || y < 0 || y >= height) {
 			return true;
 		}
 

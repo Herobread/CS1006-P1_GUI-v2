@@ -21,8 +21,11 @@ public class Renderer {
 	private int width = 500;
 	private int height = 500;
 	private final String missingTexture = "./resources/missing-texture.png";
+
 	// initialise jframe in constructor
-	public Renderer() {
+	public Renderer(int width, int height) {
+		this.width = width;
+		this.height = height;
 		frame = new JFrame();
 		configureWindow();
 	}
@@ -57,11 +60,10 @@ public class Renderer {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
 			drawTexture(textureName, x, y, image.getWidth(), image.getHeight());
 		} catch (IOException e) {
-			try{
+			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
 				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight());
-			}
-			catch(IOException e2){
+			} catch (IOException e2) {
 				System.out.println("Critical error in drawing texture");
 			}
 		}
@@ -77,15 +79,15 @@ public class Renderer {
 			imageObject.setBounds(x, y, width, height);
 			frame.add(imageObject);
 		} catch (IOException e) {
-			try{
+			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
 				drawTexture("missing-texture", x, y, width, height);
-			}
-			catch(IOException e2){
+			} catch (IOException e2) {
 				System.out.println("Critical error in drawing texture");
 			}
 		}
 	}
+
 	public void drawText(String text, int x, int y, int size) {
 		JLabel label = new JLabel(text);
 		Font font = new Font("DejaVu Sans Mono", Font.PLAIN, size);
