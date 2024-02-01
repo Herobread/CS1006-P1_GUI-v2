@@ -8,6 +8,5 @@ public class RendererUnstableMain {
 		renderer.drawText("Hello World", 0, 0, 30);
 		renderer.drawTexture("cave-urdjl", 0, 0, renderer.getFrameWidth(), renderer.getFrameHeight());
 		renderer.draw();
-
 	}
 }
