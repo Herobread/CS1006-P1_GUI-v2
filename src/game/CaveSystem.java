@@ -87,6 +87,10 @@ public class CaveSystem {
 		String res = "";
 		HashSet<Coordinates> connections = getCaveConnections(currentCaveCoordinates);
 
+		if (connections == null) {
+			return "";
+		}
+
 		boolean isUp = false;
 		boolean isRight = false;
 		boolean isDown = false;
@@ -260,51 +264,13 @@ public class CaveSystem {
 	}
 
 	// cave generation:
-	public void generateCaveSystem() {
+	public void initialiseCaveSystem() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				Cave currentCave = new Cave();
 				Coordinates currentCoordinates = new Coordinates(j, i);
 
 				setCave(currentCave, currentCoordinates);
-
-				if (i > 0) {
-					addUndirectedConnection(currentCoordinates, new Coordinates(j, i - 1));
-				}
-
-				if (i < height - 1) {
-					addUndirectedConnection(currentCoordinates, new Coordinates(j, i + 1));
-				}
-
-				if (j < width - 1) {
-					addUndirectedConnection(currentCoordinates, new Coordinates(j + 1, i));
-				}
-
-				if (j > 0) {
-					addUndirectedConnection(currentCoordinates, new Coordinates(j - 1, i));
-				}
-			}
-		}
-	}
-
-	// debug
-	public void printCaves() {
-		System.out.println("Caves:");
-		for (int i = 0; i < height; i++) {
-			for (int j = 0; j < width; j++) {
-				HashSet<Coordinates> connections = getCaveConnections(j, i);
-
-				if (connections == null) {
-					// System.out.println("no connections " + i + " " + j);
-					continue;
-				}
-
-				System.out.println("Cave (" + j + ", " + i + ") is connected to (" + connections.size() + ") "
-						+ connections.toString());
-
-				ArrayList<Entity> entities = getCaveEntities(i, j);
-
-				System.out.println("Cave (" + j + ", " + i + ") entities: " + entities.toString());
 			}
 		}
 	}
