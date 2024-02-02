@@ -15,6 +15,7 @@ import java.awt.Color;
 public class Renderer {
 	// 4. create a method that gets CaveSystem and then based on that info
 	// draws caves (use new getConnectionsString(Coordinates))
+	
 	// store jframe (and other attributes) here
 	private JFrame frame;
 
@@ -79,12 +80,7 @@ public class Renderer {
 			imageObject.setBounds(x, y, width, height);
 			frame.add(imageObject);
 		} catch (IOException e) {
-			try {
-				final BufferedImage image = ImageIO.read(new File(missingTexture));
-				drawTexture("missing-texture", x, y, width, height);
-			} catch (IOException e2) {
-				System.out.println("Critical error in drawing texture");
-			}
+			drawTexture("missing-texture", x, y, width, height);
 		}
 	}
 
