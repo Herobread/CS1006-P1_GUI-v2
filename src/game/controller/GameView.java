@@ -1,4 +1,4 @@
-package game.manager;
+package game.controller;
 
 public class GameView implements ViewBase {
 	public void handleInput() {

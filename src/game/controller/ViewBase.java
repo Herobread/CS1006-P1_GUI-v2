@@ -1,4 +1,4 @@
-package game.manager;
+package game.controller;
 
 // template for views
 public interface ViewBase {

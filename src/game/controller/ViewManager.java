@@ -1,4 +1,4 @@
-package game.manager;
+package game.controller;
 
 // will be responsible for selecting what is the state of the game:
 
