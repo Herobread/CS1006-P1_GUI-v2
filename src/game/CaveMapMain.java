@@ -12,17 +12,17 @@ public class CaveMapMain {
 		final int SCREEN_WIDTH = SIZE * TEXTURE_SIZE;
 
 		CaveSystem caves = new CaveSystem(SIZE, SIZE);
-		Renderer renderer = new Renderer(SCREEN_WIDTH, SCREEN_HEIGHT);
-		WorldGenerator generator = new WorldGenerator(SIZE, SIZE);
+		Renderer renderer = Renderer.getInstance();
+		renderer.setDimensions(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		// caves.initialiseCaveSystem();
+		WorldGenerator generator = new WorldGenerator(SIZE, SIZE);
 
 		caves = generator.generateCellularAutomataCaves(caves);
 
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				String texture = "cave-" + caves.getConnectionsString(j, i);
-				// renderer.drawText(j + " - " + i, j * TEXTURE_SIZE, i * TEXTURE_SIZE, 12);
+				renderer.drawText(j + " - " + i, j * TEXTURE_SIZE, i * TEXTURE_SIZE, 12);
 				renderer.drawTexture(texture, j * TEXTURE_SIZE, i * TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
 			}
 		}

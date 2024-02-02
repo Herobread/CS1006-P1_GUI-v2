@@ -13,22 +13,27 @@ import java.awt.Font;
 import java.awt.Color;
 
 public class Renderer {
-	// 4. create a method that gets CaveSystem and then based on that info
-	// draws caves (use new getConnectionsString(Coordinates))
+	// Singleton instance
+	private static Renderer instance;
 
-	// store jframe (and other attributes) here
+	// Other attributes
 	private JFrame frame;
-
 	private int width = 500;
 	private int height = 500;
 	private final String missingTexture = "./resources/missing-texture.png";
 
-	// initialise jframe in constructor
-	public Renderer(int width, int height) {
-		this.width = width;
-		this.height = height;
+	// Private constructor to prevent external instantiation
+	private Renderer() {
 		frame = new JFrame();
 		configureWindow();
+	}
+
+	// Public method to get the instance
+	public static Renderer getInstance() {
+		if (instance == null) {
+			instance = new Renderer();
+		}
+		return instance;
 	}
 
 	public int getFrameHeight() {
@@ -39,22 +44,25 @@ public class Renderer {
 		return width;
 	}
 
-	// configure important settings of the frame
+	// Method to set width and height
+	public void setDimensions(int width, int height) {
+		this.width = width;
+		this.height = height;
+		frame.setSize(width, height);
+	}
+
 	private void configureWindow() {
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setTitle("Hunt The Wumpus");
-		frame.setSize(width, height);
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 
-	// refresh the frame with new elements
 	public void draw() {
 		frame.repaint();
 	}
 
-	// draw an image using the image's existing size
 	public void drawTexture(String textureName, int x, int y) {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
@@ -70,7 +78,6 @@ public class Renderer {
 		}
 	}
 
-	// draw an image using the specified width and height
 	public void drawTexture(String textureName, int x, int y, int width, int height) {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
@@ -95,5 +102,10 @@ public class Renderer {
 
 	public void clear() {
 		frame.getContentPane().removeAll();
+	}
+
+	// Ensure the Singleton pattern by adding a private readObject method
+	private Object readResolve() {
+		return instance;
 	}
 }

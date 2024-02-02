@@ -10,7 +10,10 @@ public class WorldGenerator {
 	private int width;
 	private int height;
 	private boolean[][] tiles;
-	private int iterations = 10;
+	private int iterations = 2;
+	final private float SOLID_PROBABILITY = 0.5f; // 0.38f
+	final private float MIN_NEIGHBOURS = 4;
+	final private float MAX_NEIGHBOURS = 4;
 
 	public WorldGenerator(int width, int height) {
 		this.width = width;
@@ -23,7 +26,7 @@ public class WorldGenerator {
 
 		for (int y = 0; y < height; y += 1) {
 			for (int x = 0; x < width; x += 1) {
-				boolean isSolid = random.nextFloat() < 0.38 ? true : false;
+				boolean isSolid = random.nextFloat() < SOLID_PROBABILITY ? true : false;
 
 				tiles[y][x] = isSolid;
 			}
@@ -43,6 +46,8 @@ public class WorldGenerator {
 				if (coordinates == null) {
 					continue;
 				}
+
+				caves.setCave(new Cave(), currentCoordinates);
 
 				for (Coordinates coordinate : coordinates) {
 					caves.addDirectredConnection(currentCoordinates, coordinate);
@@ -102,9 +107,10 @@ public class WorldGenerator {
 		for (int y = 0; y < height; y += 1) {
 			for (int x = 0; x < width; x += 1) {
 				int neighbours = countNeighbours(x, y);
-				if (neighbours > 4) {
+
+				if (neighbours > MIN_NEIGHBOURS) {
 					newTiles[y][x] = true;
-				} else if (neighbours < 4) {
+				} else if (neighbours < MAX_NEIGHBOURS) {
 					newTiles[y][x] = false;
 				}
 			}
