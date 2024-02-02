@@ -1,4 +1,4 @@
-package game;
+package game.view;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -15,7 +15,7 @@ import java.awt.Color;
 public class Renderer {
 	// 4. create a method that gets CaveSystem and then based on that info
 	// draws caves (use new getConnectionsString(Coordinates))
-	
+
 	// store jframe (and other attributes) here
 	private JFrame frame;
 
