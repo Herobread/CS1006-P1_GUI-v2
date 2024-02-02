@@ -1,4 +1,4 @@
-package game.controller;
+package game.controllers.view;
 
 // will be responsible for selecting what is the state of the game:
 
@@ -12,14 +12,17 @@ public class ViewManager {
 	private static ViewManager instance;
 	private ViewBase currentWindow;
 
+	private GameView gameView = new GameView("Game");
+	private MainMenuView mainMenuView = new MainMenuView("Main menu");
+
 	private ViewManager() {
-		// private constructor to enforce singleton pattern
 	}
 
 	public static ViewManager getInstance() {
 		if (instance == null) {
 			instance = new ViewManager();
 		}
+
 		return instance;
 	}
 
@@ -28,17 +31,21 @@ public class ViewManager {
 	}
 
 	public void switchToMainMenu() {
-		System.out.println("main menu");
-		// setCurrentWindow(new MainMenuWindow());
+		System.out.println("[View manager] main menu");
+
+		setCurrentWindow(mainMenuView);
 	}
 
 	public void switchToGameplay() {
-		System.out.println("gameplay");
-		// setCurrentWindow(new GameplayWindow());
+		System.out.println("[View manager] switched to gameplay");
+		setCurrentWindow(gameView);
 	}
 
 	public void displayCurrentWindow() {
+		System.out.println("[View manager] switched to gameplay");
+
 		if (currentWindow != null) {
+			System.out.println(currentWindow.getName());
 			currentWindow.run();
 		}
 	}
