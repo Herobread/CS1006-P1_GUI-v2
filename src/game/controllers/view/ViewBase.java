@@ -1,11 +1,19 @@
 package game.controllers.view;
 
+import game.view.Renderer;
+
 // template for views
 public abstract class ViewBase {
 	protected String name;
+	protected Renderer renderer;
 
 	public ViewBase(String name) {
 		this.name = name;
+	}
+
+	public void init() {
+		renderer = Renderer.getInstance();
+		renderer.setDimensions(512, 512);
 	}
 
 	public void handleInput() {
@@ -18,9 +26,7 @@ public abstract class ViewBase {
 	};
 
 	public void run() {
-		handleInput();
-		renderView();
-		update();
+		System.out.println(name + " was not setup");
 	}
 
 	public String getName() {

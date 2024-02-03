@@ -1,11 +1,13 @@
 package game.view;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
@@ -49,6 +51,14 @@ public class Renderer {
 		this.width = width;
 		this.height = height;
 		frame.setSize(width, height);
+	}
+
+	// temporary method to handle clicks
+	public void drawButtonUnstable(String buttonText, int x, int y, ActionListener actionListener) {
+		JButton button = new JButton(buttonText);
+		button.setBounds(x, y, 150, 30); // You can adjust the size as needed
+		button.addActionListener(actionListener); // Attach the ActionListener
+		frame.add(button);
 	}
 
 	private void configureWindow() {

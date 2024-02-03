@@ -1,5 +1,7 @@
 package game.controllers.view;
 
+import game.view.Renderer;
+
 public class GameView extends ViewBase {
 	public GameView(String name) {
 		super(name);
@@ -14,6 +16,9 @@ public class GameView extends ViewBase {
 	@Override
 	public void renderView() {
 		// Provide the implementation for rendering the game view
+		Renderer.getInstance().clear();
+		Renderer.getInstance().drawTexture("bat", 10, 10, 80, 80);
+		Renderer.getInstance().draw();
 		System.out.println("[Game view] Rendering GameView");
 	}
 
