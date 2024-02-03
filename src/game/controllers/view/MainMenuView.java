@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import game.controllers.state.GameStateManager;
 import game.view.Renderer;
 
-public class MainMenuView extends GameView {
+public class MainMenuView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
-	// private ViewManager viewManager = ViewManager.getInstance();
+	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
 
 	public MainMenuView() {
@@ -25,8 +25,8 @@ public class MainMenuView extends GameView {
 		public void actionPerformed(ActionEvent actionEvent) {
 			System.out.println("Button clicked!");
 			gameStateManager.setInputAction("play");
-			// viewManager.switchToGameplay();
-			// viewManager.displayWindow();
+			viewManager.switchToGameplay();
+			viewManager.displayWindow();
 		}
 	};
 	private ActionListener somethingButtonActionListener = new ActionListener() {

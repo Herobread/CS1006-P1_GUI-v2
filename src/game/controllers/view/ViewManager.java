@@ -1,7 +1,5 @@
 package game.controllers.view;
 
-import game.view.Renderer;
-
 // will be responsible for selecting what is the state of the game:
 
 // main menu
@@ -14,20 +12,24 @@ public class ViewManager {
 	private static ViewManager instance;
 	private ViewBase currentWindow;
 
-	private GameView gameView = new GameView("Game");
-	private MainMenuView mainMenuView = new MainMenuView();
+	private GameView gameView;
+	private MainMenuView mainMenuView;
 
 	private ViewManager() {
-
-		mainMenuView.init();
 	}
 
 	public static synchronized ViewManager getInstance() {
 		if (instance == null) {
 			instance = new ViewManager();
+			instance.initializeViews();
 		}
 
 		return instance;
+	}
+
+	private void initializeViews() {
+		gameView = new GameView();
+		mainMenuView = new MainMenuView();
 	}
 
 	public void displayWindow() {

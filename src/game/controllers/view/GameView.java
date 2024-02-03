@@ -1,23 +1,37 @@
 package game.controllers.view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import game.controllers.state.GameStateManager;
 import game.view.Renderer;
 
 public class GameView extends ViewBase {
-	public GameView(String name) {
-		super(name);
+	private GameStateManager gameStateManager = GameStateManager.getInstance();
+	private ViewManager viewManager = ViewManager.getInstance();
+	private Renderer renderer = Renderer.getInstance();
+
+	public GameView() {
+		super("Gameplay");
 	}
 
-	@Override
-	public void handleInput() {
-		// Provide the implementation for handling input in the game view
-		System.out.println("[Game view] Handling input in GameView");
-	}
+	private ActionListener mainMenuButtonActionListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+			System.out.println("Button clicked!");
+			gameStateManager.setInputAction("some action");
+			viewManager.switchToMainMenu();
+			viewManager.displayWindow();
+		}
+	};
 
 	@Override
 	public void renderView() {
 		// Provide the implementation for rendering the game view
 		Renderer.getInstance().clear();
 		Renderer.getInstance().drawTexture("bat", 10, 10, 80, 80);
+		renderer.drawButtonUnstable("Main menu", 50, 150, mainMenuButtonActionListener);
+
 		Renderer.getInstance().draw();
 		System.out.println("[Game view] Rendering GameView");
 	}
