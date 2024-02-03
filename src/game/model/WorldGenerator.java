@@ -1,7 +1,6 @@
 package game.model;
 
 import java.util.Random;
-import java.util.Vector;
 
 import game.utils.Coordinates;
 
