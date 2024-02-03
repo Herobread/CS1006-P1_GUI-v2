@@ -1,0 +1,49 @@
+//////// extracted from non graphical htw
+
+
+// arrow prep
+With your arrow ready, %d more await.
+
+With your last arrow in hand, no others remain.
+
+Alas, your quiver echoes emptiness - not enough arrows!
+
+
+// arrow shoot
+The arrow gracefully flies into the depths of cave.
+
+[-] Your attempt finds only echoes - a miss.
+
+[+] The resounding echo of victory fills the cavern as your arrow finds its mark - Wumpus has fallen!
+
+[+] A swift arrow finds its mark, silencing a bat in the shadows of cave %d. %nThe cavern briefly holds its breath, acknowledging your precise aim.
+
+[+] An arrow descends gracefully into the abyss, leaving only the echoes of its fleeting passage.
+
+
+// interactions
+
+[X] The bat releases you from its grip, yet the Wumpus, mistaking you for a delectable morsel, wastes no time savouring an unexpected snack.
+
+[X] The bat, attempting to show you its favourite hiding spot, leads you straight into a pit. It seems bats aren't the best tour guides!
+
+[!] After a brief flight, the bat decides to take a rest, settling down in the same cave
+
+[!] Another bat joins the party! You're airborne, heading to cave
+
+[!] As you enter the cave, you notice a bat leisurely hanging from the ceiling, seemingly undisturbed by your presence in cave
+
+[!] Swiftly, a bat swoops down, seizing you and soaring into the dark recesses of cave
+
+[X] Awakening the Wumpus turned out to be a grave misstep, met with swift retribution as it promptly devoured you in the shadows of its lair.
+
+[X] In a clumsy misstep, you stumbled into the abyss, meeting your untimely demise with a fatal fall.
+
+
+// Wumpus walking
+
+A shiver runs down your spine as the thunderous steps of an unseen force rapidly approach, filling the air with an unsettling tension.
+
+[X] Suddenly, the ominous presence of the Wumpus engulfs you, and in an unfortunate turn of events, you become its unfortunate prey.
+
+You can hear loud steps in a distance.
