@@ -6,13 +6,16 @@ import java.util.Vector;
 import game.utils.Coordinates;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WorldGenerator {
 	private int width;
 	private int height;
 	private boolean[][] tiles;
 	private int iterations = 2;
-	final private float SOLID_PROBABILITY = 0.9f; // 0.38f
+	final private float SOLID_PROBABILITY = 0.45f;
 	final private float MIN_NEIGHBOURS = 4;
 	final private float MAX_NEIGHBOURS = 4;
 
@@ -40,16 +43,40 @@ public class WorldGenerator {
 		printTiles();
 
 		// find separated caves:
-		int[][] separatedIslands = floodFill(tiles);
+		int[][] separatedCavesArray = floodFill(tiles);
 
-		for (int i = 0; i < separatedIslands.length; i++) {
-			for (int j = 0; j < separatedIslands[i].length; j++) {
-				System.out.print(separatedIslands[i][j]);
+		// print separated caves:
+		for (int i = 0; i < separatedCavesArray.length; i++) {
+			for (int j = 0; j < separatedCavesArray[i].length; j++) {
+				System.out.print(separatedCavesArray[i][j]);
 			}
 			System.out.println();
 		}
 
-		// join caves
+		// store separated caves as a map (caveID - List of coordinates)
+		Map<Integer, List<Coordinates>> separatedCavesMap = getDisconnectedCavesCoordinates(separatedCavesArray);
+
+		System.out.println("Detected separate caves: " + separatedCavesMap.keySet().size());
+
+		// select random point on each island
+		List<Coordinates> randomPoints = new ArrayList<>();
+
+		for (int caveId : separatedCavesMap.keySet()) {
+			List<Coordinates> caveCoordinatesList = separatedCavesMap.get(caveId);
+			randomPoints.add(caveCoordinatesList.get(random.nextInt(caveCoordinatesList.size())));
+			System.out.println("Cave id: " + caveId + " size=" + caveCoordinatesList.size());
+		}
+
+		System.out.println(randomPoints);
+
+		// List<Coordinates> randomPoints = new ArrayList<>(); // assume filled with
+		// Coordinate
+		// function to draw line: drawLine(coordinate 1, coordinate 2)
+		// join separated islands
+		// join point 1 with 2, 2 with 3 etc
+		drawLines(randomPoints);
+
+		// finalize caves by creating connections on actual graph instead of just bitmap
 		for (int y = 0; y < height; y += 1) {
 			for (int x = 0; x < width; x += 1) {
 				Coordinates currentCoordinates = new Coordinates(x, y);
@@ -68,6 +95,12 @@ public class WorldGenerator {
 		}
 
 		return caves;
+	}
+
+	private void drawLines(List<Coordinates> points) {
+		for (int i = 0; i < points.size() - 1; i++) {
+			drawLine(points.get(i), points.get(i + 1));
+		}
 	}
 
 	// draws L shaped line on bitmap
@@ -94,6 +127,33 @@ public class WorldGenerator {
 			currentY += directionY;
 			tiles[currentY][currentX] = false;
 		}
+	}
+
+	private Map<Integer, List<Coordinates>> getDisconnectedCavesCoordinates(int[][] disconnectedCavesArray) {
+		Map<Integer, List<Coordinates>> disconnectedCavesMap = new HashMap<>();
+		int islandNumber = 1;
+
+		int rows = disconnectedCavesArray.length;
+		int cols = disconnectedCavesArray[0].length;
+
+		for (int y = 0; y < rows; y++) {
+			for (int x = 0; x < cols; x++) {
+				islandNumber = disconnectedCavesArray[y][x];
+
+				// skip walls
+				if (islandNumber == 0) {
+					continue;
+				}
+				Coordinates coordinates = new Coordinates(x, y);
+
+				disconnectedCavesMap
+						.computeIfAbsent(islandNumber, k -> new ArrayList<>())
+						.add(coordinates);
+
+			}
+		}
+
+		return disconnectedCavesMap;
 	}
 
 	private int[][] floodFill(boolean[][] tiles) {
