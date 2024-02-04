@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 import java.util.ArrayList;
 
@@ -15,5 +15,10 @@ public class Cave {
 
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+
+	@Override
+	public String toString() {
+		return "Cave [entities=" + entities + "]";
 	}
 }

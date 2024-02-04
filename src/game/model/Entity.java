@@ -1,4 +1,4 @@
-package game;
+package game.model;
 
 public class Entity {
 	private String name;
