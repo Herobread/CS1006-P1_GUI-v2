@@ -59,7 +59,7 @@ public class Renderer {
 	public int getFrameHeight() {
 		return height;
 	}
-
+		
 	public int getFrameWidth() {
 		return width;
 	}
@@ -87,11 +87,25 @@ public class Renderer {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
-			drawTexture(textureName, x, y, image.getWidth(), image.getHeight());
+			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(),1f);
 		} catch (IOException e) {
 			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
-				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight());
+				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight(),1f);
+			} catch (IOException e2) {
+				System.out.println("Critical error in drawing texture");
+			}
+		}
+	}
+	public void drawTexture(String textureName, int x, int y, float opacity) {
+		String texturePath = "./resources/" + textureName + ".png";
+		try {
+			final BufferedImage image = ImageIO.read(new File(texturePath));
+			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(),opacity);
+		} catch (IOException e) {
+			try {
+				final BufferedImage image = ImageIO.read(new File(missingTexture));
+				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight(),1f);
 			} catch (IOException e2) {
 				System.out.println("Critical error in drawing texture");
 			}
@@ -99,29 +113,14 @@ public class Renderer {
 	}
 
 	public void drawTexture(String textureName, int x, int y, int width, int height) {
-		String texturePath = "./resources/" + textureName + ".png";
-		try {
-			final BufferedImage image = ImageIO.read(new File(texturePath));
-			Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-			JLabel imageObject = new JLabel(new ImageIcon(scaledImage));
-			imageObject.setBounds(x, y, width, height);
-			frame.add(imageObject);
-		} catch (IOException e) {
-			drawTexture("missing-texture", x, y, width, height);
-		}
+		drawTexture(textureName, x, y, width, height, 1f);
 	}
 
 	public void drawTexture(String textureName, int x, int y, int width, int height, float opacity) {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
 			BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
-			image = ImageIO.read(new File(texturePath));
-			// AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-			// opacity);
-			Image scaledImage = image.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-			JLabel imageObject = new JLabel(new ImageIcon(scaledImage));
-			imageObject.setBounds(x, y, width, height);
-			frame.add(imageObject);
+			Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height, Image.SCALE_DEFAULT);
 			JPanel p = new JPanel();
 			Graphics g = frame.getGraphics();
 			paint(p, g, scaledImage, x, y, opacity);
