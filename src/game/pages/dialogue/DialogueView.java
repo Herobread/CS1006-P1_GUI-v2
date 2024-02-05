@@ -47,7 +47,7 @@ public class DialogueView extends ViewBase {
 	public void update() {
 		System.out.println("[dialogue] Updating model in dialogue");
 
-		String action = gameStateManager.getInputAction();
+		// String action = gameStateManager.getInputAction();
 
 		// if (action.equals("something")) {
 		// System.out.println("something clicked");

@@ -1,10 +1,12 @@
 package game.controllers.state;
 
+import game.model.CaveSystem;
+
 // singleton
 public class GameStateManager {
 	private static GameStateManager instance;
 	private String inputAction = "";
-	private int someNumber = 1;
+	private CaveSystem caves;
 
 	// Private constructor to prevent instantiation from outside
 	private GameStateManager() {
@@ -25,16 +27,11 @@ public class GameStateManager {
 		this.inputAction = inputAction;
 	}
 
-	public int getSomeNumber() {
-		return someNumber;
+	public CaveSystem getCaves() {
+		return caves;
 	}
 
-	public void setSomeNumber(int someNumber) {
-		this.someNumber = someNumber;
+	public void setCaves(CaveSystem caves) {
+		this.caves = caves;
 	}
-
-	public static void setInstance(GameStateManager instance) {
-		GameStateManager.instance = instance;
-	}
-
 }
