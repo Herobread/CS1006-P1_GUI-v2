@@ -45,14 +45,14 @@ public class DialogueView extends ViewBase {
 	// logic
 	@Override
 	public void update() {
-		System.out.println("[Main menu] Updating model in Main menu");
+		System.out.println("[dialogue] Updating model in dialogue");
 
 		String action = gameStateManager.getInputAction();
 
-		if (action.equals("something")) {
-			System.out.println("something clicked");
-			// ViewManager.getInstance().switchToGameplay();
-		}
+		// if (action.equals("something")) {
+		// System.out.println("something clicked");
+		// ViewManager.getInstance().switchToGameplay();
+		// }
 
 		// ViewManager manager = ViewManager.getInstance();
 		// manager.switchToGameplay();
