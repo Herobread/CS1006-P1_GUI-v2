@@ -9,8 +9,9 @@ public class RendererUnstableMain {
 		Renderer renderer = Renderer.getInstance();
 		renderer.setDimensions(512, 512);
 		renderer.drawText("Hello World", 0, 0, 30);
-		renderer.drawTexture("cave-urdl", 0,200,.2f);
-		renderer.drawTexture("cave-udl", 200, 200, 400, 400, .1f);
-
+		renderer.drawTexture("cave-u", 0, 0);
+		renderer.drawTexture("cave-ur", 50, 50,.5f);
+		renderer.drawTexture("cave-urd", 100, 100,100,100);
+		renderer.drawTexture("cave-urdl", 200, 200, 300, 300, .1f);
 	}
 }

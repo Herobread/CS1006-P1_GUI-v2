@@ -7,15 +7,17 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Color;
 
 public class Renderer {
@@ -46,6 +48,7 @@ public class Renderer {
 		frame.getContentPane().setBackground(Color.BLACK);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+
 	}
 
 	// Public method to get the instance
@@ -110,6 +113,7 @@ public class Renderer {
 				System.out.println("Critical error in drawing texture");
 			}
 		}
+
 	}
 
 	public void drawTexture(String textureName, int x, int y, int width, int height) {
@@ -150,11 +154,25 @@ public class Renderer {
 
 	public void drawText(String text, int x, int y, int size) {
 		JLabel label = new JLabel(text);
-		Font font = new Font("DejaVu Sans Mono", Font.PLAIN, size);
-		label.setFont(font);
+		label.setFont(getFont(size));
 		label.setForeground(new Color(255, 255, 255));
 		label.setBounds(x, y, 300, size);
 		frame.add(label);
+	}
+
+	public Font getFont(float size){
+		try{
+			Font font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./resources/map-u.png"));
+			font.deriveFont(size);
+			return font;
+		}
+		catch(IOException e){
+			System.out.println(e.getMessage());
+		}
+		catch(FontFormatException e){
+			System.out.println("Font error: " + e.getLocalizedMessage());
+		}
+		return new Font("Consolas", Font.TRUETYPE_FONT, (int)size);
 	}
 
 	public void clear() {
