@@ -17,13 +17,19 @@ public class GameView extends ViewBase {
 		super("Gameplay");
 	}
 
-	private ActionListener mainMenuButtonActionListener = new ActionListener() {
+	private ActionListener dialogueButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Button clicked!");
-			gameStateManager.setInputAction("some action");
-			viewManager.switchToMainMenu();
-			viewManager.displayWindow();
+			viewManager.switchToDialogue();
+			// viewManager.displayWindow();
+		}
+	};
+
+	private ActionListener mapButtonActionListener = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent actionEvent) {
+			viewManager.switchToMap();
+			// viewManager.displayWindow();
 		}
 	};
 
@@ -32,6 +38,10 @@ public class GameView extends ViewBase {
 		System.out.println("[Game view] Rendering GameView");
 
 		renderer.clear();
+
+		// temp
+		renderer.drawButtonUnstable("Dialogue test", 100, 450, dialogueButtonActionListener);
+		renderer.drawButtonUnstable("open map", 100, 350, mapButtonActionListener);
 
 		// buttons up:
 		renderer.drawTexture("shoot", 176, 8, 72, 72);
@@ -57,8 +67,6 @@ public class GameView extends ViewBase {
 		renderer.drawTexture("player", 192, 192, 128, 128);
 		renderer.drawTexture("shadow", 176, 273, 128, 64);
 		renderer.drawTexture("cave-urdl", 0, 0, 512, 512);
-
-		// renderer.drawButtonUnstable("Play", 100, 450, playButtonActionListener);
 
 		renderer.draw();
 	}
