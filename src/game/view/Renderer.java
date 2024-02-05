@@ -24,14 +24,26 @@ public class Renderer {
 
 	// Other attributes
 	private JFrame frame;
-	private int width = 500;
-	private int height = 500;
+	private int width = 512;
+	private int height = 512;
+	private int scale = 8; // increase size of pixel art
 	private final String missingTexture = "./resources/missing-texture.png";
 
 	// Private constructor to prevent external instantiation
 	private Renderer() {
 		frame = new JFrame();
 		configureWindow();
+	}
+
+	private void configureWindow() {
+		frame.setLayout(null);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setTitle("Hunt The Wumpus");
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(Color.BLACK);
+		setDimensions(width, height);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 	}
 
 	// Public method to get the instance
@@ -65,14 +77,6 @@ public class Renderer {
 		frame.add(button);
 	}
 
-	private void configureWindow() {
-		frame.setLayout(null);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setTitle("Hunt The Wumpus");
-		frame.setResizable(false);
-		frame.setVisible(true);
-	}
-
 	public void draw() {
 		frame.repaint();
 	}
@@ -81,7 +85,7 @@ public class Renderer {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
-			drawTexture(textureName, x, y, image.getWidth(), image.getHeight());
+			drawTexture(textureName, x * scale, y * scale, image.getWidth() * scale, image.getHeight() * scale);
 		} catch (IOException e) {
 			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
@@ -141,7 +145,6 @@ public class Renderer {
 		AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity);
 		g2d.setComposite(ac);
 		g2d.drawImage(pic, x, y, null);
-
 	}
 
 	public void drawText(String text, int x, int y, int size) {
@@ -160,5 +163,13 @@ public class Renderer {
 	// Ensure the Singleton pattern by adding a private readObject method
 	private Object readResolve() {
 		return instance;
+	}
+
+	public int getScale() {
+		return scale;
+	}
+
+	public void setScale(int scale) {
+		this.scale = scale;
 	}
 }
