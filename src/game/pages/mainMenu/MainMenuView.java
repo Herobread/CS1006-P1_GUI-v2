@@ -3,13 +3,13 @@ package game.pages.mainMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game.controllers.state.GameStateManager;
+// import game.controllers.state.GameStateManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.view.Renderer;
 
 public class MainMenuView extends ViewBase {
-	private GameStateManager gameStateManager = GameStateManager.getInstance();
+	// private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
 

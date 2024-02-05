@@ -3,13 +3,13 @@ package game.pages.game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game.controllers.state.GameStateManager;
+// import game.controllers.state.GameStateManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.view.Renderer;
 
 public class GameView extends ViewBase {
-	private GameStateManager gameStateManager = GameStateManager.getInstance();
+	// private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
 
@@ -21,7 +21,6 @@ public class GameView extends ViewBase {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			viewManager.switchToDialogue();
-			// viewManager.displayWindow();
 		}
 	};
 
@@ -29,7 +28,6 @@ public class GameView extends ViewBase {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			viewManager.switchToMap();
-			// viewManager.displayWindow();
 		}
 	};
 
