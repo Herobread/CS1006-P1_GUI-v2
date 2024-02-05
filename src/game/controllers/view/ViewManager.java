@@ -1,5 +1,8 @@
 package game.controllers.view;
 
+import game.pages.game.GameView;
+import game.pages.mainMenu.MainMenuView;
+
 // will be responsible for selecting what is the state of the game:
 
 // main menu
@@ -57,7 +60,6 @@ public class ViewManager {
 
 		if (currentWindow != null) {
 			System.out.println(currentWindow.getName());
-			currentWindow.run();
 		}
 	}
 }

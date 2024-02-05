@@ -1,9 +1,11 @@
-package game.controllers.view;
+package game.pages.mainMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import game.controllers.state.GameStateManager;
+import game.controllers.view.ViewBase;
+import game.controllers.view.ViewManager;
 import game.view.Renderer;
 
 public class MainMenuView extends ViewBase {
@@ -24,18 +26,8 @@ public class MainMenuView extends ViewBase {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			System.out.println("Button clicked!");
-			gameStateManager.setInputAction("play");
 			viewManager.switchToGameplay();
 			viewManager.displayWindow();
-		}
-	};
-	private ActionListener somethingButtonActionListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("something Button clicked!");
-			gameStateManager.setInputAction("something");
-			gameStateManager.setSomeNumber(gameStateManager.getSomeNumber() + 1);
-			run();
 		}
 	};
 
@@ -46,12 +38,10 @@ public class MainMenuView extends ViewBase {
 
 		System.out.println("[Main menu] Rendering Main menu");
 
-		renderer.drawButtonUnstable("Play", 50, 50, playButtonActionListener);
-		renderer.drawButtonUnstable("Something else", 50, 150, somethingButtonActionListener);
+		renderer.drawTexture("logo", 64, 116, 384, 160);
+		renderer.drawTexture("play", 172, 324, 168, 72);
 
-		renderer.drawText(gameStateManager.getSomeNumber() + " <- number", 50, 200, 12);
-
-		renderer.drawTexture("logo", 10, 10);
+		renderer.drawButtonUnstable("Play", 100, 450, playButtonActionListener);
 
 		renderer.draw();
 	}
@@ -59,7 +49,6 @@ public class MainMenuView extends ViewBase {
 	// logic
 	@Override
 	public void update() {
-		// Provide the implementation for updating the game model in the view
 		System.out.println("[Main menu] Updating model in Main menu");
 
 		String action = gameStateManager.getInputAction();

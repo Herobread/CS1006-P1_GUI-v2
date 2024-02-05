@@ -24,9 +24,11 @@ public class Renderer {
 
 	// Other attributes
 	private JFrame frame;
-	private int width = 512;
-	private int height = 512;
-	private int scale = 8; // increase size of pixel art
+	// jframe is strange and has strange sizing
+	// maybe it includes border sizes
+	// as a result 512*512 turns into 528*548
+	private int width = 528;
+	private int height = 548;
 	private final String missingTexture = "./resources/missing-texture.png";
 
 	// Private constructor to prevent external instantiation
@@ -37,11 +39,11 @@ public class Renderer {
 
 	private void configureWindow() {
 		frame.setLayout(null);
+		setDimensions(width, height);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setTitle("Hunt The Wumpus");
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.BLACK);
-		setDimensions(width, height);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
@@ -72,8 +74,8 @@ public class Renderer {
 	// temporary method to handle clicks
 	public void drawButtonUnstable(String buttonText, int x, int y, ActionListener actionListener) {
 		JButton button = new JButton(buttonText);
-		button.setBounds(x, y, 150, 30); // You can adjust the size as needed
-		button.addActionListener(actionListener); // Attach the ActionListener
+		button.setBounds(x, y, 150, 30);
+		button.addActionListener(actionListener);
 		frame.add(button);
 	}
 
@@ -85,7 +87,7 @@ public class Renderer {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
-			drawTexture(textureName, x * scale, y * scale, image.getWidth() * scale, image.getHeight() * scale);
+			drawTexture(textureName, x, y, image.getWidth(), image.getHeight());
 		} catch (IOException e) {
 			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
@@ -163,13 +165,5 @@ public class Renderer {
 	// Ensure the Singleton pattern by adding a private readObject method
 	private Object readResolve() {
 		return instance;
-	}
-
-	public int getScale() {
-		return scale;
-	}
-
-	public void setScale(int scale) {
-		this.scale = scale;
 	}
 }

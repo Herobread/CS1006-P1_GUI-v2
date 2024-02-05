@@ -6,7 +6,7 @@ import game.view.Renderer;
 class Main {
 	public static void main(String[] args) {
 		Renderer renderer = Renderer.getInstance();
-		renderer.setDimensions(512, 512);
+		// renderer.setDimensions(540, 540);
 
 		ViewManager viewManager = ViewManager.getInstance();
 

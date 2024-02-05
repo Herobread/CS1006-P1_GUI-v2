@@ -1,9 +1,11 @@
-package game.controllers.view;
+package game.pages.game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import game.controllers.state.GameStateManager;
+import game.controllers.view.ViewBase;
+import game.controllers.view.ViewManager;
 import game.view.Renderer;
 
 public class GameView extends ViewBase {
@@ -27,13 +29,38 @@ public class GameView extends ViewBase {
 
 	@Override
 	public void renderView() {
-		// Provide the implementation for rendering the game view
-		Renderer.getInstance().clear();
-		Renderer.getInstance().drawTexture("bat", 10, 10, 80, 80);
-		renderer.drawButtonUnstable("Main menu", 50, 150, mainMenuButtonActionListener);
-
-		Renderer.getInstance().draw();
 		System.out.println("[Game view] Rendering GameView");
+
+		renderer.clear();
+
+		// buttons up:
+		renderer.drawTexture("shoot", 176, 8, 72, 72);
+		renderer.drawTexture("walk-up", 256, 8, 72, 72);
+
+		// buttons down:
+		renderer.drawTexture("shoot", 176, 432, 72, 72);
+		renderer.drawTexture("walk-down", 256, 432, 72, 72);
+
+		// buttons left:
+		renderer.drawTexture("shoot", 8, 176, 72, 72);
+		renderer.drawTexture("walk-left", 8, 256, 72, 72);
+
+		// buttons right:
+		renderer.drawTexture("shoot", 432, 176, 72, 72);
+		renderer.drawTexture("walk-right", 432, 256, 72, 72);
+
+		// info:
+		renderer.drawTexture("dialogue-bs", 208, 144, 144, 64);
+
+		// main
+		renderer.drawTexture("map", 8, 8, 72, 72);
+		renderer.drawTexture("player", 192, 192, 128, 128);
+		renderer.drawTexture("shadow", 176, 273, 128, 64);
+		renderer.drawTexture("cave-urdl", 0, 0, 512, 512);
+
+		// renderer.drawButtonUnstable("Play", 100, 450, playButtonActionListener);
+
+		renderer.draw();
 	}
 
 	@Override
