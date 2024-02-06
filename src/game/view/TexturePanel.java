@@ -20,7 +20,7 @@ public class TexturePanel extends JPanel{
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         Graphics newGraphics = g.create();
         super.paintComponent(newGraphics);
         drawPicture(newGraphics, scaledImage, x, y, opacity);
@@ -33,7 +33,6 @@ public class TexturePanel extends JPanel{
             g2d.setComposite(ac);
             g2d.drawImage(pic, x, y, null);
             //g.drawImage(pic, x, y, null);
-            System.out.println("Picture Drawn!");
         }
         else{
             System.err.println("No Picture Found!");
