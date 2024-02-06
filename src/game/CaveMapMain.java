@@ -1,5 +1,7 @@
 package game;
 
+import java.awt.Color;
+
 import game.model.CaveSystem;
 import game.model.WorldGenerator;
 import game.view.Renderer;
@@ -22,7 +24,7 @@ public class CaveMapMain {
 		for (int i = 0; i < SIZE; i++) {
 			for (int j = 0; j < SIZE; j++) {
 				String texture = "cave-" + caves.getConnectionsString(j, i);
-				renderer.drawText(j + " - " + i, j * TEXTURE_SIZE, i * TEXTURE_SIZE, 12);
+				renderer.drawText(j + " - " + i, j * TEXTURE_SIZE, i * TEXTURE_SIZE, 12,Color.WHITE);
 				renderer.drawTexture(texture, j * TEXTURE_SIZE, i * TEXTURE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
 			}
 		}

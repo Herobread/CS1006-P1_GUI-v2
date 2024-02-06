@@ -1,5 +1,6 @@
 package game.pages.dialogue;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,7 +36,7 @@ public class DialogueView extends ViewBase {
 
 		renderer.drawTexture("bat", 192, 175, 128, 128);
 		renderer.drawTexture("next", 432, 432, 72, 72);
-		renderer.drawText("Bat bat bat bat bat bat bat", 113, 317, 12);
+		renderer.drawText("Bat bat bat bat bat bat bat", 113, 317, 12, Color.WHITE);
 
 		renderer.drawButtonUnstable("next", 100, 450, nextButtonActionListener);
 

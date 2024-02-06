@@ -66,7 +66,7 @@ public class GameView extends ViewBase {
 		renderer.drawTexture("shadow", 176, 273, 128, 64);
 		renderer.drawTexture("cave-urdl", 0, 0, 512, 512);
 
-		renderer.draw();
+		//renderer.draw();
 	}
 
 	@Override
