@@ -4,13 +4,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game.controllers.state.GameStateManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.view.Renderer;
 
 public class DialogueView extends ViewBase {
-	private GameStateManager gameStateManager = GameStateManager.getInstance();
+	// private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
 
@@ -38,7 +37,7 @@ public class DialogueView extends ViewBase {
 		renderer.drawTexture("next", 432, 432, 72, 72);
 		renderer.drawText("Bat bat bat bat bat bat bat", 113, 317, 12, Color.WHITE);
 
-		renderer.drawButtonUnstable("next", 100, 450, nextButtonActionListener);
+		renderer.drawClickAreaUnstable(100, 450, 100, 100, nextButtonActionListener);
 
 		renderer.draw();
 	}

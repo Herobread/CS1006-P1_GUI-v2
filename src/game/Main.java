@@ -4,7 +4,6 @@ import game.controllers.state.GameStateManager;
 import game.controllers.view.ViewManager;
 import game.model.CaveSystem;
 import game.model.WorldGenerator;
-import game.view.Renderer;
 
 class Main {
 	public static void main(String[] args) {
@@ -19,8 +18,8 @@ class Main {
 		gameStateManager.setCaves(caves);
 
 		// viewManager.switchToMap();
-		// viewManager.switchToMainMenu();
-		viewManager.switchToDialogue();
-		viewManager.switchToGameplay();
+		viewManager.switchToMainMenu();
+		// viewManager.switchToDialogue();
+		// viewManager.switchToGameplay();
 	}
 }

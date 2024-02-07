@@ -72,12 +72,15 @@ public class Renderer extends JFrame {
 	}
 
 	// temporary method to handle clicks
-	public void drawButtonUnstable(String buttonText, int x, int y, ActionListener actionListener) {
-		y += getInsets().top;
+	public void drawClickAreaUnstable(int x, int y, int width, int height,
+			ActionListener actionListener) {
+		// y += getInsets().top;
+		x -= 8; // for some reason coordinates for buttons and textures are different
 		if (validCoordinates(x, y)) {
-			JButton button = new JButton(buttonText);
-			button.setBounds(x, y, 150, 30);
+			JButton button = new JButton("Click area");
+			button.setBounds(x, y, width, height); // Set width and height based on parameters
 			button.addActionListener(actionListener);
+
 			add(button);
 		}
 	}

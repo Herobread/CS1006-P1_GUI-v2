@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.HashSet;
 
+import game.model.entities.Entity;
 import game.utils.Coordinates;
 
 public class CaveSystem {

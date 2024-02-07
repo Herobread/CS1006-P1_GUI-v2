@@ -2,6 +2,8 @@ package game.model;
 
 import java.util.ArrayList;
 
+import game.model.entities.Entity;
+
 public class Cave {
 	private ArrayList<Entity> entities;
 
