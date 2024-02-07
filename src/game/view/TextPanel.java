@@ -9,19 +9,20 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Color;
 import javax.swing.JPanel;
 
-public class TextPanel extends JPanel{
+public class TextPanel extends JPanel {
     private String text;
     private int x;
     private int y;
     private int size;
     private Color colour;
+
     public TextPanel(String text, int x, int y, int width, int height, int size, Color colour) {
         this.text = text;
         this.x = x;
         this.y = y;
         this.size = size;
         this.colour = colour;
-        //super.setForeground(new Color(0,0,0,opacity));
+        // super.setForeground(new Color(0,0,0,opacity));
     }
 
     @Override
@@ -31,11 +32,12 @@ public class TextPanel extends JPanel{
         drawText(newGraphics, text, x, y, size);
     }
 
-    private void drawText(Graphics g, String text, int x, int y, int size){
+    private void drawText(Graphics g, String text, int x, int y, int size) {
         g.setFont(getFont(size));
         g.setColor(colour);
         g.drawString(text, x, y);
     }
+
     private Font getFont(int size) {
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -43,8 +45,7 @@ public class TextPanel extends JPanel{
             return new Font("Pixelify Sans Regular", Font.TRUETYPE_FONT, size);
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
-        }
-        catch (FontFormatException e){
+        } catch (FontFormatException e) {
             System.out.println("Error: " + e.getMessage());
         }
         return new Font("Consolas", Font.TRUETYPE_FONT, size);

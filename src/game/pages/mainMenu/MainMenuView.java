@@ -53,5 +53,4 @@ public class MainMenuView extends ViewBase {
 		update();
 		renderView();
 	}
-
 }

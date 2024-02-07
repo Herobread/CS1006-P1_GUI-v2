@@ -16,9 +16,6 @@ public abstract class ViewBase {
 		renderer.setDimensions(512, 512);
 	}
 
-	public void handleInput() {
-	};
-
 	public void renderView() {
 	};
 

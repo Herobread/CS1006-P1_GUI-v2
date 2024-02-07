@@ -20,27 +20,27 @@ public class MapView extends ViewBase {
 	}
 
 	// button action listeneres
-	private ActionListener closeButtonActionListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent actionEvent) {
-			viewManager.switchToGameplay();
-			// viewManager.displayWindow();
-		}
-	};
+	// private ActionListener closeButtonActionListener = new ActionListener() {
+	// @Override
+	// public void actionPerformed(ActionEvent actionEvent) {
+	// viewManager.switchToGameplay();
+	// // viewManager.displayWindow();
+	// }
+	// };
 
-	private ActionListener generateButtonActionListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent actionEvent) {
-			WorldGenerator generator = new WorldGenerator(20, 20);
-			CaveSystem caves = new CaveSystem(20, 20);
+	// private ActionListener generateButtonActionListener = new ActionListener() {
+	// @Override
+	// public void actionPerformed(ActionEvent actionEvent) {
+	// WorldGenerator generator = new WorldGenerator(20, 20);
+	// CaveSystem caves = new CaveSystem(20, 20);
 
-			generator.generateCellularAutomataCaves(caves);
+	// generator.generateCellularAutomataCaves(caves);
 
-			gameStateManager.setCaves(caves);
+	// gameStateManager.setCaves(caves);
 
-			renderView();
-		}
-	};
+	// renderView();
+	// }
+	// };
 
 	// rendering
 	@Override
@@ -70,8 +70,8 @@ public class MapView extends ViewBase {
 		// renderer.drawText("map", 100, 100, 20);
 		// map
 
-		renderer.drawButtonUnstable("close", 300, 450, closeButtonActionListener);
-		renderer.drawButtonUnstable("funny", 100, 450, generateButtonActionListener);
+		// renderer.drawButtonUnstable("close", 300, 450, closeButtonActionListener);
+		// renderer.drawButtonUnstable("funny", 100, 450, generateButtonActionListener);
 
 		renderer.draw();
 	}

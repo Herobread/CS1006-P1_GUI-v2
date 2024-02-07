@@ -64,5 +64,4 @@ public class DialogueView extends ViewBase {
 		update();
 		renderView();
 	}
-
 }

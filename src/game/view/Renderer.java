@@ -1,4 +1,5 @@
 package game.view;
+
 //imports
 import java.awt.Image;
 import java.awt.event.ActionListener;
@@ -15,7 +16,7 @@ import javax.swing.WindowConstants;
 import java.awt.Color;
 
 //extend JFrame
-public class Renderer extends JFrame{
+public class Renderer extends JFrame {
 	// Singleton instance
 	private static Renderer instance;
 	// Other attributes
@@ -24,26 +25,25 @@ public class Renderer extends JFrame{
 	// jframe is strange and has strange sizing
 	// maybe it includes border sizes
 	// as a result 512*512 turns into 528*548
-	private int width = 512;
-	private int height = 512;
+	private int width = 528;
+	private int height = 548;
 	private final String missingTexture = "./resources/missing-texture.png";
 
 	// Private constructor to prevent external instantiation
 	private Renderer() {
 		configureWindow();
 	}
-	
-	//configure attributes of the JFrame
+
+	// configure attributes of the JFrame
 	private void configureWindow() {
 		setLayout(null);
 		setDimensions(width, height);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Hunt The Wumpus");
 		setResizable(false);
-		getContentPane().setBackground(Color.BLACK);
+		setBackground(Color.BLACK);
 		setLocationRelativeTo(null);
 		setVisible(true);
-
 	}
 
 	// Public method to get the instance
@@ -54,12 +54,12 @@ public class Renderer extends JFrame{
 		return instance;
 	}
 
-	//return the height of the frame
+	// return the height of the frame
 	public int getFrameHeight() {
 		return height;
 	}
-		
-	//return the width of the frame
+
+	// return the width of the frame
 	public int getFrameWidth() {
 		return width;
 	}
@@ -73,8 +73,8 @@ public class Renderer extends JFrame{
 
 	// temporary method to handle clicks
 	public void drawButtonUnstable(String buttonText, int x, int y, ActionListener actionListener) {
-		y+=getInsets().top;
-		if (validCoordinates(x, y)){
+		y += getInsets().top;
+		if (validCoordinates(x, y)) {
 			JButton button = new JButton(buttonText);
 			button.setBounds(x, y, 150, 30);
 			button.addActionListener(actionListener);
@@ -85,7 +85,7 @@ public class Renderer extends JFrame{
 	public void draw() {
 		repaint();
 		revalidate();
-		for (TexturePanel t : TexturePanels){
+		for (TexturePanel t : TexturePanels) {
 			t.repaint();
 		}
 	}
@@ -95,26 +95,27 @@ public class Renderer extends JFrame{
 		try {
 
 			final BufferedImage image = ImageIO.read(new File(texturePath));
-			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(),1f);
+			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), 1f);
 		} catch (IOException e) {
 			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
-				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight(),1f);
+				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight(), 1f);
 			} catch (IOException e2) {
 				System.out.println("Critical error in drawing texture");
 			}
 		}
 	}
+
 	public void drawTexture(String textureName, int x, int y, float opacity) {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
 			final BufferedImage image = ImageIO.read(new File(texturePath));
-			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(),opacity);
+			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), opacity);
 		} catch (IOException e) {
 			try {
 				final BufferedImage image = ImageIO.read(new File(missingTexture));
 				drawTexture(
-					"missing-texture", x, y, image.getWidth(), image.getHeight(),1f);
+						"missing-texture", x, y, image.getWidth(), image.getHeight(), 1f);
 			} catch (IOException e2) {
 				System.out.println("Critical error in drawing texture");
 			}
@@ -126,11 +127,12 @@ public class Renderer extends JFrame{
 	}
 
 	public void drawTexture(String textureName, int x, int y, int width, int height, float opacity) {
-		y+=getInsets().top;
-		if (validCoordinates(x, y)){
+		y += getInsets().top;
+		if (validCoordinates(x, y)) {
 			String texturePath = "./resources/" + textureName + ".png";
 			try {
-				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height, Image.SCALE_DEFAULT);
+				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,
+						Image.SCALE_DEFAULT);
 				TexturePanel t = new TexturePanel(scaledImage, x, y, width, height, opacity);
 				TexturePanels.add(t);
 				t.repaint();
@@ -149,19 +151,19 @@ public class Renderer extends JFrame{
 
 	@Override
 	public void paint(Graphics g) {
+		super.paint(g);
 		setBackground(Color.BLACK);
-		for (TexturePanel t : TexturePanels){
+		for (TexturePanel t : TexturePanels) {
 			t.paintComponent(g);
 		}
-		for (TextPanel t : TextPanels){
+		for (TextPanel t : TextPanels) {
 			t.paintComponent(g);
 		}
 	}
 
-
 	public void drawText(String text, int x, int y, int size, Color colour) {
-		y+=getInsets().top*2;
-		if (validCoordinates(x, y)){
+		y += getInsets().top * 2;
+		if (validCoordinates(x, y)) {
 			TextPanel t = new TextPanel(text, x, y, x, y, size, colour);
 			add(t);
 			TextPanels.add(t);
@@ -178,12 +180,13 @@ public class Renderer extends JFrame{
 	private Object readResolve() {
 		return instance;
 	}
-	private boolean validCoordinates(int x, int y){
-		if (x<0 || y< 0){
+
+	private boolean validCoordinates(int x, int y) {
+		if (x < 0 || y < 0) {
 			System.err.println("Drawing starts at negative coordinates!");
 			return false;
 		}
-		if (x>width || y>height){
+		if (x > width || y > height) {
 			System.err.println("Drawing starts outside frame!");
 			return false;
 		}

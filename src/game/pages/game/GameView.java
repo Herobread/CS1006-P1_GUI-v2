@@ -37,6 +37,8 @@ public class GameView extends ViewBase {
 
 		renderer.clear();
 
+		renderer.drawTexture("cave-urdl", 0, 0, 512, 512);
+
 		// temp
 		renderer.drawButtonUnstable("Dialogue test", 100, 450, dialogueButtonActionListener);
 		renderer.drawButtonUnstable("open map", 100, 350, mapButtonActionListener);
@@ -62,11 +64,10 @@ public class GameView extends ViewBase {
 
 		// main
 		renderer.drawTexture("map", 8, 8, 72, 72);
-		renderer.drawTexture("player", 192, 192, 128, 128);
 		renderer.drawTexture("shadow", 176, 273, 128, 64);
-		renderer.drawTexture("cave-urdl", 0, 0, 512, 512);
+		renderer.drawTexture("player", 192, 192, 128, 128);
 
-		//renderer.draw();
+		renderer.draw();
 	}
 
 	@Override
@@ -77,7 +78,6 @@ public class GameView extends ViewBase {
 
 	@Override
 	public void run() {
-		handleInput();
 		renderView();
 		update();
 	}

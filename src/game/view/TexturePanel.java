@@ -6,17 +6,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
-public class TexturePanel extends JPanel{
+public class TexturePanel extends JPanel {
     private Image scaledImage;
     private int x;
     private int y;
     private float opacity;
+
     public TexturePanel(Image scaledImage, int x, int y, int width, int height, float opacity) {
         this.scaledImage = scaledImage;
         this.x = x;
         this.y = y;
         this.opacity = opacity;
-        //super.setForeground(new Color(0,0,0,opacity));
+        // super.setForeground(new Color(0,0,0,opacity));
     }
 
     @Override
@@ -32,9 +33,8 @@ public class TexturePanel extends JPanel{
             AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity);
             g2d.setComposite(ac);
             g2d.drawImage(pic, x, y, null);
-            //g.drawImage(pic, x, y, null);
-        }
-        else{
+            // g.drawImage(pic, x, y, null);
+        } else {
             System.err.println("No Picture Found!");
         }
     }
