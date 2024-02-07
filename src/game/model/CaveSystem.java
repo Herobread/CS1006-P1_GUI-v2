@@ -197,6 +197,10 @@ public class CaveSystem {
 	 * @return ArrayList of entities in the cave.
 	 */
 	public ArrayList<Entity> getCaveEntities(int x, int y) {
+		if (getCave(x, y) == null) {
+			return null;
+		}
+
 		return getCave(x, y).getEntities();
 	}
 

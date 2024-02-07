@@ -6,7 +6,7 @@ public class Player extends Entity {
 	Coordinates coordinates;
 
 	public Player(int x, int y) {
-		super("Player");
+		super("Player", "player");
 
 		coordinates.setX(x);
 		coordinates.setY(y);

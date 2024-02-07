@@ -2,12 +2,14 @@ package game.pages.map;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import game.controllers.state.GameStateManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.model.CaveSystem;
 import game.model.WorldGenerator;
+import game.model.entities.Entity;
 import game.view.Renderer;
 
 public class MapView extends ViewBase {
@@ -63,8 +65,24 @@ public class MapView extends ViewBase {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
-						y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+				// renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE
+				// + START_POS_X,
+				// y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+
+				List<Entity> entities = caves.getCaveEntities(x, y);
+
+				if (entities == null) {
+					continue;
+				}
+
+				if (entities.size() == 0) {
+					continue;
+				}
+
+				for (Entity entity : entities) {
+					renderer.drawTexture(entity.getName(), x * TILE_SIZE + START_POS_X,
+							y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+				}
 			}
 		}
 

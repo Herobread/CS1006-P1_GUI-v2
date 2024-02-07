@@ -2,6 +2,7 @@ package game.model;
 
 import java.util.Random;
 
+import game.model.entities.Entity;
 import game.utils.Coordinates;
 
 import java.util.ArrayList;
@@ -57,70 +58,6 @@ public class WorldGenerator {
 		// join separated islands
 		drawLines(randomPoints);
 
-		// select locations for entities
-		// hazards can only spawn when there are 4 locations
-		List<Coordinates> potentialSpawnCoordinates = new ArrayList<>();
-
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles[i].length; j++) {
-
-				System.out.print(tiles[i][j] ? "S" : countAccessibleNeighbours(j, i));
-
-				if (countAccessibleNeighbours(i, j) >= 4) {
-					potentialSpawnCoordinates.add(new Coordinates(j, i));
-				}
-			}
-			System.out.println();
-		}
-
-		// randomize
-		Collections.shuffle(potentialSpawnCoordinates);
-
-		int coordinateId = 0;
-
-		int AMOUNT_OF_BATS = 4; // Adjust these values accordingly
-		int AMOUNT_OF_WUMPUSES = 2;
-		int AMOUNT_OF_PITS = 4;
-		int AMOUNT_OF_TREASURES = 2;
-		int AMOUNT_OF_ARROWS = 5;
-
-		Map<String, List<Coordinates>> hazards = new HashMap<>();
-
-		hazards.put("wumpus", new ArrayList<>());
-		for (int i = 0; i < AMOUNT_OF_WUMPUSES; i++) {
-			hazards.get("wumpus").add(potentialSpawnCoordinates.get(coordinateId));
-			coordinateId += 1;
-		}
-
-		hazards.put("pit", new ArrayList<>());
-		for (int i = 0; i < AMOUNT_OF_PITS; i++) {
-			hazards.get("pit").add(potentialSpawnCoordinates.get(coordinateId));
-			coordinateId += 1;
-		}
-
-		hazards.put("bats", new ArrayList<>());
-		for (int i = 0; i < AMOUNT_OF_BATS; i++) {
-			hazards.get("bats").add(potentialSpawnCoordinates.get(coordinateId));
-			coordinateId += 1;
-		}
-
-		hazards.put("treasure", new ArrayList<>());
-		for (int i = 0; i < AMOUNT_OF_TREASURES; i++) {
-			hazards.get("treasure").add(potentialSpawnCoordinates.get(coordinateId));
-			coordinateId += 1;
-		}
-
-		hazards.put("arrows", new ArrayList<>());
-		for (int i = 0; i < AMOUNT_OF_ARROWS; i++) {
-			hazards.get("arrows").add(potentialSpawnCoordinates.get(coordinateId));
-			coordinateId += 1;
-		}
-
-		// Print out the map
-		for (Map.Entry<String, List<Coordinates>> entry : hazards.entrySet()) {
-			System.out.println(entry.getKey() + " = " + entry.getValue());
-		}
-
 		// finalize caves by creating connections on actual graph instead of just bitmap
 		for (int y = 0; y < height; y += 1) {
 			for (int x = 0; x < width; x += 1) {
@@ -131,11 +68,94 @@ public class WorldGenerator {
 					continue;
 				}
 
+				System.out.println(currentCoordinates);
+
 				caves.setCave(new Cave(), currentCoordinates);
+
+				System.out.println(caves.getCave(currentCoordinates));
 
 				for (Coordinates coordinate : coordinates) {
 					caves.addDirectredConnection(currentCoordinates, coordinate);
 				}
+			}
+		}
+
+		// select locations for entities
+		// entities can only spawn when there are 4 locations
+		List<Coordinates> potentialSpawnCoordinates = new ArrayList<>();
+
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles[i].length; j++) {
+
+				System.out.print(tiles[i][j] ? "S" : countAccessibleNeighbours(j, i));
+
+				if (countAccessibleNeighbours(i, j) >= 4) {
+					potentialSpawnCoordinates.add(new Coordinates(i, j));
+				}
+			}
+			System.out.println();
+		}
+
+		// randomize
+		Collections.shuffle(potentialSpawnCoordinates);
+
+		int coordinateId = 0;
+
+		int AMOUNT_OF_BATS = 4;
+		int AMOUNT_OF_WUMPUSES = 2;
+		int AMOUNT_OF_PITS = 4;
+		int AMOUNT_OF_TREASURES = 2;
+		int AMOUNT_OF_ARROWS = 5;
+
+		Map<String, List<Coordinates>> entities = new HashMap<>();
+
+		entities.put("wumpus", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_WUMPUSES; i++) {
+			entities.get("wumpus").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		entities.put("pit", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_PITS; i++) {
+			entities.get("pit").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		entities.put("bats", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_BATS; i++) {
+			entities.get("bats").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		entities.put("treasure", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_TREASURES; i++) {
+			entities.get("treasure").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		entities.put("arrows", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_ARROWS; i++) {
+			entities.get("arrows").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		// Print out the map
+		// for (Map.Entry<String, List<Coordinates>> entry : entities.entrySet()) {
+		// System.out.println(entry.getKey() + " = " + entry.getValue());
+		// }
+
+		for (String entityName : entities.keySet()) {
+			List<Coordinates> entitySpawnLocations = entities.get(entityName);
+
+			Entity entity = new Entity(entityName, entityName);
+
+			for (Coordinates entitySpawnLocation : entitySpawnLocations) {
+
+				System.out.println(isSolid(entitySpawnLocation.getX(), entitySpawnLocation.getY()));
+				System.out.println(entitySpawnLocations);
+				System.out.println(entitySpawnLocation);
+				System.out.println(caves.getCave(entitySpawnLocation));
+				caves.addEntity(entity, entitySpawnLocation);
 			}
 		}
 

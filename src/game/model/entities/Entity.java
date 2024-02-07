@@ -2,9 +2,11 @@ package game.model.entities;
 
 public class Entity {
 	private String name;
+	private String textureName;
 
-	public Entity(String name) {
+	public Entity(String name, String textureName) {
 		this.name = name;
+		this.textureName = textureName;
 	}
 
 	public String getName() {
@@ -43,6 +45,14 @@ public class Entity {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public String getTextureName() {
+		return textureName;
+	}
+
+	public void setTextureName(String textureName) {
+		this.textureName = textureName;
 	}
 
 }
