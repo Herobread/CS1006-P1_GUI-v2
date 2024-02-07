@@ -5,6 +5,7 @@ import java.util.Random;
 import game.utils.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,23 +40,11 @@ public class WorldGenerator {
 			iterate();
 		}
 
-		printTiles();
-
 		// find separated caves:
 		int[][] separatedCavesArray = floodFill(tiles);
 
-		// print separated caves:
-		for (int i = 0; i < separatedCavesArray.length; i++) {
-			for (int j = 0; j < separatedCavesArray[i].length; j++) {
-				System.out.print(separatedCavesArray[i][j]);
-			}
-			System.out.println();
-		}
-
 		// store separated caves as a map (caveID - List of coordinates)
 		Map<Integer, List<Coordinates>> separatedCavesMap = getDisconnectedCavesCoordinates(separatedCavesArray);
-
-		System.out.println("Detected separate caves: " + separatedCavesMap.keySet().size());
 
 		// select random point on each island
 		List<Coordinates> randomPoints = new ArrayList<>();
@@ -63,17 +52,74 @@ public class WorldGenerator {
 		for (int caveId : separatedCavesMap.keySet()) {
 			List<Coordinates> caveCoordinatesList = separatedCavesMap.get(caveId);
 			randomPoints.add(caveCoordinatesList.get(random.nextInt(caveCoordinatesList.size())));
-			System.out.println("Cave id: " + caveId + " size=" + caveCoordinatesList.size());
 		}
 
-		System.out.println(randomPoints);
-
-		// List<Coordinates> randomPoints = new ArrayList<>(); // assume filled with
-		// Coordinate
-		// function to draw line: drawLine(coordinate 1, coordinate 2)
 		// join separated islands
-		// join point 1 with 2, 2 with 3 etc
 		drawLines(randomPoints);
+
+		// select locations for entities
+		// hazards can only spawn when there are 4 locations
+		List<Coordinates> potentialSpawnCoordinates = new ArrayList<>();
+
+		for (int i = 0; i < tiles.length; i++) {
+			for (int j = 0; j < tiles[i].length; j++) {
+
+				System.out.print(tiles[i][j] ? "S" : countAccessibleNeighbours(j, i));
+
+				if (countAccessibleNeighbours(i, j) >= 4) {
+					potentialSpawnCoordinates.add(new Coordinates(j, i));
+				}
+			}
+			System.out.println();
+		}
+
+		// randomize
+		Collections.shuffle(potentialSpawnCoordinates);
+
+		int coordinateId = 0;
+
+		int AMOUNT_OF_BATS = 4; // Adjust these values accordingly
+		int AMOUNT_OF_WUMPUSES = 2;
+		int AMOUNT_OF_PITS = 4;
+		int AMOUNT_OF_TREASURES = 2;
+		int AMOUNT_OF_ARROWS = 5;
+
+		Map<String, List<Coordinates>> hazards = new HashMap<>();
+
+		hazards.put("wumpus", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_WUMPUSES; i++) {
+			hazards.get("wumpus").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		hazards.put("pit", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_PITS; i++) {
+			hazards.get("pit").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		hazards.put("bats", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_BATS; i++) {
+			hazards.get("bats").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		hazards.put("treasure", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_TREASURES; i++) {
+			hazards.get("treasure").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		hazards.put("arrows", new ArrayList<>());
+		for (int i = 0; i < AMOUNT_OF_ARROWS; i++) {
+			hazards.get("arrows").add(potentialSpawnCoordinates.get(coordinateId));
+			coordinateId += 1;
+		}
+
+		// Print out the map
+		for (Map.Entry<String, List<Coordinates>> entry : hazards.entrySet()) {
+			System.out.println(entry.getKey() + " = " + entry.getValue());
+		}
 
 		// finalize caves by creating connections on actual graph instead of just bitmap
 		for (int y = 0; y < height; y += 1) {
@@ -223,18 +269,6 @@ public class WorldGenerator {
 		return neighbors;
 	}
 
-	private void printTiles() {
-		System.out.println("=============================================================================");
-		for (int y = 0; y < height; y += 1) {
-			for (int x = 0; x < width; x += 1) {
-				System.out.print(
-						isSolid(x, y) ? "X" : " ");
-			}
-			System.out.println();
-		}
-		System.out.println("=============================================================================");
-	}
-
 	private void iterate() {
 		boolean[][] newTiles = new boolean[height][width];
 
@@ -261,6 +295,27 @@ public class WorldGenerator {
 				if (isSolid(x + targetX, y + targetY)) {
 					total += 1;
 				}
+			}
+		}
+
+		return total;
+	}
+
+	private int countAccessibleNeighbours(int targetX, int targetY) {
+		int total = 0;
+
+		// Define directions (up, down, left, right)
+		int[] dx = { 0, 0, -1, 1 };
+		int[] dy = { -1, 1, 0, 0 };
+
+		// Iterate over all directions
+		for (int i = 0; i < 4; i++) {
+			int newX = targetX + dx[i];
+			int newY = targetY + dy[i];
+
+			// Check if the new position is within the grid bounds and if it's not solid
+			if (!isSolid(newX, newY)) {
+				total++;
 			}
 		}
 
