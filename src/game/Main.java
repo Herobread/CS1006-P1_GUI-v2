@@ -10,9 +10,6 @@ class Main {
 	public static void main(String[] args) {
 		ViewManager viewManager = ViewManager.getInstance();
 		GameStateManager gameStateManager = GameStateManager.getInstance();
-		Renderer renderer = Renderer.getInstance();
-		renderer.clear();
-		renderer.setDimensions(512, 512);
 
 		// initialise game variables
 		CaveSystem caves = new CaveSystem(20, 20);
@@ -22,8 +19,8 @@ class Main {
 		gameStateManager.setCaves(caves);
 
 		// viewManager.switchToMap();
-		viewManager.switchToMainMenu();
-		// viewManager.switchToDialogue();
-		// viewManager.switchToGameplay();
+		// viewManager.switchToMainMenu();
+		viewManager.switchToDialogue();
+		viewManager.switchToGameplay();
 	}
 }

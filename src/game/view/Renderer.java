@@ -24,8 +24,8 @@ public class Renderer extends JFrame {
 	private List<TextPanel> TextPanels = new ArrayList<TextPanel>();
 	// jframe is strange and has strange sizing
 	// maybe it includes border sizes
-	// as a result 512*512 turns into 528*548
-	private int width = 528;
+	// as a result 512*512 turns into 512*548
+	private int width = 512;
 	private int height = 548;
 	private final String missingTexture = "./resources/missing-texture.png";
 
