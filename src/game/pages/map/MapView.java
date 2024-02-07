@@ -66,6 +66,8 @@ public class MapView extends ViewBase {
 		final int MAP_SIZE_PX = 348;
 		final int TILE_SIZE = MAP_SIZE_PX / width;
 
+		renderer.drawTexture("map-frame", 70, 70, 372, 372);
+
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
