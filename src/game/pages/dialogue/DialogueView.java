@@ -34,10 +34,10 @@ public class DialogueView extends ViewBase {
 		System.out.println("[Dialogue] Rendering");
 
 		renderer.drawTexture("bat", 192, 175, 128, 128);
-		renderer.drawTexture("next", 432, 432, 72, 72);
 		renderer.drawText("Bat bat bat bat bat bat bat", 113, 317, 12, Color.WHITE);
 
-		renderer.drawClickAreaUnstable(100, 450, 100, 100, nextButtonActionListener);
+		renderer.drawTexture("next", 432, 432, 72, 72);
+		renderer.drawClickAreaUnstable(432, 432, 72, 72, nextButtonActionListener);
 
 		renderer.draw();
 	}

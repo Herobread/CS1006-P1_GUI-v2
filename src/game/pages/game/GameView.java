@@ -131,9 +131,12 @@ public class GameView extends ViewBase {
 		renderer.drawTexture("map", 8, 8, 72, 72);
 		renderer.drawClickAreaUnstable(8, 8, 72, 72, mapButtonActionListener);
 
+		// map button
+
 		// main
 		renderer.drawTexture("shadow", 176, 273, 128, 64);
 		renderer.drawTexture("player", 192, 192, 128, 128);
+		renderer.drawClickAreaUnstable(192, 192, 128, 128, dialogueButtonActionListener);
 
 		renderer.draw();
 	}
