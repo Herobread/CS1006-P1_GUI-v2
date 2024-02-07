@@ -27,7 +27,7 @@ public class Renderer extends JFrame {
 	// as a result 512*512 turns into 512*548
 	private int width = 512;
 	private int height = 548;
-	private final String missingTexture = "./resources/missing-texture.png";
+	private final String MISSING_TEXTURE = "./resources/missing-texture.png";
 
 	// Private constructor to prevent external instantiation
 	private Renderer() {
@@ -101,7 +101,7 @@ public class Renderer extends JFrame {
 			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), 1f);
 		} catch (IOException e) {
 			try {
-				final BufferedImage image = ImageIO.read(new File(missingTexture));
+				final BufferedImage image = ImageIO.read(new File(MISSING_TEXTURE));
 				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight(), 1f);
 			} catch (IOException e2) {
 				System.out.println("Critical error in drawing texture");
@@ -116,7 +116,7 @@ public class Renderer extends JFrame {
 			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), opacity);
 		} catch (IOException e) {
 			try {
-				final BufferedImage image = ImageIO.read(new File(missingTexture));
+				final BufferedImage image = ImageIO.read(new File(MISSING_TEXTURE));
 				drawTexture(
 						"missing-texture", x, y, image.getWidth(), image.getHeight(), 1f);
 			} catch (IOException e2) {
@@ -143,7 +143,7 @@ public class Renderer extends JFrame {
 			} catch (IOException e) {
 				drawTexture("missing-texture", x, y, width, height);
 				try {
-					final BufferedImage image = ImageIO.read(new File(missingTexture));
+					final BufferedImage image = ImageIO.read(new File(MISSING_TEXTURE));
 					drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight());
 				} catch (IOException e2) {
 					System.out.println("Critical error in drawing texture");
