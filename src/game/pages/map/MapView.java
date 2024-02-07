@@ -10,6 +10,7 @@ import game.controllers.view.ViewManager;
 import game.model.CaveSystem;
 import game.model.WorldGenerator;
 import game.model.entities.Entity;
+import game.model.entities.Player;
 import game.view.Renderer;
 
 public class MapView extends ViewBase {
@@ -55,6 +56,7 @@ public class MapView extends ViewBase {
 		renderer.drawClickAreaUnstable(432, 10, 72, 72, closeButtonActionListener);
 
 		CaveSystem caves = gameStateManager.getCaves();
+		Player player = gameStateManager.getPlayer();
 
 		int width = caves.getWidth();
 		int height = caves.getHeight();
@@ -66,8 +68,13 @@ public class MapView extends ViewBase {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				renderer.drawTexture("cave-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
+				renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
 						y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+
+				if (player.getX() == x && player.getY() == y) {
+					renderer.drawTexture(player.getTextureName(), x * TILE_SIZE + START_POS_X,
+							y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+				}
 
 				List<Entity> entities = caves.getCaveEntities(x, y);
 

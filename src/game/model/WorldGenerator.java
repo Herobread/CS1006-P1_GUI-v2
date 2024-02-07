@@ -2,7 +2,9 @@ package game.model;
 
 import java.util.Random;
 
+import game.controllers.state.GameStateManager;
 import game.model.entities.Entity;
+import game.model.entities.Player;
 import game.utils.Coordinates;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WorldGenerator {
+	private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private int width;
 	private int height;
 	private boolean[][] tiles;
@@ -132,6 +135,11 @@ public class WorldGenerator {
 			entities.get("arrow").add(potentialSpawnCoordinates.get(coordinateId));
 			coordinateId += 1;
 		}
+
+		Player player = gameStateManager.getPlayer();
+
+		player.setCoordinates(potentialSpawnCoordinates.get(coordinateId));
+		coordinateId += 1;
 
 		for (String entityName : entities.keySet()) {
 			List<Coordinates> entitySpawnLocations = entities.get(entityName);

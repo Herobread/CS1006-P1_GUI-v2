@@ -3,13 +3,20 @@ package game.model.entities;
 import game.utils.Coordinates;
 
 public class Player extends Entity {
-	Coordinates coordinates;
+	private Coordinates coordinates;
 
 	public Player(int x, int y) {
 		super("Player", "player");
 
-		coordinates.setX(x);
-		coordinates.setY(y);
+		coordinates = new Coordinates(x, y);
+	}
+
+	public void setCoordinates(Coordinates coordinates) {
+		this.coordinates = coordinates;
+	}
+
+	public Coordinates getCoordinates() {
+		return coordinates;
 	}
 
 	public int getX() {
