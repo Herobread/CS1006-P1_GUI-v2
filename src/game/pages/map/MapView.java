@@ -59,15 +59,15 @@ public class MapView extends ViewBase {
 		int width = caves.getWidth();
 		int height = caves.getHeight();
 
-		final int START_POS_X = 84;
-		final int START_POS_Y = 84;
-		final int TILE_SIZE = 15;
+		final int START_POS_X = 82;
+		final int START_POS_Y = 82;
+		final int MAP_SIZE_PX = 348;
+		final int TILE_SIZE = MAP_SIZE_PX / width;
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				// renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE
-				// + START_POS_X,
-				// y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+				renderer.drawTexture("cave-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
+						y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
 
 				List<Entity> entities = caves.getCaveEntities(x, y);
 

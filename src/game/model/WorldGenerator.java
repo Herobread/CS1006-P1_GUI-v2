@@ -68,11 +68,7 @@ public class WorldGenerator {
 					continue;
 				}
 
-				System.out.println(currentCoordinates);
-
 				caves.setCave(new Cave(), currentCoordinates);
-
-				System.out.println(caves.getCave(currentCoordinates));
 
 				for (Coordinates coordinate : coordinates) {
 					caves.addDirectredConnection(currentCoordinates, coordinate);
@@ -84,28 +80,26 @@ public class WorldGenerator {
 		// entities can only spawn when there are 4 locations
 		List<Coordinates> potentialSpawnCoordinates = new ArrayList<>();
 
-		for (int i = 0; i < tiles.length; i++) {
-			for (int j = 0; j < tiles[i].length; j++) {
-
-				System.out.print(tiles[i][j] ? "S" : countAccessibleNeighbours(j, i));
-
-				if (countAccessibleNeighbours(i, j) >= 4) {
-					potentialSpawnCoordinates.add(new Coordinates(i, j));
+		for (int y = 0; y < tiles.length; y++) {
+			for (int x = 0; x < tiles[y].length; x++) {
+				if (countAccessibleNeighbours(x, y) >= 4) {
+					potentialSpawnCoordinates.add(new Coordinates(x, y));
 				}
 			}
-			System.out.println();
 		}
 
 		// randomize
 		Collections.shuffle(potentialSpawnCoordinates);
 
+		int spawnableArea = potentialSpawnCoordinates.size();
+
 		int coordinateId = 0;
 
-		int AMOUNT_OF_BATS = 4;
+		int AMOUNT_OF_BATS = spawnableArea / 30;
 		int AMOUNT_OF_WUMPUSES = 2;
-		int AMOUNT_OF_PITS = 4;
+		int AMOUNT_OF_PITS = spawnableArea / 50;
 		int AMOUNT_OF_TREASURES = 2;
-		int AMOUNT_OF_ARROWS = 5;
+		int AMOUNT_OF_ARROWS = spawnableArea / 10;
 
 		Map<String, List<Coordinates>> entities = new HashMap<>();
 
@@ -121,9 +115,9 @@ public class WorldGenerator {
 			coordinateId += 1;
 		}
 
-		entities.put("bats", new ArrayList<>());
+		entities.put("bat", new ArrayList<>());
 		for (int i = 0; i < AMOUNT_OF_BATS; i++) {
-			entities.get("bats").add(potentialSpawnCoordinates.get(coordinateId));
+			entities.get("bat").add(potentialSpawnCoordinates.get(coordinateId));
 			coordinateId += 1;
 		}
 
@@ -133,16 +127,11 @@ public class WorldGenerator {
 			coordinateId += 1;
 		}
 
-		entities.put("arrows", new ArrayList<>());
+		entities.put("arrow", new ArrayList<>());
 		for (int i = 0; i < AMOUNT_OF_ARROWS; i++) {
-			entities.get("arrows").add(potentialSpawnCoordinates.get(coordinateId));
+			entities.get("arrow").add(potentialSpawnCoordinates.get(coordinateId));
 			coordinateId += 1;
 		}
-
-		// Print out the map
-		// for (Map.Entry<String, List<Coordinates>> entry : entities.entrySet()) {
-		// System.out.println(entry.getKey() + " = " + entry.getValue());
-		// }
 
 		for (String entityName : entities.keySet()) {
 			List<Coordinates> entitySpawnLocations = entities.get(entityName);
@@ -150,11 +139,6 @@ public class WorldGenerator {
 			Entity entity = new Entity(entityName, entityName);
 
 			for (Coordinates entitySpawnLocation : entitySpawnLocations) {
-
-				System.out.println(isSolid(entitySpawnLocation.getX(), entitySpawnLocation.getY()));
-				System.out.println(entitySpawnLocations);
-				System.out.println(entitySpawnLocation);
-				System.out.println(caves.getCave(entitySpawnLocation));
 				caves.addEntity(entity, entitySpawnLocation);
 			}
 		}
@@ -322,24 +306,13 @@ public class WorldGenerator {
 	}
 
 	private int countAccessibleNeighbours(int targetX, int targetY) {
-		int total = 0;
+		ArrayList<Coordinates> neighbours = getNeighbouringCoordinates(targetX, targetY);
 
-		// Define directions (up, down, left, right)
-		int[] dx = { 0, 0, -1, 1 };
-		int[] dy = { -1, 1, 0, 0 };
-
-		// Iterate over all directions
-		for (int i = 0; i < 4; i++) {
-			int newX = targetX + dx[i];
-			int newY = targetY + dy[i];
-
-			// Check if the new position is within the grid bounds and if it's not solid
-			if (!isSolid(newX, newY)) {
-				total++;
-			}
+		if (neighbours == null) {
+			return 0;
 		}
 
-		return total;
+		return neighbours.size();
 	}
 
 	private boolean isSolid(int x, int y) {
