@@ -90,7 +90,7 @@ public class MapView extends ViewBase {
 				}
 
 				for (Entity entity : entities) {
-					renderer.drawTexture(entity.getName(), x * TILE_SIZE + START_POS_X,
+					renderer.drawTexture(entity.getTextureName(), x * TILE_SIZE + START_POS_X,
 							y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
 				}
 			}
