@@ -50,25 +50,21 @@ public class ViewManager {
 	}
 
 	public void switchToMainMenu() {
-		System.out.println("[View manager] main menu");
 		setCurrentWindow(mainMenuView);
 		displayWindow();
 	}
 
 	public void switchToGameplay() {
-		System.out.println("[View manager] switched to gameplay");
 		setCurrentWindow(gameView);
 		displayWindow();
 	}
 
 	public void switchToDialogue() {
-		System.out.println("[View manager] switched to dialogue");
 		setCurrentWindow(dialogueView);
 		displayWindow();
 	}
 
 	public void switchToMap() {
-		System.out.println("[View manager] switched to map");
 		setCurrentWindow(mapView);
 		displayWindow();
 	}

@@ -50,8 +50,6 @@ public class MapView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
-		System.out.println("[Map] Rendering");
-
 		CaveSystem caves = gameStateManager.getCaves();
 		Player player = gameStateManager.getPlayer();
 
@@ -103,17 +101,6 @@ public class MapView extends ViewBase {
 	// logic
 	@Override
 	public void update() {
-		System.out.println("[Main menu] Updating model in Main menu");
-
-		String action = gameStateManager.getInputAction();
-
-		if (action.equals("something")) {
-			System.out.println("something clicked");
-			// ViewManager.getInstance().switchToGameplay();
-		}
-
-		// ViewManager manager = ViewManager.getInstance();
-		// manager.switchToGameplay();
 	}
 
 	@Override

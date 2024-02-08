@@ -38,7 +38,6 @@ public class GameView extends ViewBase {
 	private ActionListener mapButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Map button pressed");
 			viewManager.switchToMap();
 		}
 	};
@@ -46,7 +45,6 @@ public class GameView extends ViewBase {
 	private ActionListener shootUpButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Shoot up button pressed");
 		}
 	};
 
@@ -64,7 +62,6 @@ public class GameView extends ViewBase {
 	private ActionListener shootDownButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Shoot down button pressed");
 		}
 	};
 
@@ -82,7 +79,6 @@ public class GameView extends ViewBase {
 	private ActionListener shootLeftButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Shoot left button pressed");
 		}
 	};
 
@@ -100,7 +96,6 @@ public class GameView extends ViewBase {
 	private ActionListener shootRightButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Shoot Right button pressed");
 		}
 	};
 
@@ -117,8 +112,6 @@ public class GameView extends ViewBase {
 
 	@Override
 	public void renderView() {
-		System.out.println("[Game view] Rendering GameView");
-
 		renderer.clear();
 
 		CaveSystem caves = gameStateManager.getCaves();
@@ -175,7 +168,6 @@ public class GameView extends ViewBase {
 	@Override
 	public void update() {
 		// Provide the implementation for updating the game model in the view
-		System.out.println("[Game view] Updating model in GameView");
 	}
 
 	@Override

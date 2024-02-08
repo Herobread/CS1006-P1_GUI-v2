@@ -43,8 +43,6 @@ public class DialogueView extends ViewBase {
 		String text = dialogue.getText();
 		String texture = dialogue.getTexture();
 
-		System.out.println("[Dialogue] Rendering");
-
 		if (texture != null) {
 			renderer.drawTexture(texture, 192, 175, 128, 128);
 		}
@@ -59,8 +57,6 @@ public class DialogueView extends ViewBase {
 	// logic
 	@Override
 	public void update() {
-		System.out.println("[dialogue] Updating model in dialogue");
-
 	}
 
 	@Override

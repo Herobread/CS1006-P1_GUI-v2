@@ -21,9 +21,7 @@ public class MainMenuView extends ViewBase {
 	private ActionListener playButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("Button clicked!");
 			viewManager.switchToGameplay();
-			// viewManager.displayWindow();
 		}
 	};
 
@@ -31,8 +29,6 @@ public class MainMenuView extends ViewBase {
 	@Override
 	public void renderView() {
 		renderer.clear();
-
-		System.out.println("[Main menu] Rendering Main menu");
 
 		renderer.drawTexture("logo", 64, 116, 384, 160);
 		renderer.drawTexture("play", 172, 324, 168, 72);
@@ -44,7 +40,6 @@ public class MainMenuView extends ViewBase {
 	// logic
 	@Override
 	public void update() {
-		System.out.println("[Main menu] Updating model in Main menu");
 	}
 
 	@Override
