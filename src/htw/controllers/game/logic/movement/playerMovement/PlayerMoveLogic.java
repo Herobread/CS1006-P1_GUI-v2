@@ -4,6 +4,8 @@ import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.model.CaveSystem;
 import htw.model.entities.Player;
+import htw.model.map.ExploredMap;
+import htw.model.map.ExploredMap.TileState;
 import htw.utils.Coordinates;
 import htw.utils.Direction;
 
@@ -13,6 +15,7 @@ public class PlayerMoveLogic {
 	public void handleMove(Direction direction) {
 		// get target coordinates
 		Player player = gameStateManager.getPlayer();
+		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		Coordinates currentCoordinates = player.getCoordinates();
 		Coordinates targetCoordinates = CoordinateCalculator.calculateTargetCoordinates(currentCoordinates, direction);
 
@@ -27,5 +30,6 @@ public class PlayerMoveLogic {
 
 		// all good, set new coordinates
 		player.setCoordinates(targetCoordinates);
+		exploredMap.markTile(TileState.CAVE, targetCoordinates);
 	}
 }

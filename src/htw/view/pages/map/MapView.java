@@ -11,6 +11,7 @@ import htw.model.CaveSystem;
 import htw.model.WorldGenerator;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
+import htw.model.map.ExploredMap;
 import htw.view.Renderer;
 
 public class MapView extends ViewBase {
@@ -50,6 +51,7 @@ public class MapView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
+		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		CaveSystem caves = gameStateManager.getCaves();
 		Player player = gameStateManager.getPlayer();
 
@@ -65,6 +67,10 @@ public class MapView extends ViewBase {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
+				if (exploredMap.getTile(x, y) == null) {
+					continue;
+				}
+
 				renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
 						y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
 
@@ -90,10 +96,10 @@ public class MapView extends ViewBase {
 			}
 		}
 
-		renderer.drawTexture("cross", 432, 10, 72, 72);
-		renderer.drawClickArea(432, 10, 72, 72, closeButtonActionListener);
+		renderer.drawTexture("cross", 8, 8, 72, 72);
+		renderer.drawClickAreaUnstable(8, 8, 72, 72, closeButtonActionListener);
 
-		renderer.drawClickArea(100, 450, 100, 100, generateButtonActionListener);
+		renderer.drawClickAreaUnstable(100, 450, 100, 100, generateButtonActionListener);
 
 		renderer.draw();
 	}

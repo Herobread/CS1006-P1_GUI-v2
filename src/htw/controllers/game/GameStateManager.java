@@ -2,6 +2,7 @@ package htw.controllers.game;
 
 import htw.model.CaveSystem;
 import htw.model.entities.Player;
+import htw.model.map.ExploredMap;
 
 // singleton
 public class GameStateManager {
@@ -9,6 +10,7 @@ public class GameStateManager {
 	private String inputAction = "";
 	private CaveSystem caves;
 	private Player player;
+	private ExploredMap exploredMap;
 
 	// Private constructor to prevent instantiation from outside
 	private GameStateManager() {
@@ -48,5 +50,13 @@ public class GameStateManager {
 
 	public void setPlayer(Player player) {
 		this.player = player;
+	}
+
+	public ExploredMap getExploredMap() {
+		return exploredMap;
+	}
+
+	public void setExploredMap(ExploredMap exploredMap) {
+		this.exploredMap = exploredMap;
 	}
 }

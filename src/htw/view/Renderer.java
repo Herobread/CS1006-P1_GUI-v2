@@ -72,6 +72,14 @@ public class Renderer extends JFrame {
 	}
 
 	// temporary method to handle clicks
+	public void drawClickAreaUnstable(int x, int y, int width, int height,
+			ActionListener actionListener) {
+		JButton button = new JButton("Click Me");
+		button.setBounds(x, y, width, height);
+		button.addActionListener(actionListener);
+		getContentPane().add(button);
+	}
+
 	public void drawClickArea(int x, int y, int width, int height,
 			ActionListener actionListener) {
 		// y += getInsets().top;

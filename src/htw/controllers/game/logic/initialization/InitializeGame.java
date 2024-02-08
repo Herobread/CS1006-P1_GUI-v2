@@ -4,6 +4,8 @@ import htw.controllers.game.GameStateManager;
 import htw.model.CaveSystem;
 import htw.model.WorldGenerator;
 import htw.model.entities.Player;
+import htw.model.map.ExploredMap;
+import htw.model.map.ExploredMap.TileState;
 
 public class InitializeGame {
 	public static void initialize() {
@@ -14,11 +16,17 @@ public class InitializeGame {
 		Player player = new Player(0, 0);
 		gameStateManager.setPlayer(player);
 
-		// create caves
-		CaveSystem caves = new CaveSystem(20, 20);
-		WorldGenerator generator = new WorldGenerator(20, 20);
-		generator.generateCellularAutomataCaves(caves);
+		final int WORLD_SIZE = 20;
 
+		// create caves
+		CaveSystem caves = new CaveSystem(WORLD_SIZE, WORLD_SIZE);
+		WorldGenerator generator = new WorldGenerator(WORLD_SIZE, WORLD_SIZE);
+		generator.generateCellularAutomataCaves(caves);
 		gameStateManager.setCaves(caves);
+
+		// map
+		ExploredMap exploredMap = new ExploredMap(WORLD_SIZE, WORLD_SIZE);
+		exploredMap.markTile(TileState.CAVE, player.getCoordinates());
+		gameStateManager.setExploredMap(exploredMap);
 	}
 }
