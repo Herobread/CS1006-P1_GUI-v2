@@ -2,7 +2,7 @@ package game.model;
 
 import java.util.Random;
 
-import game.controllers.state.GameStateManager;
+import game.controllers.game.GameStateManager;
 import game.model.entities.Entity;
 import game.model.entities.Player;
 import game.utils.Coordinates;

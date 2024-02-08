@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import game.controllers.state.GameStateManager;
+import game.controllers.game.GameStateManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.model.CaveSystem;

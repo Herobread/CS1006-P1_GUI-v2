@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import game.controllers.state.dialogue.Dialogue;
-import game.controllers.state.dialogue.DialogueManager;
+import game.controllers.dialogue.Dialogue;
+import game.controllers.dialogue.DialogueManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.view.Renderer;

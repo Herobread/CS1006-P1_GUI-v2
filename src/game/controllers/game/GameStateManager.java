@@ -1,4 +1,4 @@
-package game.controllers.state;
+package game.controllers.game;
 
 import game.model.CaveSystem;
 import game.model.entities.Player;

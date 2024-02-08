@@ -1,7 +1,7 @@
 package game;
 
-import game.controllers.state.GameStateManager;
-import game.controllers.state.dialogue.DialogueManager;
+import game.controllers.dialogue.DialogueManager;
+import game.controllers.game.GameStateManager;
 import game.controllers.view.ViewManager;
 import game.model.CaveSystem;
 import game.model.WorldGenerator;

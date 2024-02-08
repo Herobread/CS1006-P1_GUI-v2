@@ -1,4 +1,4 @@
-package game.controllers.state.dialogue;
+package game.controllers.dialogue;
 
 public class Dialogue {
 	private String text;

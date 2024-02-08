@@ -1,4 +1,4 @@
-package game.controllers.state.dialogue;
+package game.controllers.dialogue;
 
 import java.util.LinkedList;
 import java.util.Queue;
