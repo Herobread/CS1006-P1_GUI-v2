@@ -11,7 +11,6 @@ import htw.model.CaveSystem;
 import htw.model.WorldGenerator;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
-import htw.model.map.ExploredMap;
 import htw.view.Renderer;
 
 public class MapView extends ViewBase {
@@ -51,7 +50,7 @@ public class MapView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
-		ExploredMap exploredMap = gameStateManager.getExploredMap();
+		// ExploredMap exploredMap = gameStateManager.getExploredMap();
 		CaveSystem caves = gameStateManager.getCaves();
 		Player player = gameStateManager.getPlayer();
 

@@ -1,10 +1,8 @@
 package htw.controllers.game.logic.movement.playerMovement;
 
-import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.playerActions.InteractWithEntity;
-import htw.controllers.view.ViewManager;
 import htw.model.CaveSystem;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
@@ -14,8 +12,6 @@ import htw.utils.Direction;
 
 public class PlayerMoveLogic {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
-	private DialogueManager dialogueManager = DialogueManager.getInstance();
-	private ViewManager viewManager = ViewManager.getInstance();
 
 	public void handleMove(Direction direction) {
 		// get target coordinates
