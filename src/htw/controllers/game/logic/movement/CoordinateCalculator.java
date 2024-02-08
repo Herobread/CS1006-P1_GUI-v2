@@ -26,5 +26,4 @@ public class CoordinateCalculator {
 		}
 		return new Coordinates(x, y);
 	}
-
 }
