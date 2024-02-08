@@ -1,8 +1,10 @@
 package tests;
 
 import static org.junit.Assert.assertEquals;
-import game.model.*;
+
 import org.junit.*;
+
+import htw.model.*;
 
 public class CaveSystemTests {
 
