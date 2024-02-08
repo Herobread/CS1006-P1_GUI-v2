@@ -252,6 +252,10 @@ public class CaveSystem {
 		caves[y][x] = cave;
 	}
 
+	public boolean isSolid(int x, int y) {
+		return getCave(x, y) == null;
+	}
+
 	public Cave getCave(Coordinates coordinates) {
 		return getCave(coordinates.getX(), coordinates.getY());
 	}
@@ -268,7 +272,7 @@ public class CaveSystem {
 		this.caves = caves;
 	}
 
-	// cave generation:
+	// cave initialisation:
 	public void initialiseCaveSystem() {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
@@ -279,9 +283,4 @@ public class CaveSystem {
 			}
 		}
 	}
-
-	// extra:
-	// public void isTherePath() {
-	// // check if there is a path
-	// }
 }

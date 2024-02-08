@@ -1,4 +1,4 @@
-package game.pages.dialogue;
+package game.view.pages.dialogue;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;

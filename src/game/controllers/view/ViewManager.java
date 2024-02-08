@@ -1,9 +1,9 @@
 package game.controllers.view;
 
-import game.pages.dialogue.DialogueView;
-import game.pages.game.GameView;
-import game.pages.mainMenu.MainMenuView;
-import game.pages.map.MapView;
+import game.view.pages.dialogue.DialogueView;
+import game.view.pages.game.GameView;
+import game.view.pages.mainMenu.MainMenuView;
+import game.view.pages.map.MapView;
 
 // will be responsible for selecting what is the state of the game:
 

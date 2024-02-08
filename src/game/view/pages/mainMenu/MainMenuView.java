@@ -1,4 +1,4 @@
-package game.pages.mainMenu;
+package game.view.pages.mainMenu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

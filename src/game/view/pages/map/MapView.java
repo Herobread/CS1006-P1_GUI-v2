@@ -1,4 +1,4 @@
-package game.pages.map;
+package game.view.pages.map;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

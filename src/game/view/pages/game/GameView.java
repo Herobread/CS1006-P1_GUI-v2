@@ -1,4 +1,4 @@
-package game.pages.game;
+package game.view.pages.game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +13,7 @@ public class GameView extends ViewBase {
 	// private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
+	private DialogueManager dialogueQueueManager = DialogueManager.getInstance();
 
 	public GameView() {
 		super("Gameplay");
@@ -23,10 +24,9 @@ public class GameView extends ViewBase {
 		public void actionPerformed(ActionEvent actionEvent) {
 
 			// add placeholder dialogues
-			DialogueManager dialogueQueueManager = DialogueManager.getInstance();
 			dialogueQueueManager.addDialogue("1. Bat Bat Bat Bat Bat", "bat");
-			dialogueQueueManager.addDialogue("2. Bat Bat Bat Bat Bat");
-			dialogueQueueManager.addDialogue("3. Wumpus");
+			dialogueQueueManager.addDialogue("2. Bat Bat Bat Bat Bat", "bat");
+			dialogueQueueManager.addDialogue("3. Wumpus eats you", "wumpus");
 			viewManager.switchToDialogue();
 		}
 	};
@@ -137,8 +137,6 @@ public class GameView extends ViewBase {
 		// map button
 		renderer.drawTexture("map", 8, 8, 72, 72);
 		renderer.drawClickAreaUnstable(8, 8, 72, 72, mapButtonActionListener);
-
-		// map button
 
 		// main
 		renderer.drawTexture("shadow", 176, 273, 128, 64);
