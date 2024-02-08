@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import game.controllers.state.dialogue.Dialogue;
+import game.controllers.state.dialogue.DialogueManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
 import game.view.Renderer;
@@ -12,6 +14,7 @@ public class DialogueView extends ViewBase {
 	// private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
+	private DialogueManager dialogueManager = DialogueManager.getInstance();
 
 	public DialogueView() {
 		super("Dialogue");
@@ -21,8 +24,12 @@ public class DialogueView extends ViewBase {
 	private ActionListener nextButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			viewManager.switchToGameplay();
-			// viewManager.displayWindow();
+			if (dialogueManager.isEmpty()) {
+				viewManager.switchToGameplay();
+				return;
+			}
+
+			renderView();
 		}
 	};
 
@@ -31,10 +38,17 @@ public class DialogueView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
+		Dialogue dialogue = dialogueManager.getNextDialogue();
+
+		String text = dialogue.getText();
+		String texture = dialogue.getTexture();
+
 		System.out.println("[Dialogue] Rendering");
 
-		renderer.drawTexture("bat", 192, 175, 128, 128);
-		renderer.drawText("Bat bat bat bat bat bat bat", 113, 317, 12, Color.WHITE);
+		if (texture != null) {
+			renderer.drawTexture(texture, 192, 175, 128, 128);
+		}
+		renderer.drawText(text, 113, 317, 12, Color.WHITE);
 
 		renderer.drawTexture("next", 432, 432, 72, 72);
 		renderer.drawClickAreaUnstable(432, 432, 72, 72, nextButtonActionListener);
@@ -47,15 +61,6 @@ public class DialogueView extends ViewBase {
 	public void update() {
 		System.out.println("[dialogue] Updating model in dialogue");
 
-		// String action = gameStateManager.getInputAction();
-
-		// if (action.equals("something")) {
-		// System.out.println("something clicked");
-		// ViewManager.getInstance().switchToGameplay();
-		// }
-
-		// ViewManager manager = ViewManager.getInstance();
-		// manager.switchToGameplay();
 	}
 
 	@Override

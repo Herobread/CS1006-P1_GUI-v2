@@ -3,19 +3,19 @@ package game.controllers.state.dialogue;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class DialogueQueueManager {
-	private static DialogueQueueManager instance;
+public class DialogueManager {
+	private static DialogueManager instance;
 	private Queue<Dialogue> dialogueQueue;
 
 	// Private constructor to prevent instantiation from outside
-	private DialogueQueueManager() {
+	private DialogueManager() {
 		dialogueQueue = new LinkedList<>();
 	}
 
 	// Method to get the singleton instance
-	public static DialogueQueueManager getInstance() {
+	public static DialogueManager getInstance() {
 		if (instance == null) {
-			instance = new DialogueQueueManager();
+			instance = new DialogueManager();
 		}
 		return instance;
 	}

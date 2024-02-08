@@ -3,6 +3,7 @@ package game.pages.game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import game.controllers.state.dialogue.DialogueManager;
 // import game.controllers.state.GameStateManager;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
@@ -20,6 +21,12 @@ public class GameView extends ViewBase {
 	private ActionListener dialogueButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
+
+			// add placeholder dialogues
+			DialogueManager dialogueQueueManager = DialogueManager.getInstance();
+			dialogueQueueManager.addDialogue("1. Bat Bat Bat Bat Bat", "bat");
+			dialogueQueueManager.addDialogue("2. Bat Bat Bat Bat Bat");
+			dialogueQueueManager.addDialogue("3. Wumpus");
 			viewManager.switchToDialogue();
 		}
 	};
