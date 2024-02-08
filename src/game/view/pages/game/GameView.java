@@ -4,13 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import game.controllers.dialogue.DialogueManager;
-// import game.controllers.state.GameStateManager;
+import game.controllers.game.GameStateManager;
+import game.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import game.controllers.view.ViewBase;
 import game.controllers.view.ViewManager;
+import game.model.CaveSystem;
+import game.model.entities.Player;
+import game.utils.Coordinates;
+import game.utils.Direction;
 import game.view.Renderer;
 
 public class GameView extends ViewBase {
-	// private GameStateManager gameStateManager = GameStateManager.getInstance();
+	private game.controllers.game.GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
 	private DialogueManager dialogueQueueManager = DialogueManager.getInstance();
@@ -22,7 +27,6 @@ public class GameView extends ViewBase {
 	private ActionListener dialogueButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-
 			// add placeholder dialogues
 			dialogueQueueManager.addDialogue("1. Bat Bat Bat Bat Bat", "bat");
 			dialogueQueueManager.addDialogue("2. Bat Bat Bat Bat Bat", "bat");
@@ -49,7 +53,11 @@ public class GameView extends ViewBase {
 	private ActionListener walkUpButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("walk up button pressed");
+			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
+
+			playerMoveLogic.handleMove(Direction.UP);
+
+			renderView();
 		}
 	};
 
@@ -63,7 +71,11 @@ public class GameView extends ViewBase {
 	private ActionListener walkDownButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("walk down button pressed");
+			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
+
+			playerMoveLogic.handleMove(Direction.DOWN);
+
+			renderView();
 		}
 	};
 
@@ -77,7 +89,11 @@ public class GameView extends ViewBase {
 	private ActionListener walkLeftButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("walk left button pressed");
+			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
+
+			playerMoveLogic.handleMove(Direction.LEFT);
+
+			renderView();
 		}
 	};
 
@@ -91,7 +107,11 @@ public class GameView extends ViewBase {
 	private ActionListener walkRightButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			System.out.println("walk Right button pressed");
+			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
+
+			playerMoveLogic.handleMove(Direction.RIGHT);
+
+			renderView();
 		}
 	};
 
@@ -101,7 +121,13 @@ public class GameView extends ViewBase {
 
 		renderer.clear();
 
-		renderer.drawTexture("cave-urdl", 0, 0, 512, 512);
+		CaveSystem caves = gameStateManager.getCaves();
+
+		Player player = gameStateManager.getPlayer();
+		Coordinates playerCoordinates = player.getCoordinates();
+		String currentCaveTexture = "cave-" + caves.getConnectionsString(playerCoordinates);
+
+		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 
 		// buttons up:
 		renderer.drawTexture("shoot", 176, 8, 72, 72);

@@ -252,6 +252,10 @@ public class CaveSystem {
 		caves[y][x] = cave;
 	}
 
+	public boolean isSolid(Coordinates coordinates) {
+		return isSolid(coordinates.getX(), coordinates.getY());
+	}
+
 	public boolean isSolid(int x, int y) {
 		return getCave(x, y) == null;
 	}
