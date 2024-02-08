@@ -67,9 +67,9 @@ public class MapView extends ViewBase {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (exploredMap.getTile(x, y) == null) {
-					continue;
-				}
+				// if (exploredMap.getTile(x, y) == null) {
+				// continue;
+				// }
 
 				renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
 						y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);

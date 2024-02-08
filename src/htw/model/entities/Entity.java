@@ -3,10 +3,18 @@ package htw.model.entities;
 public class Entity {
 	private String name;
 	private String textureName;
+	private boolean isHazard;
 
 	public Entity(String name, String textureName) {
 		this.name = name;
 		this.textureName = textureName;
+		this.isHazard = false;
+	}
+
+	public Entity(String name, String textureName, boolean isHazard) {
+		this.name = name;
+		this.textureName = textureName;
+		this.isHazard = isHazard;
 	}
 
 	public String getName() {
@@ -53,6 +61,14 @@ public class Entity {
 
 	public void setTextureName(String textureName) {
 		this.textureName = textureName;
+	}
+
+	public boolean isHazard() {
+		return isHazard;
+	}
+
+	public void setHazard(boolean isHazard) {
+		this.isHazard = isHazard;
 	}
 
 }

@@ -3,8 +3,11 @@ package htw.model;
 import java.util.Random;
 
 import htw.controllers.game.GameStateManager;
+import htw.model.entities.Bat;
 import htw.model.entities.Entity;
+import htw.model.entities.Pit;
 import htw.model.entities.Player;
+import htw.model.entities.Wumpus;
 import htw.utils.Coordinates;
 
 import java.util.ArrayList;
@@ -145,6 +148,21 @@ public class WorldGenerator {
 			List<Coordinates> entitySpawnLocations = entities.get(entityName);
 
 			Entity entity = new Entity(entityName, entityName);
+
+			switch (entityName) {
+				case "bat":
+					entity = new Bat();
+					break;
+				case "wumpus":
+					entity = new Wumpus();
+					break;
+				case "pit":
+					entity = new Pit();
+					break;
+				default:
+					entity = new Entity(entityName, entityName);
+					break;
+			}
 
 			for (Coordinates entitySpawnLocation : entitySpawnLocations) {
 				caves.addEntity(entity, entitySpawnLocation);

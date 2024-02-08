@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
+import htw.controllers.game.logic.playerActions.Senses;
 import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.CaveSystem;
@@ -115,10 +116,10 @@ public class GameView extends ViewBase {
 		renderer.clear();
 
 		CaveSystem caves = gameStateManager.getCaves();
-
 		Player player = gameStateManager.getPlayer();
 		Coordinates playerCoordinates = player.getCoordinates();
 		String currentCaveTexture = "cave-" + caves.getConnectionsString(playerCoordinates);
+		String senses = Senses.checkNeighbours(caves, playerCoordinates);
 
 		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 
@@ -152,7 +153,10 @@ public class GameView extends ViewBase {
 		renderer.drawClickAreaUnstable(432, 256, 72, 72, walkRightButtonActionListener);
 
 		// info:
-		renderer.drawTexture("dialogue-bs", 208, 144, 144, 64);
+		if (senses.length() != 0) {
+			String hazardsDialogueTexture = "dialogue-" + senses;
+			renderer.drawTexture(hazardsDialogueTexture, 208, 144, 144, 64);
+		}
 
 		// map button
 		renderer.drawTexture("map", 8, 8, 72, 72);
