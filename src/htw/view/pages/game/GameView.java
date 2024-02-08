@@ -19,7 +19,7 @@ public class GameView extends ViewBase {
 	private htw.controllers.game.GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
-	private DialogueManager dialogueQueueManager = DialogueManager.getInstance();
+	private DialogueManager dialogueManager = DialogueManager.getInstance();
 
 	public GameView() {
 		super("Gameplay");
@@ -29,9 +29,9 @@ public class GameView extends ViewBase {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			// add placeholder dialogues
-			dialogueQueueManager.addDialogue("1. Bat Bat Bat Bat Bat", "bat");
-			dialogueQueueManager.addDialogue("2. Bat Bat Bat Bat Bat", "bat");
-			dialogueQueueManager.addDialogue("3. Wumpus eats you", "wumpus");
+			dialogueManager.addDialogue("1. Bat Bat Bat Bat Bat", "bat");
+			dialogueManager.addDialogue("2. Bat Bat Bat Bat Bat", "bat");
+			dialogueManager.addDialogue("3. Wumpus eats you", "wumpus");
 			viewManager.switchToDialogue();
 		}
 	};
@@ -56,7 +56,7 @@ public class GameView extends ViewBase {
 
 			playerMoveLogic.handleMove(Direction.UP);
 
-			renderView();
+			update();
 		}
 	};
 
@@ -73,7 +73,7 @@ public class GameView extends ViewBase {
 
 			playerMoveLogic.handleMove(Direction.DOWN);
 
-			renderView();
+			update();
 		}
 	};
 
@@ -90,7 +90,7 @@ public class GameView extends ViewBase {
 
 			playerMoveLogic.handleMove(Direction.LEFT);
 
-			renderView();
+			update();
 		}
 	};
 
@@ -107,12 +107,13 @@ public class GameView extends ViewBase {
 
 			playerMoveLogic.handleMove(Direction.RIGHT);
 
-			renderView();
+			update();
 		}
 	};
 
 	@Override
 	public void renderView() {
+
 		renderer.clear();
 
 		CaveSystem caves = gameStateManager.getCaves();
@@ -172,6 +173,14 @@ public class GameView extends ViewBase {
 
 	@Override
 	public void update() {
+		if (!dialogueManager.isEmpty()) {
+
+			viewManager.switchToDialogue();
+			return;
+		}
+
+		renderView();
+
 		// Provide the implementation for updating the game model in the view
 	}
 

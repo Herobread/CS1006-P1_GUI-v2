@@ -1,9 +1,9 @@
 package htw.model.entities;
 
 public class Entity {
-	private String name;
-	private String textureName;
-	private boolean isHazard;
+	protected String name;
+	protected String textureName;
+	protected boolean isHazard;
 
 	public Entity(String name, String textureName) {
 		this.name = name;
@@ -23,6 +23,10 @@ public class Entity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public void interact() {
+		System.out.println("Interacting with " + name);
 	}
 
 	@Override
