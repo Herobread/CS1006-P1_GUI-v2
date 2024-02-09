@@ -5,6 +5,7 @@ import htw.utils.Coordinates;
 public class Player extends Entity {
 	private Coordinates coordinates;
 	private int arrows = 5;
+	private int gold = 0;
 
 	public Player(int x, int y) {
 		super("Player", "player");
@@ -51,5 +52,17 @@ public class Player extends Entity {
 		}
 
 		return false;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public void addGold(int amount) {
+		gold += amount;
 	}
 }
