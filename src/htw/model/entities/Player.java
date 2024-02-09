@@ -4,6 +4,7 @@ import htw.utils.Coordinates;
 
 public class Player extends Entity {
 	private Coordinates coordinates;
+	private int arrows = 5;
 
 	public Player(int x, int y) {
 		super("Player", "player");
@@ -33,5 +34,22 @@ public class Player extends Entity {
 
 	public void setY(int y) {
 		coordinates.setY(y);
+	}
+
+	public int getArrows() {
+		return arrows;
+	}
+
+	public void setArrows(int arrows) {
+		this.arrows = arrows;
+	}
+
+	public boolean useArrow() {
+		if (arrows > 0) {
+			arrows -= 1;
+			return true;
+		}
+
+		return false;
 	}
 }

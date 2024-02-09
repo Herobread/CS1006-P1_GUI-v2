@@ -12,20 +12,25 @@ import htw.utils.Coordinates;
 import htw.utils.Direction;
 
 public class PlayerMoveLogic {
-	private GameStateManager gameStateManager = GameStateManager.getInstance();
 
-	public void handleMove(Direction direction) {
-		// get target coordinates
+	public static void handleMove(Direction direction) {
+		GameStateManager gameStateManager = GameStateManager.getInstance();
 		Player player = gameStateManager.getPlayer();
-		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		Coordinates currentCoordinates = player.getCoordinates();
 		Coordinates targetCoordinates = CoordinateCalculator.calculateTargetCoordinates(currentCoordinates, direction);
 
-		// check if move is valid
+		handleMove(targetCoordinates);
+	}
+
+	public static void handleMove(Coordinates targetCoordinates) {
+		GameStateManager gameStateManager = GameStateManager.getInstance();
+		Player player = gameStateManager.getPlayer();
+		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		CaveSystem caves = gameStateManager.getCaves();
 
+		// check if move is valid
 		if (caves.isSolid(targetCoordinates)) {
-			return;
+			return; // cancel move
 		}
 
 		String senses = Senses.checkNeighbours(caves, targetCoordinates);
@@ -36,10 +41,9 @@ public class PlayerMoveLogic {
 			exploredMap.markTile(TileState.CAVE, targetCoordinates);
 		}
 
-		// TODO: check tile content
-		InteractWithEntity.interact(caves, targetCoordinates);
-
 		// all good, set new coordinates
 		player.setCoordinates(targetCoordinates);
+
+		InteractWithEntity.interact(caves, targetCoordinates);
 	}
 }

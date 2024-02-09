@@ -54,9 +54,7 @@ public class GameView extends ViewBase {
 	private ActionListener walkUpButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
-
-			playerMoveLogic.handleMove(Direction.UP);
+			PlayerMoveLogic.handleMove(Direction.UP);
 
 			update();
 		}
@@ -71,9 +69,7 @@ public class GameView extends ViewBase {
 	private ActionListener walkDownButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
-
-			playerMoveLogic.handleMove(Direction.DOWN);
+			PlayerMoveLogic.handleMove(Direction.DOWN);
 
 			update();
 		}
@@ -88,9 +84,7 @@ public class GameView extends ViewBase {
 	private ActionListener walkLeftButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
-
-			playerMoveLogic.handleMove(Direction.LEFT);
+			PlayerMoveLogic.handleMove(Direction.LEFT);
 
 			update();
 		}
@@ -105,9 +99,7 @@ public class GameView extends ViewBase {
 	private ActionListener walkRightButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
-			PlayerMoveLogic playerMoveLogic = new PlayerMoveLogic();
-
-			playerMoveLogic.handleMove(Direction.RIGHT);
+			PlayerMoveLogic.handleMove(Direction.RIGHT);
 
 			update();
 		}
@@ -123,6 +115,9 @@ public class GameView extends ViewBase {
 		Coordinates playerCoordinates = player.getCoordinates();
 		String currentCaveTexture = "cave-" + caves.getConnectionsString(playerCoordinates);
 		String senses = Senses.checkNeighbours(caves, playerCoordinates);
+
+		System.out.println("[game main] " + playerCoordinates);
+		System.out.println(player.hashCode());
 
 		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 

@@ -19,7 +19,8 @@ public class MapView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
-	private boolean SHOW_ENTITIES = false;
+	private boolean SHOW_ENTITIES = true;
+	private boolean SHOW_ALL_MAP_WAYS = true;
 
 	public MapView() {
 		super("Map");
@@ -69,7 +70,7 @@ public class MapView extends ViewBase {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (exploredMap.getTile(x, y) == null) {
+				if (exploredMap.getTile(x, y) == null && !SHOW_ALL_MAP_WAYS) {
 					continue;
 				}
 
@@ -89,7 +90,6 @@ public class MapView extends ViewBase {
 				}
 
 				if (SHOW_ENTITIES) {
-
 					List<Entity> entities = caves.getCaveEntities(x, y);
 
 					if (entities == null) {
