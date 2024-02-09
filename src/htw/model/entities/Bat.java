@@ -41,6 +41,5 @@ public class Bat extends Entity {
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 
 		dialogueManager.addDialogue("You killed a bat.");
-		dialogueManager.addDialogue("(its still on map, i need to remove it yet).");
 	}
 }

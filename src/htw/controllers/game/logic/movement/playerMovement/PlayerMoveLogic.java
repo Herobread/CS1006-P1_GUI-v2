@@ -25,14 +25,25 @@ public class PlayerMoveLogic {
 	public static void handleMove(Coordinates targetCoordinates) {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 		Player player = gameStateManager.getPlayer();
-		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		CaveSystem caves = gameStateManager.getCaves();
 
-		// check if move is valid
-		if (caves.isSolid(targetCoordinates)) {
-			return; // cancel move
+		if (!isValidMove(caves, targetCoordinates)) {
+			return; // Cancel move
 		}
 
+		markTileOnMap(caves, targetCoordinates);
+
+		player.setCoordinates(targetCoordinates);
+		InteractWithEntity.interact(caves, targetCoordinates);
+	}
+
+	private static boolean isValidMove(CaveSystem caves, Coordinates targetCoordinates) {
+		return !caves.isSolid(targetCoordinates);
+	}
+
+	public static void markTileOnMap(CaveSystem caves, Coordinates targetCoordinates) {
+		GameStateManager gameStateManager = GameStateManager.getInstance();
+		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		String senses = Senses.checkNeighbours(caves, targetCoordinates);
 
 		if (senses.length() > 0) {
@@ -40,10 +51,5 @@ public class PlayerMoveLogic {
 		} else {
 			exploredMap.markTile(TileState.CAVE, targetCoordinates);
 		}
-
-		// all good, set new coordinates
-		player.setCoordinates(targetCoordinates);
-
-		InteractWithEntity.interact(caves, targetCoordinates);
 	}
 }
