@@ -1,4 +1,4 @@
-package htw.controllers.game.logic.events;
+package htw.controllers.game.logic.movement;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,8 +7,8 @@ import java.util.List;
 import htw.model.caves.CaveSystem;
 import htw.utils.Coordinates;
 
-public class BatEvent {
-	public static Coordinates findRandomPlace(CaveSystem caves) {
+public class RandomPlace {
+	public static Coordinates find(CaveSystem caves) {
 		int width = caves.getWidth();
 		int height = caves.getHeight();
 		List<Coordinates> availablePlaces = new ArrayList<>();
