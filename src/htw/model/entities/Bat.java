@@ -2,6 +2,7 @@ package htw.model.entities;
 
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
+import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.movement.RandomPlace;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import htw.controllers.game.logic.playerActions.InteractWithEntity;
@@ -21,11 +22,15 @@ public class Bat extends Entity {
 
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 
-		Coordinates randomPlace = RandomPlace.find(caves);
+		Coordinates playerCoordinates = player.getCoordinates();
+		Coordinates randomCoordinates = RandomPlace.find(caves);
+		String distanceExplanation = CoordinateCalculator.calculateDistanceString(playerCoordinates, randomCoordinates);
+		String batDialogue = "The bat picked you up and flies "
+				+ distanceExplanation + "!";
 
-		dialogueManager.addDialogue("The bat pick you up and flies to some cave!", textureName);
+		dialogueManager.addDialogue(batDialogue, textureName);
 
-		PlayerMoveLogic.handleMove(randomPlace);
+		PlayerMoveLogic.handleMove(randomCoordinates);
 		InteractWithEntity.interact(caves, player.getCoordinates());
 	}
 }

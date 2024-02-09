@@ -46,7 +46,8 @@ public class DialogueView extends ViewBase {
 		if (texture != null) {
 			renderer.drawTexture(texture, 192, 175, 128, 128);
 		}
-		renderer.drawText(text, 113, 317, 12, Color.WHITE);
+
+		renderer.drawText(text, 113, 317, 20, Color.WHITE);
 
 		renderer.drawTexture("next", 432, 432, 72, 72);
 		renderer.drawClickAreaUnstable(432, 432, 72, 72, nextButtonActionListener);

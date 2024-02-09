@@ -12,6 +12,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import java.awt.Color;
 
@@ -36,12 +37,12 @@ public class Renderer extends JFrame {
 
 	// configure attributes of the JFrame
 	private void configureWindow() {
+		getContentPane().setBackground(Color.BLACK);
 		setLayout(null);
 		setDimensions(width, height);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Hunt The Wumpus");
 		setResizable(false);
-		setBackground(Color.BLACK);
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
@@ -102,20 +103,21 @@ public class Renderer extends JFrame {
 	}
 
 	public void draw() {
-		repaint();
-		revalidate();
-		for (TexturePanel t : TexturePanels) {
-			t.repaint();
-		}
-		for (TextPanel t : TextPanels) {
-			t.repaint();
-		}
+		SwingUtilities.invokeLater(() -> {
+			repaint();
+			revalidate();
+			for (TexturePanel t : TexturePanels) {
+				t.repaint();
+			}
+			for (TextPanel t : TextPanels) {
+				t.repaint();
+			}
+		});
 	}
 
 	public void drawTexture(String textureName, int x, int y) {
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
-
 			final BufferedImage image = ImageIO.read(new File(texturePath));
 			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), 1f);
 		} catch (IOException e) {
@@ -174,7 +176,7 @@ public class Renderer extends JFrame {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		setBackground(Color.BLACK);
+		// setBackground(Color.BLACK);
 		for (TexturePanel t : TexturePanels) {
 			t.paintComponent(g);
 		}
