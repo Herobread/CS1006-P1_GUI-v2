@@ -1,6 +1,6 @@
 package htw.controllers.game;
 
-import htw.model.CaveSystem;
+import htw.model.caves.CaveSystem;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 

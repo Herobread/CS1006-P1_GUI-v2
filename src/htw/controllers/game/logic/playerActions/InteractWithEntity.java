@@ -2,7 +2,7 @@ package htw.controllers.game.logic.playerActions;
 
 import java.util.ArrayList;
 
-import htw.model.CaveSystem;
+import htw.model.caves.CaveSystem;
 import htw.model.entities.Entity;
 import htw.utils.Coordinates;
 

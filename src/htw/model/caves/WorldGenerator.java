@@ -1,4 +1,4 @@
-package htw.model;
+package htw.model.caves;
 
 import java.util.Random;
 
@@ -64,6 +64,22 @@ public class WorldGenerator {
 		// join separated islands
 		drawLines(randomPoints);
 
+		// locations for random debree inside the cave
+		int[][] decorationSpawnCoordinatePairs = {
+				{ 192, 96 }, { 265, 80 }, { 132, 180 }, { 110, 238 }, { 168, 243 },
+				{ 364, 176 }, { 344, 224 }, { 399, 238 }, { 344, 283 }, { 156, 316 },
+				{ 228, 331 }, { 293, 326 }, { 192, 384 }, { 263, 385 }
+		};
+
+		// Create list of Coordinates
+		List<Coordinates> decorationSpawnCoordinates = new ArrayList<>();
+		String[] decorationTextureNames = { "mushroom-brown", "mushroom-red", "broken-arrow", "broken-bow", "rock" };
+
+		// Add coordinates from the array to the list
+		for (int[] pair : decorationSpawnCoordinatePairs) {
+			decorationSpawnCoordinates.add(new Coordinates(pair[0], pair[1]));
+		}
+
 		// finalize caves by creating connections on actual graph instead of just bitmap
 		for (int y = 0; y < height; y += 1) {
 			for (int x = 0; x < width; x += 1) {
@@ -74,7 +90,22 @@ public class WorldGenerator {
 					continue;
 				}
 
-				caves.setCave(new Cave(), currentCoordinates);
+				Cave cave = new Cave();
+
+				int totalNeighbours = coordinates.size();
+
+				if (totalNeighbours > 3) {
+					int randomLocationId = random.nextInt(decorationSpawnCoordinates.size());
+					int randomTextureId = random.nextInt(decorationTextureNames.length);
+
+					Coordinates randomLocation = decorationSpawnCoordinates.get(randomLocationId);
+					String randomTextureName = decorationTextureNames[randomTextureId];
+
+					Decoration decoration = new Decoration(randomLocation, randomTextureName);
+					cave.addDecoration(decoration);
+				}
+
+				caves.setCave(cave, currentCoordinates);
 
 				for (Coordinates coordinate : coordinates) {
 					caves.addDirectredConnection(currentCoordinates, coordinate);

@@ -1,8 +1,8 @@
 package htw.controllers.game.logic.initialization;
 
 import htw.controllers.game.GameStateManager;
-import htw.model.CaveSystem;
-import htw.model.WorldGenerator;
+import htw.model.caves.CaveSystem;
+import htw.model.caves.WorldGenerator;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 import htw.model.map.ExploredMap.TileState;

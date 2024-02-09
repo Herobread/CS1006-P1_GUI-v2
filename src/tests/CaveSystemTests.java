@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.*;
 
 import htw.model.*;
+import htw.model.caves.CaveSystem;
 
 public class CaveSystemTests {
 

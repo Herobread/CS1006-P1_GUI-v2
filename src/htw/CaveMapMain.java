@@ -2,8 +2,8 @@ package htw;
 
 import java.awt.Color;
 
-import htw.model.CaveSystem;
-import htw.model.WorldGenerator;
+import htw.model.caves.CaveSystem;
+import htw.model.caves.WorldGenerator;
 import htw.view.Renderer;
 
 public class CaveMapMain {

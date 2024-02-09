@@ -1,4 +1,4 @@
-package htw.model;
+package htw.model.caves;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -198,6 +198,14 @@ public class CaveSystem {
 	 * @return ArrayList of entities in the cave.
 	 */
 	public ArrayList<Entity> getCaveEntities(int x, int y) {
+		if (getCave(x, y) == null) {
+			return null;
+		}
+
+		return getCave(x, y).getEntities();
+	}
+
+	public ArrayList<Entity> getCaveDecorations(int x, int y) {
 		if (getCave(x, y) == null) {
 			return null;
 		}

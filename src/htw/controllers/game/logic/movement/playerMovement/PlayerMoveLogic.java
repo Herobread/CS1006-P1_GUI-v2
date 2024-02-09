@@ -3,7 +3,7 @@ package htw.controllers.game.logic.movement.playerMovement;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.playerActions.InteractWithEntity;
-import htw.model.CaveSystem;
+import htw.model.caves.CaveSystem;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 import htw.model.map.ExploredMap.TileState;

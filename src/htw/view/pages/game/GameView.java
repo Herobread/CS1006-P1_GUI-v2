@@ -2,6 +2,7 @@ package htw.view.pages.game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
@@ -9,7 +10,8 @@ import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import htw.controllers.game.logic.playerActions.Senses;
 import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
-import htw.model.CaveSystem;
+import htw.model.caves.CaveSystem;
+import htw.model.caves.Decoration;
 import htw.model.entities.Player;
 import htw.utils.Coordinates;
 import htw.utils.Direction;
@@ -124,6 +126,16 @@ public class GameView extends ViewBase {
 
 		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 
+		// player shadow
+		renderer.drawTexture("shadow", 176, 273, 128, 64, 0.5f);
+
+		ArrayList<Decoration> decorations = caves.getCave(playerCoordinates).getDecorations();
+
+		for (Decoration decoration : decorations) {
+			renderer.drawTexture(decoration.getTextureName(), decoration.getX(), decoration.getY(),
+					decoration.getWidth(), decoration.getHeight());
+		}
+
 		// buttons up:
 		renderer.drawTexture("shoot", 176, 8, 72, 72);
 		renderer.drawClickAreaUnstable(176, 8, 72, 72,
@@ -163,8 +175,6 @@ public class GameView extends ViewBase {
 		renderer.drawTexture("map", 8, 8, 72, 72);
 		renderer.drawClickAreaUnstable(8, 8, 72, 72, mapButtonActionListener);
 
-		// main
-		renderer.drawTexture("shadow", 176, 273, 128, 64);
 		renderer.drawTexture("player", 192, 192, 128, 128);
 		renderer.drawClickAreaUnstable(192, 192, 128, 128, dialogueButtonActionListener);
 
