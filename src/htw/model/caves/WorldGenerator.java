@@ -8,6 +8,7 @@ import htw.model.entities.Bat;
 import htw.model.entities.Entity;
 import htw.model.entities.Pit;
 import htw.model.entities.Player;
+import htw.model.entities.Treasure;
 import htw.model.entities.Wumpus;
 import htw.utils.Coordinates;
 
@@ -181,27 +182,30 @@ public class WorldGenerator {
 		for (String entityName : entities.keySet()) {
 			List<Coordinates> entitySpawnLocations = entities.get(entityName);
 
-			Entity entity = new Entity(entityName, entityName);
-
-			switch (entityName) {
-				case "bat":
-					entity = new Bat();
-					break;
-				case "wumpus":
-					entity = new Wumpus();
-					break;
-				case "pit":
-					entity = new Pit();
-					break;
-				case "arrow":
-					entity = new Arrow();
-					break;
-				default:
-					entity = new Entity(entityName, entityName);
-					break;
-			}
-
 			for (Coordinates entitySpawnLocation : entitySpawnLocations) {
+				Entity entity = null;
+
+				switch (entityName) {
+					case "bat":
+						entity = new Bat();
+						break;
+					case "wumpus":
+						entity = new Wumpus();
+						break;
+					case "pit":
+						entity = new Pit();
+						break;
+					case "arrow":
+						entity = new Arrow();
+						break;
+					case "treasure":
+						entity = new Treasure();
+						break;
+					default:
+						entity = new Entity(entityName, entityName);
+						break;
+				}
+
 				caves.addEntity(entity, entitySpawnLocation);
 			}
 		}
