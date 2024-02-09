@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
+import htw.model.caves.Cave;
 import htw.model.caves.CaveSystem;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
@@ -52,6 +53,9 @@ public class PlayerShootAction {
 		for (Entity target : targets) {
 			if (target.isShootable()) {
 				target.onShot();
+
+				Cave cave = caves.getCave(targetCoordinates);
+				cave.removeEntity(target);
 
 				return target;
 			}

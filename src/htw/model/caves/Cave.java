@@ -17,6 +17,14 @@ public class Cave {
 		entities.add(entity);
 	}
 
+	public void removeEntity(Entity entity) {
+		if (entity == null) {
+			return;
+		}
+
+		entities.remove(entity);
+	}
+
 	public ArrayList<Entity> getEntities() {
 		return entities;
 	}

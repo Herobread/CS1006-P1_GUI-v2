@@ -11,6 +11,7 @@ public class GameStateManager {
 	private CaveSystem caves;
 	private Player player;
 	private ExploredMap exploredMap;
+	private boolean isEndGame = false;
 
 	// Private constructor to prevent instantiation from outside
 	private GameStateManager() {
@@ -29,6 +30,14 @@ public class GameStateManager {
 
 	public void setInputAction(String inputAction) {
 		this.inputAction = inputAction;
+	}
+
+	public boolean isEndGame() {
+		return isEndGame;
+	}
+
+	public void setEndGame(boolean isEndGame) {
+		this.isEndGame = isEndGame;
 	}
 
 	public CaveSystem getCaves() {

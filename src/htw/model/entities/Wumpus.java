@@ -5,6 +5,5 @@ public class Wumpus extends Entity {
 		super("wumpus", "wumpus-teeth");
 		setHazard(true);
 		setShootable(true);
-
 	}
 }
