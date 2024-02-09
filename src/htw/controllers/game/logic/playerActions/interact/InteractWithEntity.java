@@ -16,7 +16,6 @@ public class InteractWithEntity {
 
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			System.out.println(entity);
 			entity.interact();
 		}
 	}

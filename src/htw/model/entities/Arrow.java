@@ -24,10 +24,10 @@ public class Arrow extends Entity {
 		Coordinates currentCoordinates = player.getCoordinates();
 		Cave cave = caveSystem.getCave(currentCoordinates);
 
+		player.setArrows(player.getArrows() + 1);
+
 		dialogueManager.addDialogue("You found an arrow!", textureName);
 		dialogueManager.addDialogue("You have " + player.getArrows() + " arrows.", textureName);
-
-		player.setArrows(player.getArrows() + 1);
 
 		cave.removeEntity(this);
 		// this = null;

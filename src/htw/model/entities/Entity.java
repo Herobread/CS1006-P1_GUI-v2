@@ -32,7 +32,8 @@ public class Entity {
 
 	@Override
 	public String toString() {
-		return "Entity [name=" + name + "]";
+		return "Entity [name=" + name + ", textureName=" + textureName + ", isHazard=" + isHazard + ", isShootable="
+				+ isShootable + "]";
 	}
 
 	@Override
