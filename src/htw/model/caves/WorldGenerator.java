@@ -3,6 +3,7 @@ package htw.model.caves;
 import java.util.Random;
 
 import htw.controllers.game.GameStateManager;
+import htw.model.entities.Arrow;
 import htw.model.entities.Bat;
 import htw.model.entities.Entity;
 import htw.model.entities.Pit;
@@ -191,6 +192,9 @@ public class WorldGenerator {
 					break;
 				case "pit":
 					entity = new Pit();
+					break;
+				case "arrow":
+					entity = new Arrow();
 					break;
 				default:
 					entity = new Entity(entityName, entityName);
