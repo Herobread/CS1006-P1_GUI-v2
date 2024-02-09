@@ -7,7 +7,7 @@ import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 import htw.model.map.ExploredMap.TileState;
 
-public class InitializeGame {
+public class GameInitializer {
 	public static void initialize() {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 
