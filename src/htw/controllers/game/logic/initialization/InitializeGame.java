@@ -16,7 +16,7 @@ public class InitializeGame {
 		Player player = new Player(0, 0);
 		gameStateManager.setPlayer(player);
 
-		final int WORLD_SIZE = 20;
+		final int WORLD_SIZE = 16;
 
 		// create caves
 		CaveSystem caves = new CaveSystem(WORLD_SIZE, WORLD_SIZE);

@@ -26,6 +26,9 @@ public class WorldGenerator {
 	final private float MIN_NEIGHBOURS = 4;
 	final private float MAX_NEIGHBOURS = 4;
 
+	String[] decorationTextureNames = { "mushroom-brown", "mushroom-red", "broken-arrow", "broken-bow", "rock-1",
+			"rock-2" };
+
 	public WorldGenerator(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -73,7 +76,6 @@ public class WorldGenerator {
 
 		// Create list of Coordinates
 		List<Coordinates> decorationSpawnCoordinates = new ArrayList<>();
-		String[] decorationTextureNames = { "mushroom-brown", "mushroom-red", "broken-arrow", "broken-bow", "rock" };
 
 		// Add coordinates from the array to the list
 		for (int[] pair : decorationSpawnCoordinatePairs) {
