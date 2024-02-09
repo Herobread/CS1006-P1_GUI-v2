@@ -11,12 +11,15 @@ import htw.model.caves.CaveSystem;
 import htw.model.caves.WorldGenerator;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
+import htw.model.map.ExploredMap;
+import htw.model.map.ExploredMap.TileState;
 import htw.view.Renderer;
 
 public class MapView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
+	private boolean SHOW_ENTITIES = false;
 
 	public MapView() {
 		super("Map");
@@ -50,7 +53,7 @@ public class MapView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
-		// ExploredMap exploredMap = gameStateManager.getExploredMap();
+		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		CaveSystem caves = gameStateManager.getCaves();
 		Player player = gameStateManager.getPlayer();
 
@@ -66,32 +69,43 @@ public class MapView extends ViewBase {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				// if (exploredMap.getTile(x, y) == null) {
-				// continue;
-				// }
+				if (exploredMap.getTile(x, y) == null) {
+					continue;
+				}
 
+				// map tile
 				renderer.drawTexture("map-" + caves.getConnectionsString(x, y), x * TILE_SIZE + START_POS_X,
 						y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
 
+				// mark on map tile
+				if (exploredMap.getTile(x, y) == TileState.HAZARD) {
+					renderer.drawTexture("map-danger", x * TILE_SIZE + START_POS_X,
+							y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+				}
+
 				if (player.getX() == x && player.getY() == y) {
-					renderer.drawTexture(player.getTextureName(), x * TILE_SIZE + START_POS_X,
+					renderer.drawTexture("map-player", x * TILE_SIZE + START_POS_X,
 							y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
 				}
 
-				List<Entity> entities = caves.getCaveEntities(x, y);
+				if (SHOW_ENTITIES) {
 
-				if (entities == null) {
-					continue;
+					List<Entity> entities = caves.getCaveEntities(x, y);
+
+					if (entities == null) {
+						continue;
+					}
+
+					if (entities.size() == 0) {
+						continue;
+					}
+
+					for (Entity entity : entities) {
+						renderer.drawTexture(entity.getTextureName(), x * TILE_SIZE + START_POS_X,
+								y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
+					}
 				}
 
-				if (entities.size() == 0) {
-					continue;
-				}
-
-				for (Entity entity : entities) {
-					renderer.drawTexture(entity.getTextureName(), x * TILE_SIZE + START_POS_X,
-							y * TILE_SIZE + START_POS_Y, TILE_SIZE, TILE_SIZE);
-				}
 			}
 		}
 

@@ -3,6 +3,7 @@ package htw.controllers.game.logic.movement.playerMovement;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.playerActions.InteractWithEntity;
+import htw.controllers.game.logic.playerActions.Senses;
 import htw.model.caves.CaveSystem;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
@@ -27,11 +28,18 @@ public class PlayerMoveLogic {
 			return;
 		}
 
+		String senses = Senses.checkNeighbours(caves, targetCoordinates);
+
+		if (senses.length() > 0) {
+			exploredMap.markTile(TileState.HAZARD, targetCoordinates);
+		} else {
+			exploredMap.markTile(TileState.CAVE, targetCoordinates);
+		}
+
 		// TODO: check tile content
 		InteractWithEntity.interact(caves, targetCoordinates);
 
 		// all good, set new coordinates
 		player.setCoordinates(targetCoordinates);
-		exploredMap.markTile(TileState.CAVE, targetCoordinates);
 	}
 }
