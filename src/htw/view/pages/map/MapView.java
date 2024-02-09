@@ -8,7 +8,6 @@ import htw.controllers.game.GameStateManager;
 import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
-import htw.model.caves.WorldGenerator;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
@@ -32,20 +31,6 @@ public class MapView extends ViewBase {
 		public void actionPerformed(ActionEvent actionEvent) {
 			viewManager.switchToGameplay();
 			// viewManager.displayWindow();
-		}
-	};
-
-	private ActionListener generateButtonActionListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent actionEvent) {
-			WorldGenerator generator = new WorldGenerator(20, 20);
-			CaveSystem caves = new CaveSystem(20, 20);
-
-			generator.generateCellularAutomataCaves(caves);
-
-			gameStateManager.setCaves(caves);
-
-			renderView();
 		}
 	};
 
@@ -111,8 +96,6 @@ public class MapView extends ViewBase {
 
 		renderer.drawTexture("cross", 8, 8, 72, 72);
 		renderer.drawClickAreaUnstable(8, 8, 72, 72, closeButtonActionListener);
-
-		renderer.drawClickAreaUnstable(100, 450, 100, 100, generateButtonActionListener);
 
 		renderer.draw();
 	}
