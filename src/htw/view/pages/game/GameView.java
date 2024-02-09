@@ -8,6 +8,7 @@ import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import htw.controllers.game.logic.playerActions.Senses;
+import htw.controllers.game.logic.playerActions.shoot.PlayerShootAction;
 import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
@@ -37,6 +38,9 @@ public class GameView extends ViewBase {
 	private ActionListener shootUpButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
+			PlayerShootAction.shoot(Direction.UP);
+
+			update();
 		}
 	};
 
@@ -52,6 +56,9 @@ public class GameView extends ViewBase {
 	private ActionListener shootDownButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
+			PlayerShootAction.shoot(Direction.DOWN);
+
+			update();
 		}
 	};
 
@@ -67,6 +74,9 @@ public class GameView extends ViewBase {
 	private ActionListener shootLeftButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
+			PlayerShootAction.shoot(Direction.LEFT);
+
+			update();
 		}
 	};
 
@@ -82,6 +92,9 @@ public class GameView extends ViewBase {
 	private ActionListener shootRightButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
+			PlayerShootAction.shoot(Direction.RIGHT);
+
+			update();
 		}
 	};
 
@@ -96,7 +109,6 @@ public class GameView extends ViewBase {
 
 	@Override
 	public void renderView() {
-
 		renderer.clear();
 
 		CaveSystem caves = gameStateManager.getCaves();

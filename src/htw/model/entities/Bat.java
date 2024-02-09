@@ -5,13 +5,15 @@ import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.movement.RandomPlace;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
-import htw.controllers.game.logic.playerActions.InteractWithEntity;
+import htw.controllers.game.logic.playerActions.interact.InteractWithEntity;
 import htw.model.caves.CaveSystem;
 import htw.utils.Coordinates;
 
 public class Bat extends Entity {
 	public Bat() {
-		super("bat", "bat", true);
+		super("bat", "bat");
+		setHazard(true);
+		setShootable(true);
 	}
 
 	@Override
@@ -32,5 +34,13 @@ public class Bat extends Entity {
 
 		PlayerMoveLogic.handleMove(randomCoordinates);
 		InteractWithEntity.interact(caves, player.getCoordinates());
+	}
+
+	@Override
+	public void onShot() {
+		DialogueManager dialogueManager = DialogueManager.getInstance();
+
+		dialogueManager.addDialogue("You killed a bat.");
+		dialogueManager.addDialogue("(its still on map, i need to remove it yet).");
 	}
 }

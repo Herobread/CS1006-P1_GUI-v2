@@ -1,4 +1,4 @@
-package htw.controllers.game.logic.playerActions;
+package htw.controllers.game.logic.playerActions.interact;
 
 import java.util.ArrayList;
 
