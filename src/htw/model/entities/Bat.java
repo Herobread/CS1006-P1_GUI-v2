@@ -26,8 +26,6 @@ public class Bat extends Entity {
 		dialogueManager.addDialogue("The bat pick you up and flies to some cave!", textureName);
 
 		PlayerMoveLogic.handleMove(randomPlace);
-
-		System.out.println(player.hashCode());
 		InteractWithEntity.interact(caves, player.getCoordinates());
 	}
 }

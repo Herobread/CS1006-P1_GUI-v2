@@ -27,17 +27,6 @@ public class GameView extends ViewBase {
 		super("Gameplay");
 	}
 
-	private ActionListener dialogueButtonActionListener = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent actionEvent) {
-			// add placeholder dialogues
-			dialogueManager.addDialogue("1. Bat Bat Bat Bat Bat", "bat");
-			dialogueManager.addDialogue("2. Bat Bat Bat Bat Bat", "bat");
-			dialogueManager.addDialogue("3. Wumpus eats you", "wumpus");
-			viewManager.switchToDialogue();
-		}
-	};
-
 	private ActionListener mapButtonActionListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
@@ -116,9 +105,6 @@ public class GameView extends ViewBase {
 		String currentCaveTexture = "cave-" + caves.getConnectionsString(playerCoordinates);
 		String senses = Senses.checkNeighbours(caves, playerCoordinates);
 
-		System.out.println("[game main] " + playerCoordinates);
-		System.out.println(player.hashCode());
-
 		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 
 		// player shadow
@@ -171,7 +157,6 @@ public class GameView extends ViewBase {
 		renderer.drawClickAreaUnstable(8, 8, 72, 72, mapButtonActionListener);
 
 		renderer.drawTexture("player", 192, 192, 128, 128);
-		renderer.drawClickAreaUnstable(192, 192, 128, 128, dialogueButtonActionListener);
 
 		renderer.draw();
 	}
