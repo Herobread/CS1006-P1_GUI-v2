@@ -142,6 +142,12 @@ public class WorldGenerator {
 		int AMOUNT_OF_TREASURES = 2;
 		int AMOUNT_OF_ARROWS = spawnableArea / 10;
 
+		gameStateManager.setAmountOfBats(AMOUNT_OF_BATS);
+		gameStateManager.setAmountOfWumpuses(AMOUNT_OF_WUMPUSES);
+		gameStateManager.setAmountOfPits(AMOUNT_OF_PITS);
+		gameStateManager.setAmountOfTreasures(AMOUNT_OF_TREASURES);
+		gameStateManager.setAmountOfArrows(AMOUNT_OF_ARROWS);
+
 		Map<String, List<Coordinates>> entities = new HashMap<>();
 
 		entities.put("wumpus", new ArrayList<>());

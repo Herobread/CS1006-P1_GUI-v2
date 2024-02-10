@@ -8,6 +8,7 @@ import htw.controllers.game.GameStateManager;
 import htw.controllers.game.GameStatus;
 import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
+import htw.model.entities.Player;
 import htw.view.Renderer;
 
 public class ScoresView extends ViewBase {
@@ -32,6 +33,7 @@ public class ScoresView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 		GameStatus gameStatus = gameStateManager.getGameStatus();
+		Player player = gameStateManager.getPlayer();
 
 		// comment on user's result
 		if (gameStatus == GameStatus.FAIL) {
@@ -44,11 +46,16 @@ public class ScoresView extends ViewBase {
 
 		// diplay game stats
 		// kills
-		renderer.drawText("Wumpus: null/null", 81, 212, 24, Color.WHITE);
-		renderer.drawText("Bat: null/null", 81, 241, 24, Color.WHITE);
+		final int totalWumpuses = gameStateManager.getTotalAmountOfWumpuses();
+		final int killedWumpuses = totalWumpuses - 1; // TODO: count entities
+		renderer.drawText("Wumpus: " + killedWumpuses + "/" + totalWumpuses, 81, 212, 24, Color.WHITE);
+
+		final int totalBats = gameStateManager.getTotalAmountOfBats();
+		final int killedBats = totalWumpuses - 1;
+		renderer.drawText("Bat: " + killedBats + "/" + totalBats, 81, 241, 24, Color.WHITE);
 
 		// other
-		renderer.drawText("Gold: null/null", 81, 290, 24, Color.WHITE);
+		renderer.drawText("Gold acquired: " + player.getGold(), 81, 290, 24, Color.WHITE);
 
 		renderer.drawTexture("logo", 148, 30, 216, 90);
 
@@ -58,7 +65,6 @@ public class ScoresView extends ViewBase {
 		renderer.draw();
 	}
 
-	// logic
 	@Override
 	public void update() {
 	}

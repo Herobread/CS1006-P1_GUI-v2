@@ -12,6 +12,11 @@ public class GameStateManager {
 	private ExploredMap exploredMap;
 	private boolean isEndGame = false;
 	private GameStatus gameStatus = GameStatus.PLAYING;
+	private int amountOfBats;
+	private int amountOfWumpuses;
+	private int amountOfPits;
+	private int amountOfTreasures;
+	private int amountOfArrows;
 
 	// Private constructor to prevent instantiation from outside
 	private GameStateManager() {
@@ -75,5 +80,45 @@ public class GameStateManager {
 
 	public void setGameStatus(GameStatus gameStatus) {
 		this.gameStatus = gameStatus;
+	}
+
+	public int getTotalAmountOfBats() {
+		return amountOfBats;
+	}
+
+	public void setAmountOfBats(int amountOfBats) {
+		this.amountOfBats = amountOfBats;
+	}
+
+	public int getTotalAmountOfWumpuses() {
+		return amountOfWumpuses;
+	}
+
+	public void setAmountOfWumpuses(int amountOfWumpuses) {
+		this.amountOfWumpuses = amountOfWumpuses;
+	}
+
+	public int getTotalAmountOfPits() {
+		return amountOfPits;
+	}
+
+	public void setAmountOfPits(int amountOfPits) {
+		this.amountOfPits = amountOfPits;
+	}
+
+	public int getTotalAmountOfTreasures() {
+		return amountOfTreasures;
+	}
+
+	public void setAmountOfTreasures(int amountOfTreasures) {
+		this.amountOfTreasures = amountOfTreasures;
+	}
+
+	public int getTotalAmountOfArrows() {
+		return amountOfArrows;
+	}
+
+	public void setAmountOfArrows(int amountOfArrows) {
+		this.amountOfArrows = amountOfArrows;
 	}
 }

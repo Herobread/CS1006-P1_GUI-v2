@@ -22,4 +22,10 @@ public class Wumpus extends Entity {
 		dialogueManager.addDialogue("...a sense of impending doom washes over you...", "player");
 		dialogueManager.addDialogue("The Wumpus lunges, devouring you whole.", textureName);
 	}
+
+	@Override
+	public void onShot() {
+		DialogueManager dialogueManager = DialogueManager.getInstance();
+		dialogueManager.addDialogue("Wumpus eliminated!", textureName);
+	}
 }

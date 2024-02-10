@@ -8,7 +8,7 @@ class Main {
 		GameInitializer.initialize();
 
 		ViewManager viewManager = ViewManager.getInstance();
-		viewManager.switchToScores();
-		// viewManager.switchToMainMenu();
+		// viewManager.switchToScores();
+		viewManager.switchToMainMenu();
 	}
 }
