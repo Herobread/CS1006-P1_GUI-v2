@@ -11,8 +11,16 @@ import htw.model.map.ExploredMap.TileState;
 import htw.utils.Coordinates;
 import htw.utils.Direction;
 
+/**
+ * Provides methods for handling player movement logic.
+ */
 public class PlayerMoveLogic {
 
+	/**
+	 * Handles the player's movement in the specified direction.
+	 *
+	 * @param direction The direction in which the player wants to move.
+	 */
 	public static void handleMove(Direction direction) {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 		Player player = gameStateManager.getPlayer();
@@ -22,6 +30,11 @@ public class PlayerMoveLogic {
 		handleMove(targetCoordinates);
 	}
 
+	/**
+	 * Handles the player's movement to the specified target coordinates.
+	 *
+	 * @param targetCoordinates The target coordinates to move the player to.
+	 */
 	public static void handleMove(Coordinates targetCoordinates) {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 		Player player = gameStateManager.getPlayer();
@@ -37,10 +50,24 @@ public class PlayerMoveLogic {
 		InteractWithEntity.interact(caves, targetCoordinates);
 	}
 
+	/**
+	 * Checks if the move to the specified target coordinates is valid.
+	 *
+	 * @param caves             The cave system.
+	 * @param targetCoordinates The target coordinates to move to.
+	 * @return True if the move is valid, false otherwise.
+	 */
 	private static boolean isValidMove(CaveSystem caves, Coordinates targetCoordinates) {
 		return !caves.isSolid(targetCoordinates);
 	}
 
+	/**
+	 * Marks the tile on the explored map based on the player's new position.
+	 *
+	 * @param caves             The cave system.
+	 * @param targetCoordinates The target coordinates where the player is moving
+	 *                          to.
+	 */
 	public static void markTileOnMap(CaveSystem caves, Coordinates targetCoordinates) {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 		ExploredMap exploredMap = gameStateManager.getExploredMap();

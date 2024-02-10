@@ -10,13 +10,26 @@ import htw.model.caves.CaveSystem;
 import htw.model.entities.Entity;
 import htw.utils.Coordinates;
 
+/**
+ * Provides methods for sensing hazards in neighboring caves.
+ */
 public class Senses {
-	public static String checkNeighbours(CaveSystem caves, Coordinates coordinates) {
-		String result = "";
 
+	/**
+	 * Checks neighboring caves for hazards and returns a string representing the
+	 * hazards found.
+	 *
+	 * @param caves       The cave system.
+	 * @param coordinates The coordinates of the cave to check neighbors for
+	 *                    hazards.
+	 * @return A string representing the hazards found in neighboring caves.
+	 */
+	public static String checkNeighbours(CaveSystem caves, Coordinates coordinates) {
+		// Get neighboring caves
 		HashSet<Coordinates> neighbours = caves.getCaveConnections(coordinates);
 		Set<Character> hazards = new HashSet<>();
 
+		// Check entities in neighboring caves for hazards
 		for (Coordinates neighbourCoordinates : neighbours) {
 			ArrayList<Entity> entities = caves.getCaveEntities(neighbourCoordinates);
 
@@ -28,15 +41,15 @@ public class Senses {
 			}
 		}
 
+		// Sort hazards alphabetically
 		List<Character> sortedHazards = new ArrayList<>(hazards);
 		Collections.sort(sortedHazards);
 
-		StringBuilder sb = new StringBuilder();
+		// Construct result string
+		String result = "";
 		for (char hazard : sortedHazards) {
-			sb.append(hazard);
+			result += hazard;
 		}
-
-		result = sb.toString();
 
 		return result;
 	}

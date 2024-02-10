@@ -30,6 +30,5 @@ public class Arrow extends Entity {
 		dialogueManager.addDialogue("You have " + player.getArrows() + " arrows.", textureName);
 
 		cave.removeEntity(this);
-		// this = null;
 	}
 }

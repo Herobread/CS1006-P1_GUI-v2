@@ -6,14 +6,11 @@ import htw.view.pages.mainMenu.MainMenuView;
 import htw.view.pages.map.MapView;
 import htw.view.pages.scores.ScoresView;
 
-// will be responsible for selecting what is the state of the game:
-
-// main menu
-// game
-// map
-// dialogue
-
-// singleton pattern
+/**
+ * Manages the different views of the application and controls the transition
+ * between them.
+ * This class follows the singleton pattern.
+ */
 public class ViewManager {
 	private static ViewManager instance;
 	private ViewBase currentWindow;
@@ -27,12 +24,16 @@ public class ViewManager {
 	private ViewManager() {
 	}
 
+	/**
+	 * Retrieves the singleton instance of the ViewManager.
+	 *
+	 * @return The ViewManager instance.
+	 */
 	public static synchronized ViewManager getInstance() {
 		if (instance == null) {
 			instance = new ViewManager();
 			instance.initializeViews();
 		}
-
 		return instance;
 	}
 
@@ -44,42 +45,62 @@ public class ViewManager {
 		scoresView = new ScoresView();
 	}
 
+	/**
+	 * Displays the current window.
+	 */
 	public void displayWindow() {
 		currentWindow.run();
 	}
 
-	public void setCurrentWindow(ViewBase window) {
+	private void setCurrentWindow(ViewBase window) {
 		currentWindow = window;
 	}
 
+	/**
+	 * Switches to the main menu view.
+	 */
 	public void switchToMainMenu() {
 		setCurrentWindow(mainMenuView);
 		displayWindow();
 	}
 
+	/**
+	 * Switches to the gameplay view.
+	 */
 	public void switchToGameplay() {
 		setCurrentWindow(gameView);
 		displayWindow();
 	}
 
+	/**
+	 * Switches to the dialogue view.
+	 */
 	public void switchToDialogue() {
 		setCurrentWindow(dialogueView);
 		displayWindow();
 	}
 
+	/**
+	 * Switches to the map view.
+	 */
 	public void switchToMap() {
 		setCurrentWindow(mapView);
 		displayWindow();
 	}
 
+	/**
+	 * Switches to the scores view.
+	 */
 	public void switchToScores() {
 		setCurrentWindow(scoresView);
 		displayWindow();
 	}
 
+	/**
+	 * Displays information about the current window.
+	 */
 	public void displayCurrentWindowInfo() {
 		System.out.println("[View manager] current window:");
-
 		if (currentWindow != null) {
 			System.out.println(currentWindow.getName());
 		}
