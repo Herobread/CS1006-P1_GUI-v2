@@ -1,4 +1,4 @@
-package htw.view;
+package htw.view.renderer;
 
 //imports
 import java.awt.Image;

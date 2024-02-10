@@ -12,14 +12,14 @@ import htw.controllers.game.logic.initialization.GameInitializer;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import htw.controllers.game.logic.playerActions.Senses;
 import htw.controllers.game.logic.playerActions.shoot.PlayerShootAction;
-import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
 import htw.model.caves.Decoration;
 import htw.model.entities.Player;
 import htw.utils.Coordinates;
 import htw.utils.Direction;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class GameView extends ViewBase {
 	private htw.controllers.game.GameStateManager gameStateManager = GameStateManager.getInstance();

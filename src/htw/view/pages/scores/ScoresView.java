@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.GameStatus;
-import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.entities.Player;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class ScoresView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();

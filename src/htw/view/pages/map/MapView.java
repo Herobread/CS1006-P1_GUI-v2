@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import htw.controllers.game.GameStateManager;
-import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 import htw.model.map.ExploredMap.TileState;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class MapView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();

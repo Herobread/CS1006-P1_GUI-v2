@@ -5,7 +5,7 @@ package htw;
 import java.awt.Color;
 import java.util.Random;
 
-import htw.view.Renderer;
+import htw.view.renderer.Renderer;
 
 public class RendererUnstableMain {
 	public static void main(String[] args) {
