@@ -73,22 +73,13 @@ public class Renderer extends JFrame {
 	}
 
 	// temporary method to handle clicks
-	public void drawClickAreaUnstable(int x, int y, int width, int height,
-			ActionListener actionListener) {
-		JButton button = new JButton("Click Me");
-		button.setBounds(x, y, width, height);
-		button.addActionListener(actionListener);
-		getContentPane().add(button);
-
-		// the code below doesn't work, see:
-		// https://github.com/Herobread/CS1006-P1_GUI-v2/issues/15#issuecomment-1934596735
-
-		// x -= 8; // for some reason coordinates for buttons and textures are different
-		// if (validCoordinates(x, y)) {
-		// CustomButton button = new CustomButton(actionListener, x, y, width, height);
-		// add(button);
-		// setComponentZOrder(button, 0);
-		// }
+	public void drawClickAreaUnstable(int x, int y, int width, int height, ActionListener actionListener) {
+		x -= 8; // for some reason coordinates for buttons and textures are different
+		if (validCoordinates(x, y)) {
+			CustomButton button = new CustomButton(actionListener, x, y, width, height);
+			add(button);
+			setComponentZOrder(button, 0);
+		}
 	}
 
 	public void drawClickArea(int x, int y, int width, int height,

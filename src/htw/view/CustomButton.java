@@ -30,7 +30,6 @@ public class CustomButton extends JButton{
     public void paint(Graphics g){
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0f));
-        super.paint(g2d);
         g2d.dispose();
     }
 }
