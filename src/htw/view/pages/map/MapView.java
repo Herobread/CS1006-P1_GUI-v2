@@ -95,7 +95,7 @@ public class MapView extends ViewBase {
 		}
 
 		renderer.drawTexture("cross", 8, 8, 72, 72);
-		renderer.drawClickAreaUnstable(8, 8, 72, 72, closeButtonActionListener);
+		renderer.drawClickArea(8, 8, 72, 72, closeButtonActionListener);
 
 		renderer.draw();
 	}

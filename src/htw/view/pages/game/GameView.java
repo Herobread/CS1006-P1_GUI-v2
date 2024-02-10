@@ -131,32 +131,32 @@ public class GameView extends ViewBase {
 
 		// buttons up:
 		renderer.drawTexture("shoot", 176, 8, 72, 72);
-		renderer.drawClickAreaUnstable(176, 8, 72, 72,
+		renderer.drawClickArea(176, 8, 72, 72,
 				shootUpButtonActionListener);
 
 		renderer.drawTexture("walk-up", 256, 8, 72, 72);
-		renderer.drawClickAreaUnstable(256, 8, 72, 72, walkUpButtonActionListener);
+		renderer.drawClickArea(256, 8, 72, 72, walkUpButtonActionListener);
 
 		// buttons down:
 		renderer.drawTexture("shoot", 176, 432, 72, 72);
-		renderer.drawClickAreaUnstable(176, 432, 72, 72, shootDownButtonActionListener);
+		renderer.drawClickArea(176, 432, 72, 72, shootDownButtonActionListener);
 
 		renderer.drawTexture("walk-down", 256, 432, 72, 72);
-		renderer.drawClickAreaUnstable(256, 432, 72, 72, walkDownButtonActionListener);
+		renderer.drawClickArea(256, 432, 72, 72, walkDownButtonActionListener);
 
 		// buttons left:
 		renderer.drawTexture("shoot", 8, 176, 72, 72);
-		renderer.drawClickAreaUnstable(8, 176, 72, 72, shootLeftButtonActionListener);
+		renderer.drawClickArea(8, 176, 72, 72, shootLeftButtonActionListener);
 
 		renderer.drawTexture("walk-left", 8, 256, 72, 72);
-		renderer.drawClickAreaUnstable(8, 256, 72, 72, walkLeftButtonActionListener);
+		renderer.drawClickArea(8, 256, 72, 72, walkLeftButtonActionListener);
 
 		// buttons right:
 		renderer.drawTexture("shoot", 432, 176, 72, 72);
-		renderer.drawClickAreaUnstable(432, 176, 72, 72, shootRightButtonActionListener);
+		renderer.drawClickArea(432, 176, 72, 72, shootRightButtonActionListener);
 
 		renderer.drawTexture("walk-right", 432, 256, 72, 72);
-		renderer.drawClickAreaUnstable(432, 256, 72, 72, walkRightButtonActionListener);
+		renderer.drawClickArea(432, 256, 72, 72, walkRightButtonActionListener);
 
 		// info:
 		if (senses.length() != 0) {
@@ -166,7 +166,7 @@ public class GameView extends ViewBase {
 
 		// map button
 		renderer.drawTexture("map", 8, 8, 72, 72);
-		renderer.drawClickAreaUnstable(8, 8, 72, 72, mapButtonActionListener);
+		renderer.drawClickArea(8, 8, 72, 72, mapButtonActionListener);
 
 		renderer.drawTexture("player", 192, 192, 128, 128);
 

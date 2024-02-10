@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -23,11 +22,9 @@ public class Renderer extends JFrame {
 	// Other attributes
 	private List<TexturePanel> TexturePanels = new ArrayList<TexturePanel>();
 	private List<TextPanel> TextPanels = new ArrayList<TextPanel>();
-	// jframe is strange and has strange sizing
-	// maybe it includes border sizes
-	// as a result 512*512 turns into 512*548
 	private int width = 512;
-	private int height = 548;
+	private int height = 512;
+	//Store the filepath of the texture to be displayed when no texture is found at other locations
 	private final String MISSING_TEXTURE = "./resources/missing-texture.png";
 
 	// Private constructor to prevent external instantiation
@@ -37,9 +34,11 @@ public class Renderer extends JFrame {
 
 	// configure attributes of the JFrame
 	private void configureWindow() {
+		//set background colour
 		getContentPane().setBackground(Color.BLACK);
 		setLayout(null);
 		setDimensions(width, height);
+		//ensure that when the program is closed the process halts
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Hunt The Wumpus");
 		setResizable(false);
@@ -72,27 +71,19 @@ public class Renderer extends JFrame {
 		setSize(width, height);
 	}
 
-	// temporary method to handle clicks
-	public void drawClickAreaUnstable(int x, int y, int width, int height, ActionListener actionListener) {
+	//draw an invisible area with an action listener
+	public void drawClickArea(int x, int y, int width, int height, ActionListener actionListener) {
 		x -= 8; // for some reason coordinates for buttons and textures are different
+		//if the image will be drawn inside the frame
 		if (validCoordinates(x, y)) {
+			//create new CustomButton object and add it to the frame, ensuring it's at the top so clicks are handled
 			CustomButton button = new CustomButton(actionListener, x, y, width, height);
 			add(button);
 			setComponentZOrder(button, 0);
 		}
 	}
 
-	public void drawClickArea(int x, int y, int width, int height,
-			ActionListener actionListener) {
-		// y += getInsets().top;
-		x -= 8; // for some reason coordinates for buttons and textures are different
-		if (validCoordinates(x, y)) {
-			CustomButton button = new CustomButton(actionListener, x, y, width, height);
-			add(button);
-			setComponentZOrder(button, 0);
-		}
-	}
-
+	//refresh the content on the screen
 	public void draw() {
 		SwingUtilities.invokeLater(() -> {
 			repaint();
@@ -106,68 +97,99 @@ public class Renderer extends JFrame {
 		});
 	}
 
+	//draw a texture using the width and height of the original image at the specified x and y co-ordinates
 	public void drawTexture(String textureName, int x, int y) {
-		String texturePath = "./resources/" + textureName + ".png";
-		try {
-			final BufferedImage image = ImageIO.read(new File(texturePath));
-			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), 1f);
-		} catch (IOException e) {
-			try {
-				final BufferedImage image = ImageIO.read(new File(MISSING_TEXTURE));
-				drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight(), 1f);
-			} catch (IOException e2) {
-				System.out.println("Critical error in drawing texture");
-			}
-		}
+		//call the drawTexture method with the same textureName and co-ordinates as this, with opacity 1
+		drawTexture(textureName, x, y, 1f);
 	}
 
+	//draw a texture given it's name, it's destination co-ordinates and it's intended opacity
 	public void drawTexture(String textureName, int x, int y, float opacity) {
+		//store the relative location of the image in the file system
 		String texturePath = "./resources/" + textureName + ".png";
 		try {
+			//store the image as a bufferedImage to be able to get it's width and height later
 			final BufferedImage image = ImageIO.read(new File(texturePath));
+			//call the drawTexture method with the texture name, co-ordinates, size and opacity
 			drawTexture(textureName, x, y, image.getWidth(), image.getHeight(), opacity);
+		//if the file could not be found
 		} catch (IOException e) {
-			try {
-				final BufferedImage image = ImageIO.read(new File(MISSING_TEXTURE));
-				drawTexture(
-						"missing-texture", x, y, image.getWidth(), image.getHeight(), 1f);
-			} catch (IOException e2) {
-				System.out.println("Critical error in drawing texture");
-			}
+			drawMissingImage(x, y);
 		}
 	}
 
+	//if the drawTexture method is called with only the texture name, size and location, then call drawTexture with those parameters
+	//and opacity 1
 	public void drawTexture(String textureName, int x, int y, int width, int height) {
 		drawTexture(textureName, x, y, width, height, 1f);
 	}
 
+	//draw a texture given it's name, intended co-ordinates, size and opactity
 	public void drawTexture(String textureName, int x, int y, int width, int height, float opacity) {
+		//adjust the y position by the size of the header
 		y += getInsets().top;
+		//if the co-ordinates given are within the frame
 		if (validCoordinates(x, y)) {
+			//store the path to the texture
 			String texturePath = "./resources/" + textureName + ".png";
 			try {
-				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,
-						Image.SCALE_DEFAULT);
+				//get an image object of the file provided
+				Image scaledImage = ImageIO.read(new File(texturePath));
+				//scale the image
+				scaledImage = scaledImage.getScaledInstance(width, height,Image.SCALE_DEFAULT);
+				//create a texturePanel object with the right parameters and add it to the frame
 				TexturePanel t = new TexturePanel(scaledImage, x, y, width, height, opacity);
 				TexturePanels.add(t);
 				t.repaint();
 				add(t);
+			//if the image can't be found, draw the missing texture instead
 			} catch (IOException e) {
-				drawTexture("missing-texture", x, y, width, height);
-				try {
-					final BufferedImage image = ImageIO.read(new File(MISSING_TEXTURE));
-					drawTexture("missing-texture", x, y, image.getWidth(), image.getHeight());
-				} catch (IOException e2) {
-					System.out.println("Critical error in drawing texture");
-				}
+				drawMissingImage(x,y,width, height);
 			}
 		}
 	}
 
+	private void drawMissingImage(int x, int y){
+		try {
+			//get an image object of the file provided
+			BufferedImage scaledImage = ImageIO.read(new File(MISSING_TEXTURE));
+			//create a texturePanel object with the right parameters and add it to the frame and list of TexturePanels
+			TexturePanel t = new TexturePanel(scaledImage, x, y, scaledImage.getWidth(), scaledImage.getHeight(), 1f);
+			TexturePanels.add(t);
+			t.repaint();
+			add(t);
+		}
+		//if the missing texture image couldn't be found, write a message to the command line to notify the user of a critical error.
+		catch(IOException e){
+			System.err.println("Critical error: missing texture not found");
+		}
+	}
+
+	//draw a missing image with the height and width provided
+	private void drawMissingImage(int x, int y, int width, int height){
+		try {
+			//get an image object of the file provided
+			Image scaledImage = ImageIO.read(new File(MISSING_TEXTURE));
+			//scale the image
+			scaledImage = scaledImage.getScaledInstance(width, height,Image.SCALE_DEFAULT);
+			//create a texturePanel object with the right parameters and add it to the frame
+			TexturePanel t = new TexturePanel(scaledImage, x, y, width, height, 1f);
+			TexturePanels.add(t);
+			t.repaint();
+			add(t);
+		}
+		//if the missing texture image couldn't be found, write a message to the command line to notify the user of a critical error.
+		catch(IOException e){
+			System.err.println("Critical error");
+		}
+	}
+
+	//Define what happens when a redraw happens, ensuring that all components are present after the redraw.
 	@Override
 	public void paint(Graphics g) {
+		//call the paint method on the superclass (JFrame)
 		super.paint(g);
-		// setBackground(Color.BLACK);
+		//add all of the TexturePanels and TextPanels back in
 		for (TexturePanel t : TexturePanels) {
 			t.paintComponent(g);
 		}
@@ -176,15 +198,20 @@ public class Renderer extends JFrame {
 		}
 	}
 
+	//draw text to the screen
 	public void drawText(String text, int x, int y, int size, Color colour) {
+		//JFrames also handle the coordinates of text slightly differently, so adjust the position of the y coordinate by 2
 		y += getInsets().top * 2;
+		//if the x and y coordinates provided are valid
 		if (validCoordinates(x, y)) {
+			//create a new textPanel and add it to the frame and list of TextPanels
 			TextPanel t = new TextPanel(text, x, y, x, y, size, colour);
 			add(t);
 			TextPanels.add(t);
 		}
 	}
 
+	//clear everything from the screen
 	public void clear() {
 		getContentPane().removeAll();
 		TexturePanels.clear();
@@ -196,15 +223,19 @@ public class Renderer extends JFrame {
 		return instance;
 	}
 
+	//determine if the co-ordinates provided are valid
 	private boolean validCoordinates(int x, int y) {
+		//if the x or y co-ordinate provided are negative, return false and write to system error
 		if (x < 0 || y < 0) {
 			System.err.println("Drawing starts at negative coordinates!");
 			return false;
 		}
+		//if the x or y co-ordinate provided are outside the frame, return false and write to system error
 		if (x > width || y > height) {
 			System.err.println("Drawing starts outside frame!");
 			return false;
 		}
+		//if the co-ordinates pass both of these checks, return true
 		return true;
 	}
 }
