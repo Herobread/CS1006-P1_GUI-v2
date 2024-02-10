@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.GameStatus;
+import htw.controllers.game.logic.VictoryChecker;
 import htw.controllers.game.logic.initialization.GameInitializer;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import htw.controllers.game.logic.playerActions.Senses;
@@ -182,15 +183,17 @@ public class GameView extends ViewBase {
 			return;
 		}
 
-		if (gameStateManager.getGameStatus() == GameStatus.FAIL) {
+		VictoryChecker.checkVictory();
+
+		GameStatus status = gameStateManager.getGameStatus();
+
+		if (status != GameStatus.PLAYING) {
 			viewManager.switchToScores();
 			GameInitializer.initialize();
 			return;
 		}
 
 		renderView();
-
-		// Provide the implementation for updating the game model in the view
 	}
 
 	@Override

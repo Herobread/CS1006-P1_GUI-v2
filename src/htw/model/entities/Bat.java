@@ -39,6 +39,10 @@ public class Bat extends Entity {
 
 	@Override
 	public void onShot() {
+		GameStateManager gameStateManager = GameStateManager.getInstance();
+		Player player = gameStateManager.getPlayer();
+		player.addBatsShot(1);
+
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 
 		dialogueManager.addDialogue("You killed a bat.", "bat");
