@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
@@ -70,6 +71,16 @@ public class Renderer extends JFrame {
 		this.width = width + getInsets().left + getInsets().right;
 		this.height = height + getInsets().top;
 		setSize(width, height);
+	}
+
+	// please, don't remove this, until stable click area is stable
+	public void drawClickAreaUnstable(int x, int y, int width, int height,
+			ActionListener actionListener) {
+		JButton button = new JButton("Click Me");
+		button.setBounds(x, y, width, height);
+		button.addActionListener(actionListener);
+
+		getContentPane().add(button);
 	}
 
 	// draw an invisible area with an action listener
