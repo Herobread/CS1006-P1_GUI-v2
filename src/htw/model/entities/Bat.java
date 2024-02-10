@@ -40,6 +40,6 @@ public class Bat extends Entity {
 	public void onShot() {
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 
-		dialogueManager.addDialogue("You killed a bat.");
+		dialogueManager.addDialogue("You killed a bat.", "bat");
 	}
 }
