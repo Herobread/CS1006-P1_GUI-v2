@@ -183,8 +183,8 @@ public class GameView extends ViewBase {
 		}
 
 		if (gameStateManager.getGameStatus() == GameStatus.FAIL) {
-			GameInitializer.initialize();
 			viewManager.switchToScores();
+			GameInitializer.initialize();
 			return;
 		}
 

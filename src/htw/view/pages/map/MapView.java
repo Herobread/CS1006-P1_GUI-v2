@@ -18,8 +18,8 @@ public class MapView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
-	private boolean SHOW_ENTITIES = true;
-	private boolean SHOW_ALL_MAP_WAYS = true;
+	private boolean SHOW_ENTITIES = false;
+	private boolean SHOW_ALL_MAP_WAYS = false;
 
 	public MapView() {
 		super("Map");
@@ -30,7 +30,6 @@ public class MapView extends ViewBase {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			viewManager.switchToGameplay();
-			// viewManager.displayWindow();
 		}
 	};
 
