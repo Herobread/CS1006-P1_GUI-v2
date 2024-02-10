@@ -4,6 +4,7 @@ import htw.view.pages.dialogue.DialogueView;
 import htw.view.pages.game.GameView;
 import htw.view.pages.mainMenu.MainMenuView;
 import htw.view.pages.map.MapView;
+import htw.view.pages.scores.ScoresView;
 
 // will be responsible for selecting what is the state of the game:
 
@@ -21,6 +22,7 @@ public class ViewManager {
 	private MainMenuView mainMenuView;
 	private DialogueView dialogueView;
 	private MapView mapView;
+	private ScoresView scoresView;
 
 	private ViewManager() {
 	}
@@ -39,6 +41,7 @@ public class ViewManager {
 		mainMenuView = new MainMenuView();
 		dialogueView = new DialogueView();
 		mapView = new MapView();
+		scoresView = new ScoresView();
 	}
 
 	public void displayWindow() {
@@ -66,6 +69,11 @@ public class ViewManager {
 
 	public void switchToMap() {
 		setCurrentWindow(mapView);
+		displayWindow();
+	}
+
+	public void switchToScores() {
+		setCurrentWindow(scoresView);
 		displayWindow();
 	}
 

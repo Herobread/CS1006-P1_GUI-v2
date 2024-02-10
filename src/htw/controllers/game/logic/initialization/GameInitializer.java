@@ -1,6 +1,7 @@
 package htw.controllers.game.logic.initialization;
 
 import htw.controllers.game.GameStateManager;
+import htw.controllers.game.GameStatus;
 import htw.model.caves.CaveSystem;
 import htw.model.caves.WorldGenerator;
 import htw.model.entities.Player;
@@ -11,6 +12,7 @@ public class GameInitializer {
 	public static void initialize() {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 
+		gameStateManager.setGameStatus(GameStatus.PLAYING);
 		// initialise game variables
 		// create player instance
 		Player player = new Player(0, 0);

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
+import htw.controllers.game.GameStatus;
+import htw.controllers.game.logic.initialization.GameInitializer;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
 import htw.controllers.game.logic.playerActions.Senses;
 import htw.controllers.game.logic.playerActions.shoot.PlayerShootAction;
@@ -176,8 +178,13 @@ public class GameView extends ViewBase {
 	@Override
 	public void update() {
 		if (!dialogueManager.isEmpty()) {
-
 			viewManager.switchToDialogue();
+			return;
+		}
+
+		if (gameStateManager.getGameStatus() == GameStatus.FAIL) {
+			GameInitializer.initialize();
+			viewManager.switchToScores();
 			return;
 		}
 

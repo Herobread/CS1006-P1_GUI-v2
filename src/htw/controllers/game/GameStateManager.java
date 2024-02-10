@@ -4,7 +4,6 @@ import htw.model.caves.CaveSystem;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 
-// singleton
 public class GameStateManager {
 	private static GameStateManager instance;
 	private String inputAction = "";
@@ -12,6 +11,7 @@ public class GameStateManager {
 	private Player player;
 	private ExploredMap exploredMap;
 	private boolean isEndGame = false;
+	private GameStatus gameStatus = GameStatus.PLAYING;
 
 	// Private constructor to prevent instantiation from outside
 	private GameStateManager() {
@@ -67,5 +67,13 @@ public class GameStateManager {
 
 	public void setExploredMap(ExploredMap exploredMap) {
 		this.exploredMap = exploredMap;
+	}
+
+	public GameStatus getGameStatus() {
+		return gameStatus;
+	}
+
+	public void setGameStatus(GameStatus gameStatus) {
+		this.gameStatus = gameStatus;
 	}
 }
