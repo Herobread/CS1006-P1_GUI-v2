@@ -14,6 +14,7 @@ public class Bat extends Entity {
 		super("bat", "bat");
 		setHazard(true);
 		setShootable(true);
+		setRemoveOnShot(true);
 	}
 
 	@Override

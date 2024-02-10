@@ -47,11 +47,11 @@ public class ScoresView extends ViewBase {
 		// diplay game stats
 		// kills
 		final int totalWumpuses = gameStateManager.getTotalAmountOfWumpuses();
-		final int killedWumpuses = totalWumpuses - 1; // TODO: count entities
+		final int killedWumpuses = -1; // TODO: count entities
 		renderer.drawText("Wumpus: " + killedWumpuses + "/" + totalWumpuses, 81, 212, 24, Color.WHITE);
 
 		final int totalBats = gameStateManager.getTotalAmountOfBats();
-		final int killedBats = totalWumpuses - 1;
+		final int killedBats = -1;
 		renderer.drawText("Bat: " + killedBats + "/" + totalBats, 81, 241, 24, Color.WHITE);
 
 		// other

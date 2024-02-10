@@ -5,6 +5,7 @@ public class Entity {
 	protected String textureName;
 	protected boolean isHazard;
 	protected boolean isShootable;
+	protected boolean removeOnShot;
 
 	public Entity(String name, String textureName) {
 		this.name = name;
@@ -87,6 +88,14 @@ public class Entity {
 
 	public void setShootable(boolean isShootable) {
 		this.isShootable = isShootable;
+	}
+
+	public boolean isRemoveOnShot() {
+		return removeOnShot;
+	}
+
+	public void setRemoveOnShot(boolean removeOnShot) {
+		this.removeOnShot = removeOnShot;
 	}
 
 }

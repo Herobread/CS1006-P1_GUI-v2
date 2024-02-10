@@ -58,7 +58,10 @@ public class PlayerShootAction {
 
 				// remove entity
 				Cave cave = caves.getCave(targetCoordinates);
-				cave.removeEntity(target);
+
+				if (target.isRemoveOnShot()) {
+					cave.removeEntity(target);
+				}
 
 				// recheck tile on map
 				PlayerMoveLogic.markTileOnMap(caves, player.getCoordinates());
