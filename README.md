@@ -27,6 +27,7 @@ Run `src/Main.java`.
 
 ## Implementation Details
 
+- MVC pattern
 - The game utilizes Java and JSwing for the GUI.
 - Cave networks are generated using cellular automata for randomness.
 - ViewManager handles scene rendering, while GameStateManager manages state transitions.
