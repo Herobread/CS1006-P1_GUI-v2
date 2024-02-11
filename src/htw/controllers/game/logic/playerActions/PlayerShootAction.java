@@ -1,4 +1,4 @@
-package htw.controllers.game.logic.playerActions.shoot;
+package htw.controllers.game.logic.playerActions;
 
 import java.util.ArrayList;
 

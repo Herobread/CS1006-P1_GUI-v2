@@ -13,7 +13,7 @@ import htw.utils.Coordinates;
 /**
  * Provides methods for sensing hazards in neighboring caves.
  */
-public class Senses {
+public class PlayerSensesAction {
 
 	/**
 	 * Checks neighboring caves for hazards and returns a string representing the

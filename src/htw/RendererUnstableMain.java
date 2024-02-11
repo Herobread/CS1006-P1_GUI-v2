@@ -2,7 +2,7 @@
 
 package htw;
 
-import htw.view.Renderer;
+import htw.view.renderer.Renderer;
 
 public class RendererUnstableMain {
 	public static void main(String[] args) {

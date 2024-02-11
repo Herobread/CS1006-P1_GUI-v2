@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.GameStatus;
-import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.entities.Player;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class ScoresView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
@@ -47,11 +47,11 @@ public class ScoresView extends ViewBase {
 		// diplay game stats
 		// kills
 		final int totalWumpuses = gameStateManager.getTotalAmountOfWumpuses();
-		final int killedWumpuses = -1; // TODO: count entities
+		final int killedWumpuses = player.getWumpusesShot();
 		renderer.drawText("Wumpus: " + killedWumpuses + "/" + totalWumpuses, 81, 212, 24, Color.WHITE);
 
 		final int totalBats = gameStateManager.getTotalAmountOfBats();
-		final int killedBats = -1;
+		final int killedBats = player.getBatsShot();
 		renderer.drawText("Bat: " + killedBats + "/" + totalBats, 81, 241, 24, Color.WHITE);
 
 		// other

@@ -7,18 +7,19 @@ import java.util.ArrayList;
 import htw.controllers.dialogue.DialogueManager;
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.GameStatus;
+import htw.controllers.game.logic.VictoryChecker;
 import htw.controllers.game.logic.initialization.GameInitializer;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
-import htw.controllers.game.logic.playerActions.Senses;
-import htw.controllers.game.logic.playerActions.shoot.PlayerShootAction;
-import htw.controllers.view.ViewBase;
+import htw.controllers.game.logic.playerActions.PlayerShootAction;
+import htw.controllers.game.logic.playerActions.PlayerSensesAction;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
 import htw.model.caves.Decoration;
 import htw.model.entities.Player;
 import htw.utils.Coordinates;
 import htw.utils.Direction;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class GameView extends ViewBase {
 	private htw.controllers.game.GameStateManager gameStateManager = GameStateManager.getInstance();
@@ -117,7 +118,7 @@ public class GameView extends ViewBase {
 		Player player = gameStateManager.getPlayer();
 		Coordinates playerCoordinates = player.getCoordinates();
 		String currentCaveTexture = "cave-" + caves.getConnectionsString(playerCoordinates);
-		String senses = Senses.checkNeighbours(caves, playerCoordinates);
+		String senses = PlayerSensesAction.checkNeighbours(caves, playerCoordinates);
 
 		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 
@@ -182,15 +183,17 @@ public class GameView extends ViewBase {
 			return;
 		}
 
-		if (gameStateManager.getGameStatus() == GameStatus.FAIL) {
-			GameInitializer.initialize();
+		VictoryChecker.checkVictory();
+
+		GameStatus status = gameStateManager.getGameStatus();
+
+		if (status != GameStatus.PLAYING) {
 			viewManager.switchToScores();
+			GameInitializer.initialize();
 			return;
 		}
 
 		renderView();
-
-		// Provide the implementation for updating the game model in the view
 	}
 
 	@Override

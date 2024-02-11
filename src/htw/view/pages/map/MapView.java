@@ -5,21 +5,21 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import htw.controllers.game.GameStateManager;
-import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
 import htw.model.entities.Entity;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
 import htw.model.map.ExploredMap.TileState;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class MapView extends ViewBase {
 	private GameStateManager gameStateManager = GameStateManager.getInstance();
 	private ViewManager viewManager = ViewManager.getInstance();
 	private Renderer renderer = Renderer.getInstance();
-	private boolean SHOW_ENTITIES = true;
-	private boolean SHOW_ALL_MAP_WAYS = true;
+	private boolean SHOW_ENTITIES = false;
+	private boolean SHOW_ALL_MAP_WAYS = false;
 
 	public MapView() {
 		super("Map");
@@ -30,7 +30,6 @@ public class MapView extends ViewBase {
 		@Override
 		public void actionPerformed(ActionEvent actionEvent) {
 			viewManager.switchToGameplay();
-			// viewManager.displayWindow();
 		}
 	};
 

@@ -136,11 +136,11 @@ public class WorldGenerator {
 
 		int coordinateId = 0;
 
-		int AMOUNT_OF_BATS = spawnableArea / 30;
+		int AMOUNT_OF_BATS = spawnableArea / 15;
 		int AMOUNT_OF_WUMPUSES = 2;
 		int AMOUNT_OF_PITS = spawnableArea / 50;
-		int AMOUNT_OF_TREASURES = 2;
-		int AMOUNT_OF_ARROWS = spawnableArea / 10;
+		int AMOUNT_OF_TREASURES = spawnableArea / 50;
+		int AMOUNT_OF_ARROWS = spawnableArea / 20;
 
 		gameStateManager.setAmountOfBats(AMOUNT_OF_BATS);
 		gameStateManager.setAmountOfWumpuses(AMOUNT_OF_WUMPUSES);

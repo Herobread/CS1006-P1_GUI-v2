@@ -6,6 +6,8 @@ public class Player extends Entity {
 	private Coordinates coordinates;
 	private int arrows = 5;
 	private int gold = 0;
+	private int batsShot = 0;
+	private int wumpusesShot = 0;
 
 	public Player(int x, int y) {
 		super("Player", "player");
@@ -64,5 +66,29 @@ public class Player extends Entity {
 
 	public void addGold(int amount) {
 		gold += amount;
+	}
+
+	public int getBatsShot() {
+		return batsShot;
+	}
+
+	public void setBatsShot(int batsShot) {
+		this.batsShot = batsShot;
+	}
+
+	public void addBatsShot(int amount) {
+		batsShot += amount;
+	}
+
+	public int getWumpusesShot() {
+		return wumpusesShot;
+	}
+
+	public void setWumpusesShot(int wumpusesShot) {
+		this.wumpusesShot = wumpusesShot;
+	}
+
+	public void addWumpusShot(int amount) {
+		wumpusesShot += amount;
 	}
 }

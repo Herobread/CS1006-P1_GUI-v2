@@ -1,5 +1,6 @@
 package htw.controllers.view;
 
+import htw.view.pages.ViewBase;
 import htw.view.pages.dialogue.DialogueView;
 import htw.view.pages.game.GameView;
 import htw.view.pages.mainMenu.MainMenuView;

@@ -3,9 +3,9 @@ package htw.view.pages.mainMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import htw.controllers.view.ViewBase;
 import htw.controllers.view.ViewManager;
-import htw.view.Renderer;
+import htw.view.pages.ViewBase;
+import htw.view.renderer.Renderer;
 
 public class MainMenuView extends ViewBase {
 	// private GameStateManager gameStateManager = GameStateManager.getInstance();

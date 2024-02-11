@@ -26,7 +26,12 @@ public class Wumpus extends Entity {
 
 	@Override
 	public void onShot() {
+		GameStateManager gameStateManager = GameStateManager.getInstance();
+		Player player = gameStateManager.getPlayer();
+		player.addWumpusShot(1);
+
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 		dialogueManager.addDialogue("Wumpus eliminated!", textureName);
+
 	}
 }

@@ -1,4 +1,4 @@
-package htw.controllers.game.logic.playerActions.interact;
+package htw.controllers.game.logic.playerActions;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import htw.utils.Coordinates;
  * Provides methods for interacting with entities at specific coordinates within
  * the cave system.
  */
-public class InteractWithEntity {
+public class PlayerInteractAction {
 
 	/**
 	 * Interacts with entities located at the specified coordinates in the cave

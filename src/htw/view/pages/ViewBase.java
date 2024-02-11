@@ -1,6 +1,6 @@
-package htw.controllers.view;
+package htw.view.pages;
 
-import htw.view.Renderer;
+import htw.view.renderer.Renderer;
 
 /**
  * A template for views in the application.

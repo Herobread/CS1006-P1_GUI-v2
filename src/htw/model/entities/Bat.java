@@ -5,7 +5,7 @@ import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.movement.RandomPlace;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
-import htw.controllers.game.logic.playerActions.interact.InteractWithEntity;
+import htw.controllers.game.logic.playerActions.PlayerInteractAction;
 import htw.model.caves.CaveSystem;
 import htw.utils.Coordinates;
 
@@ -34,11 +34,15 @@ public class Bat extends Entity {
 		dialogueManager.addDialogue(batDialogue, textureName);
 
 		PlayerMoveLogic.handleMove(randomCoordinates);
-		InteractWithEntity.interact(caves, player.getCoordinates());
+		PlayerInteractAction.interact(caves, player.getCoordinates());
 	}
 
 	@Override
 	public void onShot() {
+		GameStateManager gameStateManager = GameStateManager.getInstance();
+		Player player = gameStateManager.getPlayer();
+		player.addBatsShot(1);
+
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 
 		dialogueManager.addDialogue("You killed a bat.", "bat");
