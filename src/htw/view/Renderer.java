@@ -12,9 +12,11 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 //extend JFrame
 public class Renderer extends JFrame {
@@ -23,6 +25,7 @@ public class Renderer extends JFrame {
 	// Other attributes
 	private List<TexturePanel> TexturePanels = new ArrayList<TexturePanel>();
 	private List<TextPanel> TextPanels = new ArrayList<TextPanel>();
+	private List<CustomButton> CustomButtons = new ArrayList<CustomButton>();
 	private int width = 512;
 	private int height = 550; // not 512 because of border on top
 	// Store the filepath of the texture to be displayed when no texture is found at
@@ -38,7 +41,7 @@ public class Renderer extends JFrame {
 	private void configureWindow() {
 		// set background colour
 		getContentPane().setBackground(Color.BLACK);
-		setLayout(null);
+		setLayout(new FlowLayout());
 		setDimensions(width, height);
 		// ensure that when the program is closed the process halts
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -84,30 +87,34 @@ public class Renderer extends JFrame {
 	}
 
 	// draw an invisible area with an action listener
-	public void drawClickArea(int x, int y, int width, int height, ActionListener actionListener) {
+	public void drawButton(String textureName, int x, int y, int width, int height, ActionListener actionListener) {
 		x -= 8; // for some reason coordinates for buttons and textures are different
 		// if the image will be drawn inside the frame
 		if (validCoordinates(x, y)) {
 			// create new CustomButton object and add it to the frame, ensuring it's at the
 			// top so clicks are handled
-			CustomButton button = new CustomButton(actionListener, x, y, width, height);
-			add(button);
-			setComponentZOrder(button, 0);
+			try{
+				String texturePath = "./resources/" + textureName + ".png";
+				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,Image.SCALE_DEFAULT);
+				CustomButton button = new CustomButton(actionListener,scaledImage, x, y, width, height,1f);
+				CustomButtons.add(button);
+				getContentPane().add(button);			
+				button.repaint();
+				setComponentZOrder(button, 0);
+			}
+			catch(IOException e){
+				System.err.println("Problem drawing button");
+			}
 		}
 	}
 
 	// refresh the content on the screen
 	public void draw() {
-		SwingUtilities.invokeLater(() -> {
+		//SwingUtilities.invokeLater(() -> {
 			repaint();
 			revalidate();
-			for (TexturePanel t : TexturePanels) {
-				t.repaint();
-			}
-			for (TextPanel t : TextPanels) {
-				t.repaint();
-			}
-		});
+			
+		//});
 	}
 
 	// draw a texture using the width and height of the original image at the
@@ -214,12 +221,15 @@ public class Renderer extends JFrame {
 	public void paint(Graphics g) {
 		// call the paint method on the superclass (JFrame)
 		super.paint(g);
-		// add all of the TexturePanels and TextPanels back in
+		// add all of the TexturePanels, TextPanels and ButtonPanels back in
 		for (TexturePanel t : TexturePanels) {
 			t.paintComponent(g);
 		}
 		for (TextPanel t : TextPanels) {
 			t.paintComponent(g);
+		}
+		for (CustomButton b : CustomButtons){
+			b.paintComponent(g);
 		}
 	}
 
