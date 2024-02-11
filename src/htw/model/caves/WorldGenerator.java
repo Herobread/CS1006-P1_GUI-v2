@@ -148,9 +148,6 @@ public class WorldGenerator {
 		gameStateManager.setAmountOfTreasures(AMOUNT_OF_TREASURES);
 		gameStateManager.setAmountOfArrows(AMOUNT_OF_ARROWS);
 
-		System.out.println(gameStateManager.getTotalAmountOfWumpuses());
-		System.out.println(gameStateManager.getTotalAmountOfBats());
-
 		Map<String, List<Coordinates>> entities = new HashMap<>();
 
 		entities.put("wumpus", new ArrayList<>());
