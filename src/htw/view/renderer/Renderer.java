@@ -12,7 +12,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 import java.awt.Color;
@@ -93,16 +92,16 @@ public class Renderer extends JFrame {
 		if (validCoordinates(x, y)) {
 			// create new CustomButton object and add it to the frame, ensuring it's at the
 			// top so clicks are handled
-			try{
+			try {
 				String texturePath = "./resources/" + textureName + ".png";
-				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,Image.SCALE_DEFAULT);
-				CustomButton button = new CustomButton(actionListener,scaledImage, x, y, width, height);
+				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,
+						Image.SCALE_DEFAULT);
+				CustomButton button = new CustomButton(actionListener, scaledImage, x, y, width, height);
 				CustomButtons.add(button);
-				getContentPane().add(button);			
+				getContentPane().add(button);
 				button.repaint();
 				setComponentZOrder(button, 0);
-			}
-			catch(IOException e){
+			} catch (IOException e) {
 				System.err.println("Problem drawing button");
 			}
 		}
@@ -113,7 +112,6 @@ public class Renderer extends JFrame {
 		SwingUtilities.invokeLater(() -> {
 			repaint();
 			revalidate();
-			
 		});
 	}
 
@@ -228,7 +226,7 @@ public class Renderer extends JFrame {
 		for (TextPanel t : TextPanels) {
 			t.paintComponent(g);
 		}
-		for (CustomButton b : CustomButtons){
+		for (CustomButton b : CustomButtons) {
 			b.paintComponent(g);
 		}
 	}
@@ -251,6 +249,7 @@ public class Renderer extends JFrame {
 	public void clear() {
 		getContentPane().removeAll();
 		TexturePanels.clear();
+		CustomButtons.clear();
 		TextPanels.clear();
 	}
 

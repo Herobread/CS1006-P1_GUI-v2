@@ -31,7 +31,8 @@ public class MainMenuView extends ViewBase {
 
 		renderer.drawTexture("logo", 64, 116, 384, 160);
 		renderer.drawTexture("play", 172, 324, 168, 72);
-		renderer.drawClickAreaUnstable(172, 324, 168, 72, playButtonActionListener);
+		renderer.drawButton("play", 172, 324, 168, 72, playButtonActionListener);
+		// renderer.drawClickAreaUnstable(172, 324, 168, 72, playButtonActionListener);
 
 		renderer.draw();
 	}

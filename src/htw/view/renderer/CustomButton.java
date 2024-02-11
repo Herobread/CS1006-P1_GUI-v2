@@ -16,15 +16,19 @@ public class CustomButton extends JButton {
     private Image img;
 
     // constructor
-    public CustomButton(ActionListener actionListener,Image img, int x, int y, int width, int height) {
+    public CustomButton(ActionListener actionListener, Image img, int x, int y, int width, int height) {
         super();
-        this.x = x;
-        this.y = y;
+        this.x = x + 5;
+        this.y = y + 30;
         this.width = width;
         this.height = height;
         this.img = img;
         addActionListener(actionListener);
         setBounds(x, y, width, height);
+        setOpaque(false);
+        setContentAreaFilled(false);
+        setBorderPainted(false);
+        setFocusPainted(false);
     }
 
     // get the bounds of the button
@@ -35,8 +39,7 @@ public class CustomButton extends JButton {
     // ensure that the button isn't painted
     @Override
     public void paintComponent(Graphics g) {
-        setBounds(x,y,width,height);
-        g.drawImage(img, x, y,width,height,null);
-        
+        setBounds(x, y, width, height);
+        g.drawImage(img, x, y, width, height, null);
     }
 }
