@@ -2,8 +2,8 @@ package htw.controllers.game.logic.movement.playerMovement;
 
 import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
-import htw.controllers.game.logic.playerActions.Senses;
-import htw.controllers.game.logic.playerActions.interact.InteractWithEntity;
+import htw.controllers.game.logic.playerActions.PlayerInteractAction;
+import htw.controllers.game.logic.playerActions.PlayerSensesAction;
 import htw.model.caves.CaveSystem;
 import htw.model.entities.Player;
 import htw.model.map.ExploredMap;
@@ -47,7 +47,7 @@ public class PlayerMoveLogic {
 		markTileOnMap(caves, targetCoordinates);
 
 		player.setCoordinates(targetCoordinates);
-		InteractWithEntity.interact(caves, targetCoordinates);
+		PlayerInteractAction.interact(caves, targetCoordinates);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class PlayerMoveLogic {
 	public static void markTileOnMap(CaveSystem caves, Coordinates targetCoordinates) {
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 		ExploredMap exploredMap = gameStateManager.getExploredMap();
-		String senses = Senses.checkNeighbours(caves, targetCoordinates);
+		String senses = PlayerSensesAction.checkNeighbours(caves, targetCoordinates);
 
 		if (senses.length() > 0) {
 			exploredMap.markTile(TileState.HAZARD, targetCoordinates);

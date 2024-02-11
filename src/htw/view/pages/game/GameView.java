@@ -10,8 +10,8 @@ import htw.controllers.game.GameStatus;
 import htw.controllers.game.logic.VictoryChecker;
 import htw.controllers.game.logic.initialization.GameInitializer;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
-import htw.controllers.game.logic.playerActions.Senses;
-import htw.controllers.game.logic.playerActions.shoot.PlayerShootAction;
+import htw.controllers.game.logic.playerActions.PlayerShootAction;
+import htw.controllers.game.logic.playerActions.PlayerSensesAction;
 import htw.controllers.view.ViewManager;
 import htw.model.caves.CaveSystem;
 import htw.model.caves.Decoration;
@@ -118,7 +118,7 @@ public class GameView extends ViewBase {
 		Player player = gameStateManager.getPlayer();
 		Coordinates playerCoordinates = player.getCoordinates();
 		String currentCaveTexture = "cave-" + caves.getConnectionsString(playerCoordinates);
-		String senses = Senses.checkNeighbours(caves, playerCoordinates);
+		String senses = PlayerSensesAction.checkNeighbours(caves, playerCoordinates);
 
 		renderer.drawTexture(currentCaveTexture, 0, 0, 512, 512);
 
