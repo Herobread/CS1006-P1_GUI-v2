@@ -20,13 +20,10 @@ public class GameInitializer {
 	 * setting up the explored map.
 	 */
 	public static void initialize() {
-		// Get the instance of the game state manager
 		GameStateManager gameStateManager = GameStateManager.getInstance();
 
-		// Set the game status to playing
 		gameStateManager.setGameStatus(GameStatus.PLAYING);
 
-		// Create the player instance
 		Player player = new Player(0, 0);
 		gameStateManager.setPlayer(player);
 
@@ -38,7 +35,6 @@ public class GameInitializer {
 		generator.generateCellularAutomataCaves(caves);
 		gameStateManager.setCaves(caves);
 
-		// Initialize the explored map
 		ExploredMap exploredMap = new ExploredMap(WORLD_SIZE, WORLD_SIZE);
 		// Mark the player's initial position on the map
 		exploredMap.markTile(TileState.CAVE, player.getCoordinates());
