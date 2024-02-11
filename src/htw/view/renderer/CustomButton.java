@@ -2,6 +2,7 @@ package htw.view.renderer;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
@@ -12,14 +13,16 @@ public class CustomButton extends JButton {
     private int y;
     private int width;
     private int height;
+    private Image img;
 
     // constructor
-    public CustomButton(ActionListener actionListener, int x, int y, int width, int height) {
+    public CustomButton(ActionListener actionListener,Image img, int x, int y, int width, int height) {
         super();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.img = img;
         addActionListener(actionListener);
         setBounds(x, y, width, height);
     }
@@ -31,6 +34,9 @@ public class CustomButton extends JButton {
 
     // ensure that the button isn't painted
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
+        setBounds(x,y,width,height);
+        g.drawImage(img, x, y,width,height,null);
+        
     }
 }

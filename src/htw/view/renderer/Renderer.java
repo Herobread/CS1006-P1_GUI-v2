@@ -96,7 +96,7 @@ public class Renderer extends JFrame {
 			try{
 				String texturePath = "./resources/" + textureName + ".png";
 				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,Image.SCALE_DEFAULT);
-				CustomButton button = new CustomButton(actionListener,scaledImage, x, y, width, height,1f);
+				CustomButton button = new CustomButton(actionListener,scaledImage, x, y, width, height);
 				CustomButtons.add(button);
 				getContentPane().add(button);			
 				button.repaint();
@@ -110,11 +110,11 @@ public class Renderer extends JFrame {
 
 	// refresh the content on the screen
 	public void draw() {
-		//SwingUtilities.invokeLater(() -> {
+		SwingUtilities.invokeLater(() -> {
 			repaint();
 			revalidate();
 			
-		//});
+		});
 	}
 
 	// draw a texture using the width and height of the original image at the
