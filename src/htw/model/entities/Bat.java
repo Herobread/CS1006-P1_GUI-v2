@@ -36,7 +36,6 @@ public class Bat extends Entity {
 		dialogueManager.addDialogue(batDialogue, textureName);
 
 		PlayerMoveLogic.handleMove(randomCoordinates);
-		PlayerInteractAction.interact(caves, player.getCoordinates());
 	}
 
 	@Override

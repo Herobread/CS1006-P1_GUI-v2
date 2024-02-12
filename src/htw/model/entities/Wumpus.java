@@ -19,9 +19,10 @@ public class Wumpus extends Entity {
 
 		gameStateManager.setGameStatus(GameStatus.FAIL);
 
-		dialogueManager.addDialogue("As you cautiously step into the cave...", "player");
-		dialogueManager.addDialogue("...a sense of impending doom washes over you...", "player");
-		dialogueManager.addDialogue("The Wumpus lunges, devouring you whole.", textureName);
+		dialogueManager.addDialogue("As you step into the cave...", "player");
+		dialogueManager.addDialogue("a feeling of doom hits you...", "player");
+		dialogueManager.addDialogue("The Wumpus lunges", textureName);
+		dialogueManager.addDialogue("devouring you whole.", textureName);
 	}
 
 	@Override

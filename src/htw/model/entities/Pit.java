@@ -31,7 +31,7 @@ public class Pit extends Entity {
 
 		dialogueManager.addDialogue("As you venture deeper into the cave...", "player");
 		dialogueManager.addDialogue("You stumble upon a hidden pit!", "pit");
-		dialogueManager.addDialogue("A moment of panic sets in as you plummet into darkness.", "pit");
+		dialogueManager.addDialogue("A moment of panic sets in as you.", "pit");
 		dialogueManager.addDialogue("You've fallen into the pit!", "pit");
 
 		gameStateManager.setGameStatus(GameStatus.FAIL);

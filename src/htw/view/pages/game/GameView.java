@@ -1,5 +1,6 @@
 package htw.view.pages.game;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -162,6 +163,13 @@ public class GameView extends ViewBase {
 		renderer.drawButton("map", 8, 8, 72, 72, mapButtonActionListener);
 
 		renderer.drawTexture("player", 192, 192, 128, 128);
+
+		// coordinates
+		renderer.drawText("X:" + player.getX(), 8, 440, 24, Color.WHITE);
+		renderer.drawText("Y:" + player.getY(), 8, 469, 24, Color.WHITE);
+
+		// arrows
+		renderer.drawText("A:" + player.getArrows(), 464, 469, 24, Color.WHITE);
 
 		renderer.draw();
 	}
