@@ -24,7 +24,7 @@ public class Renderer extends JFrame {
 	// Other attributes
 	private List<TexturePanel> TexturePanels = new ArrayList<TexturePanel>();
 	private List<TextPanel> TextPanels = new ArrayList<TextPanel>();
-	private List<CustomButton> CustomButtons = new ArrayList<CustomButton>();
+	private List<TextureButton> CustomButtons = new ArrayList<TextureButton>();
 	private int width = 512;
 	private int height = 550; // not 512 because of border on top
 	// Store the filepath of the texture to be displayed when no texture is found at
@@ -96,7 +96,7 @@ public class Renderer extends JFrame {
 				String texturePath = "./resources/" + textureName + ".png";
 				Image scaledImage = ImageIO.read(new File(texturePath)).getScaledInstance(width, height,
 						Image.SCALE_DEFAULT);
-				CustomButton button = new CustomButton(actionListener, scaledImage, x, y, width, height);
+				TextureButton button = new TextureButton(actionListener, scaledImage, x, y, width, height);
 				CustomButtons.add(button);
 				getContentPane().add(button);
 				button.repaint();
@@ -226,7 +226,7 @@ public class Renderer extends JFrame {
 		for (TextPanel t : TextPanels) {
 			t.paintComponent(g);
 		}
-		for (CustomButton b : CustomButtons) {
+		for (TextureButton b : CustomButtons) {
 			b.paintComponent(g);
 		}
 	}
@@ -248,7 +248,7 @@ public class Renderer extends JFrame {
 	// clear everything from the screen
 	public void clear() {
 		getContentPane().removeAll();
-		for (CustomButton button : CustomButtons) {
+		for (TextureButton button : CustomButtons) {
 			button.setVisible(false);
 		}
 		CustomButtons.clear();

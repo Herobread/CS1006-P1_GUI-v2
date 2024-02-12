@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 //extend the JButton class
-public class CustomButton extends JButton {
+public class TextureButton extends JButton {
     // attributes
     private int x;
     private int y;
@@ -16,7 +16,7 @@ public class CustomButton extends JButton {
     private Image img;
 
     // constructor
-    public CustomButton(ActionListener actionListener, Image img, int x, int y, int width, int height) {
+    public TextureButton(ActionListener actionListener, Image img, int x, int y, int width, int height) {
         super();
         this.x = x + 5;
         this.y = y + 30;
