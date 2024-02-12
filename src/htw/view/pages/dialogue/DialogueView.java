@@ -38,6 +38,9 @@ public class DialogueView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
+		// background image
+		renderer.drawTexture("cave-", 0, 0, 512, 512);
+
 		Dialogue dialogue = dialogueManager.getNextDialogue();
 
 		String text = dialogue.getText();
@@ -49,8 +52,7 @@ public class DialogueView extends ViewBase {
 
 		renderer.drawText(text, 113, 317, 20, Color.WHITE);
 
-		renderer.drawTexture("next", 432, 432, 72, 72);
-		renderer.drawClickAreaUnstable(432, 432, 72, 72, nextButtonActionListener);
+		renderer.drawButton("next", 432, 432, 72, 72, nextButtonActionListener);
 
 		renderer.draw();
 	}

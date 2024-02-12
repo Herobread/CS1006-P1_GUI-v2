@@ -29,10 +29,11 @@ public class MainMenuView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
+		// background image
+		renderer.drawTexture("cave-", 0, 0, 512, 512);
+
 		renderer.drawTexture("logo", 64, 116, 384, 160);
-		renderer.drawTexture("play", 172, 324, 168, 72);
 		renderer.drawButton("play", 172, 324, 168, 72, playButtonActionListener);
-		// renderer.drawClickAreaUnstable(172, 324, 168, 72, playButtonActionListener);
 
 		renderer.draw();
 	}

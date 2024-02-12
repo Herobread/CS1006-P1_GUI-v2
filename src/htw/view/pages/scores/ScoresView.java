@@ -32,6 +32,10 @@ public class ScoresView extends ViewBase {
 	@Override
 	public void renderView() {
 		renderer.clear();
+
+		// background image
+		renderer.drawTexture("cave-", 0, 0, 512, 512);
+
 		GameStatus gameStatus = gameStateManager.getGameStatus();
 		Player player = gameStateManager.getPlayer();
 
@@ -59,8 +63,7 @@ public class ScoresView extends ViewBase {
 
 		renderer.drawTexture("logo", 148, 30, 216, 90);
 
-		renderer.drawTexture("next", 432, 432, 72, 72);
-		renderer.drawClickAreaUnstable(432, 432, 72, 72, nextButtonActionListener);
+		renderer.drawButton("next", 432, 432, 72, 72, nextButtonActionListener);
 
 		renderer.draw();
 	}

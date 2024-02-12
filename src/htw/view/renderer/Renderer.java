@@ -248,8 +248,8 @@ public class Renderer extends JFrame {
 	// clear everything from the screen
 	public void clear() {
 		getContentPane().removeAll();
-		TexturePanels.clear();
 		CustomButtons.clear();
+		TexturePanels.clear();
 		TextPanels.clear();
 	}
 

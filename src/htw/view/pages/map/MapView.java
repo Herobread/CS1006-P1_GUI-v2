@@ -38,6 +38,9 @@ public class MapView extends ViewBase {
 	public void renderView() {
 		renderer.clear();
 
+		// background image
+		renderer.drawTexture("cave-", 0, 0, 512, 512);
+
 		ExploredMap exploredMap = gameStateManager.getExploredMap();
 		CaveSystem caves = gameStateManager.getCaves();
 		Player player = gameStateManager.getPlayer();
@@ -93,8 +96,7 @@ public class MapView extends ViewBase {
 			}
 		}
 
-		renderer.drawTexture("cross", 8, 8, 72, 72);
-		renderer.drawClickAreaUnstable(8, 8, 72, 72, closeButtonActionListener);
+		renderer.drawButton("cross", 8, 8, 72, 72, closeButtonActionListener);
 
 		renderer.draw();
 	}
