@@ -75,7 +75,7 @@ public class Renderer extends JFrame {
 		setSize(width, height);
 	}
 
-	// please, don't remove this, until stable click area is stable
+	@Deprecated
 	public void drawClickAreaUnstable(int x, int y, int width, int height,
 			ActionListener actionListener) {
 		JButton button = new JButton("Click Me");
