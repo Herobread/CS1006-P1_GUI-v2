@@ -25,12 +25,14 @@ public class Bat extends Entity {
 
 		DialogueManager dialogueManager = DialogueManager.getInstance();
 
+		dialogueManager.addDialogue("The bat picked you up!", textureName);
+
 		Coordinates playerCoordinates = player.getCoordinates();
 		Coordinates randomCoordinates = RandomPlace.find(caves);
 		String distanceExplanation = CoordinateCalculator.calculateDistanceString(playerCoordinates, randomCoordinates);
-		String batDialogue = "The bat picked you up and flies "
-				+ distanceExplanation + "!";
 
+		String batDialogue = "It flies "
+				+ distanceExplanation + "!";
 		dialogueManager.addDialogue(batDialogue, textureName);
 
 		PlayerMoveLogic.handleMove(randomCoordinates);
