@@ -16,7 +16,7 @@ This project is a modernized version of the classic Hunt the Wumpus game, origin
 
 ## Run the Program
 
-Run `src/Main.java`.
+Run `src/htw/Main.java`.
 
 ## Gameplay
 
