@@ -5,7 +5,6 @@ import htw.controllers.game.GameStateManager;
 import htw.controllers.game.logic.movement.CoordinateCalculator;
 import htw.controllers.game.logic.movement.RandomPlace;
 import htw.controllers.game.logic.movement.playerMovement.PlayerMoveLogic;
-import htw.controllers.game.logic.playerActions.PlayerInteractAction;
 import htw.model.caves.CaveSystem;
 import htw.utils.Coordinates;
 
